@@ -6,5 +6,5 @@ module.exports = {
     title: `ICN AUSTRALIA`,
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-plugin-netlify-cms"]
+  plugins: []
 };
