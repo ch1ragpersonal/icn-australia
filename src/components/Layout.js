@@ -1,17 +1,15 @@
 /** @jsxImportSource theme-ui */
 import { Box, Container, Flex } from 'theme-ui'
-import Login from '../components/Login';  // Import the Login component
+import Login from '../components/Login'
+import Navbar from './navbar'  // Import the Navbar component
 
 const Layout = ({ children }) => (
   <Box>
     <header sx={{ bg: 'primary', color: 'white', padding: '1rem' }}>
       <Container>
-        <Flex sx={{ justifyContent: 'space-between' }}>
-          <h1>Header is here!</h1>
-          {/* Render the Login component below the heading */}
-      <Box sx={{ marginTop: 4 }}>
-        <Login />
-      </Box>
+        <Flex sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <Navbar />  {/* Add the Navbar component */}
+          <Login />
         </Flex>
       </Container>
     </header>
