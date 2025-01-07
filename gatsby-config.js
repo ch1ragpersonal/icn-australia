@@ -10,7 +10,8 @@ module.exports = {
   jsxRuntime: 'automatic',
   siteMetadata: {
     title: `ICN AUSTRALIA`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://www.yourdomain.tld`,
+    description: `Your site description`,
   },
   plugins: [
     'gatsby-plugin-theme-ui',
@@ -24,6 +25,7 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    `gatsby-plugin-react-helmet`,
     // {
     //   resolve: "gatsby-source-filesystem",
     //   options: {
