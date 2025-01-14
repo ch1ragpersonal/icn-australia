@@ -1,8 +1,10 @@
 export default {
   colors: {
-    text: '#000',
+    text: '#0004118',
     background: '#fff',
-    primary: '#e8e4cf',
+    primary: '#160C28',
+    logo: '#AB7823',
+
   },
   fonts: {
     body: 'system-ui, sans-serif',
