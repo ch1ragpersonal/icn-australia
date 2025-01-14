@@ -12,6 +12,14 @@ export default {
     monospace: 'Menlo, monospace',
   },
   styles: {
+    slide: {
+      height: '200px', // Set the height for the slider
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
     root: {
       fontFamily: 'body',
     },
