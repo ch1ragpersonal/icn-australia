@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
@@ -8,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [username, setUsername] = useState(""); // Store the extracted username
+  const [username, setUsername] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,8 +20,8 @@ const Login = () => {
         password
       );
       const userEmail = userCredential.user.email;
-      const extractedUsername = userEmail.split("@")[0]; // Extract part before @
-      setUsername(extractedUsername); // Store the username
+      const extractedUsername = userEmail.split("@")[0];
+      setUsername(extractedUsername);
       setIsLoggedIn(true);
       setShowModal(false);
       alert("Login successful!");
@@ -37,64 +38,173 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        backgroundColor: "background",
+      }}
+    >
       {isLoggedIn ? (
         <div
-          style={{
+          sx={{
             display: "flex",
             alignItems: "center",
-            gap: "10px",
+            gap: 3,
+            padding: 3,
+            backgroundColor: "secondary",
+            borderRadius: "8px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           }}
         >
-          <FaUserCircle size={30} />
-          <span>{username}</span> {/* Display username */}
-          <button onClick={handleLogout}>Logout</button>
+          <FaUserCircle size={40} sx={{ color: "logo" }} />
+          <span
+            sx={{
+              fontSize: 3,
+              fontWeight: "bold",
+              color: "text",
+            }}
+          >
+            {username}
+          </span>
+          <button
+            sx={{
+              backgroundColor: "primary",
+              color: "background",
+              border: "none",
+              padding: "8px 16px",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: 2,
+              "&:hover": {
+                backgroundColor: "secondary",
+                color: "background",
+              },
+            }}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       ) : (
-        <div>
+        <>
           <FaUserCircle
-            size={30}
+            size={40}
+            sx={{
+              color: "primary", 
+              cursor: "pointer",
+              display: "inline-block",
+              height: "auto", // Prevent full-height behavior
+            }}
             onClick={() => setShowModal(true)}
-            style={{ cursor: "pointer" }}
           />
           {showModal && (
             <div
-              style={{
+              sx={{
                 position: "fixed",
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                backgroundColor: "white",
-                padding: "20px",
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                backgroundColor: "background",
+                padding: 4,
+                borderRadius: "12px",
+                boxShadow: "0 6px 16px rgba(0, 0, 0, 0.25)",
+                width: "300px",
               }}
             >
-              <form onSubmit={handleLogin}>
+              <h2
+                sx={{
+                  textAlign: "center",
+                  color: "text",
+                  fontSize: 4,
+                  mb: 3,
+                }}
+              >
+                Login
+              </h2>
+              <form
+                onSubmit={handleLogin}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 3,
+                }}
+              >
                 <input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  sx={{
+                    padding: 2,
+                    fontSize: 2,
+                    border: "1px solid",
+                    borderColor: "secondary",
+                    borderRadius: "8px",
+                    "&:focus": {
+                      borderColor: "primary",
+                      outline: "none",
+                    },
+                  }}
                 />
                 <input
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  sx={{
+                    padding: 2,
+                    fontSize: 2,
+                    border: "1px solid",
+                    borderColor: "secondary",
+                    borderRadius: "8px",
+                    "&:focus": {
+                      borderColor: "primary",
+                      outline: "none",
+                    },
+                  }}
                 />
-                <button type="submit">Login</button>
+                <button
+                  type="submit"
+                  sx={{
+                    backgroundColor: "primary",
+                    color: "background",
+                    border: "none",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: 2,
+                    "&:hover": {
+                      backgroundColor: "secondary",
+                    },
+                  }}
+                >
+                  Login
+                </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
+                  sx={{
+                    backgroundColor: "secondary",
+                    color: "background",
+                    border: "none",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: 2,
+                    "&:hover": {
+                      backgroundColor: "primary",
+                    },
+                  }}
                 >
                   Cancel
                 </button>
               </form>
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );
