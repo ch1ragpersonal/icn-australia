@@ -4,18 +4,18 @@ import { Flex, NavLink } from 'theme-ui'
 
 const Navbar = () => {
   return (
-    <Flex as="nav" sx={{ gap: 4 }}>
-      <NavLink as={Link} to="/" sx={{ color: 'white', textDecoration: 'none' }}>
+    <Flex as="nav" sx={{ gap: 4, backgroundColor: "primary" }}>
+      <NavLink as={Link} to="/" sx={{ color: 'text', textDecoration: 'none' }}>
         Home
       </NavLink>
-      <NavLink as={Link} to="/test_page" sx={{ color: 'white', textDecoration: 'none' }}>
-        Test Page 
+      <NavLink as={Link} to="/livestreams" sx={{ color: 'text', textDecoration: 'none' }}>
+        Livestreams
       </NavLink>
-      <NavLink as={Link} to="/test_page_2" sx={{ color: 'white', textDecoration: 'none' }}>
-        Test Page 2
+      <NavLink as={Link} to="/competitions" sx={{ color: 'text', textDecoration: 'none' }}>
+        Competitions
       </NavLink>
-      <NavLink as={Link} to="/test-page3" sx={{ color: 'white', textDecoration: 'none' }}>
-        Test Page 3
+      <NavLink as={Link} to="/register" sx={{ color: 'text', textDecoration: 'none' }}>
+        Register
       </NavLink>
     </Flex>
   )

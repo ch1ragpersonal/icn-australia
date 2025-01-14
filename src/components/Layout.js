@@ -5,7 +5,7 @@ import Navbar from './navbar'  // Import the Navbar component
 
 const Layout = ({ children }) => (
   <Box>
-    <header sx={{ bg: 'primary', color: 'white', padding: '1rem' }}>
+    <header sx={{ bg: 'primary', color: 'text', padding: '1rem' }}>
       <Container>
         <Flex sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
           <Navbar />  {/* Add the Navbar component */}
