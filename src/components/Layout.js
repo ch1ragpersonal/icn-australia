@@ -25,7 +25,7 @@ const Layout = ({ children, title, description }) => (
   }}>
       <Container>
         <Flex sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-          <Navbar />  {/* Add the Navbar component */}
+          <Navbar />
           <Login />
         </Flex>
       </Container>
