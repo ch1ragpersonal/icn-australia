@@ -16,13 +16,6 @@ const HomePage = () => {
           <Heading as="h1" sx={{ fontSize: 5, mb: 4 }}>
             Welcome to ICN Australia
           </Heading>
-          <Text sx={{ fontSize: 3, mb: 4 }}>
-            Connecting Australian industry with project opportunities
-          </Text>
-          <Text sx={{ fontSize: 2, color: 'gray.7' }}>
-            ICN Australia helps Australian and New Zealand companies maximise opportunities to 
-            participate in major projects. We introduce local suppliers to projects large and small.
-          </Text>
         </Box>
       </Container>
     </>
