@@ -3,6 +3,8 @@ import { Box, Container, Flex } from 'theme-ui'
 import Login from '../components/Login'
 import Navbar from './navbar'
 import Seo from './seo'
+import Navbar from './navbar'
+import Seo from './seo'
 
 const Layout = ({ children, title, description }) => (
   <Box>
@@ -25,7 +27,7 @@ const Layout = ({ children, title, description }) => (
   }}>
       <Container>
         <Flex sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-          <Navbar />  {/* Add the Navbar component */}
+          <Navbar />
           <Login />
         </Flex>
       </Container>
