@@ -8,9 +8,9 @@ export default function HomePage() {
   return (
     <>
       <Seo title="Test Page" description="This is a test page for ICN Australia" />
-        <Box sx={{ backgroundColor: 'primary', padding: 4 }}>
+
           <Heading sx={{ color: 'background' }}>Welcome to My Site</Heading>
-        </Box>
+
     </>
   );
 }
