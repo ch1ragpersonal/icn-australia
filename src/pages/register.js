@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 export default function HomePage() {
   return (
     <>
-      <Seo title="Test Page" description="This is a test page for ICN Australia" />
+      <Seo title="Register" description="Register now for Season A 2025" />
 
           <Heading sx={{ color: 'background' }}>Welcome to My Site</Heading>
 
