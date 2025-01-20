@@ -9,7 +9,7 @@ const HomePage = () => {
     <>
       <Seo 
         title="Home"
-        description="Welcome to ICN Australia - Your trusted partner in industrial capability"
+        description="Welcome to ICN Australia"
       />
       <Container>
         <Box sx={{ py: 5 }}>

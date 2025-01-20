@@ -4,8 +4,8 @@ import Seo from '../components/seo'
 const IndexPage = () => (
   <>
     <Seo 
-      title="Test Page 2"
-      description="This is a test page for ICN Australia"
+      title="Competitions"
+      description="List of Competitions"
     />
     <div>
       <h1>Welcome to My Gatsby Site</h1>
