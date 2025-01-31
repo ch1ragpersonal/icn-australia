@@ -9,7 +9,6 @@ const UserProfile = ({ username, onLogout }) => {
   const handleLogout = () => {
     auth.signOut();
     onLogout();
-    toast.success("Logged out successfully!");
   };
 
   return (

@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import LoginButton from "./LoginButton";
 import LoginForm from "./LoginForm";
 import UserProfile from "./UserProfile";
+import "../styles/toastStyles.css";
+
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,13 +17,14 @@ const Login = () => {
     setUsername(username);
     setIsLoggedIn(true);
     setShowModal(false);
-    toast.success(`Welcome back, ${username}!`, { autoClose: 3000 });
+    toast.success(`Welcome back, ${username}!`, { className: "toast-success" });
+
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUsername("");
-    toast.info("Logged out successfully", { autoClose: 3000 });
+    toast.info("Logged out successfully", { className: "toast-info" });
   };
 
   return (
