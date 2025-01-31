@@ -43,8 +43,8 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
         backgroundColor: "background",
+        padding: 2
       }}
     >
       {isLoggedIn ? (
@@ -93,10 +93,11 @@ const Login = () => {
           <FaUserCircle
             size={40}
             sx={{
-              color: "primary", 
+              color: "primary",
               cursor: "pointer",
               display: "inline-block",
-              height: "auto", // Prevent full-height behavior
+              height: "40px",
+              width: "40px",
             }}
             onClick={() => setShowModal(true)}
           />
