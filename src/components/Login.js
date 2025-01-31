@@ -1,5 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LoginButton from "./LoginButton";
 import LoginForm from "./LoginForm";
 import UserProfile from "./UserProfile";
@@ -13,11 +15,13 @@ const Login = () => {
     setUsername(username);
     setIsLoggedIn(true);
     setShowModal(false);
+    toast.success(`Welcome back, ${username}!`, { autoClose: 3000 });
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUsername("");
+    toast.info("Logged out successfully", { autoClose: 3000 });
   };
 
   return (
@@ -28,10 +32,11 @@ const Login = () => {
         justifyContent: "center",
         flexDirection: "column",
         backgroundColor: "background",
-        minHeight: isLoggedIn ? "auto" : "100vh", // Fixes excessive white space
-        padding: 3, // Adds padding for better alignment
+        minHeight: isLoggedIn ? "auto" : "100vh",
+        padding: 3,
       }}
     >
+      <ToastContainer position="top-right" />
       {isLoggedIn ? (
         <UserProfile username={username} onLogout={handleLogout} />
       ) : (

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { toast } from "react-toastify";
 
 const LoginForm = ({ onSuccess, onClose }) => {
   const [email, setEmail] = useState("");
@@ -14,9 +15,8 @@ const LoginForm = ({ onSuccess, onClose }) => {
       const userEmail = userCredential.user.email;
       const extractedUsername = userEmail.split("@")[0];
       onSuccess(extractedUsername);
-      alert("Login successful!");
     } catch (error) {
-      alert(error.message);
+      toast.error("Invalid email or password. Please try again.", { autoClose: 3000 });
     }
   };
 

@@ -2,12 +2,14 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { auth } from "../firebase";
+import { toast } from "react-toastify";
+
 
 const UserProfile = ({ username, onLogout }) => {
   const handleLogout = () => {
     auth.signOut();
     onLogout();
-    alert("Logged out successfully!");
+    toast.success("Logged out successfully!");
   };
 
   return (
