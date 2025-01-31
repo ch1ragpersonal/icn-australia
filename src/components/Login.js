@@ -33,10 +33,8 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
         backgroundColor: "background",
-        minHeight: isLoggedIn ? "auto" : "100vh",
-        padding: 3,
+        padding: 2
       }}
     >
       <ToastContainer position="top-right" />
@@ -44,7 +42,17 @@ const Login = () => {
         <UserProfile username={username} onLogout={handleLogout} />
       ) : (
         <>
-          <LoginButton onClick={() => setShowModal(true)} />
+          <FaUserCircle
+            size={40}
+            sx={{
+              color: "primary",
+              cursor: "pointer",
+              display: "inline-block",
+              height: "40px",
+              width: "40px",
+            }}
+            onClick={() => setShowModal(true)}
+          />
           {showModal && (
             <LoginForm onSuccess={handleLoginSuccess} onClose={() => setShowModal(false)} />
           )}
