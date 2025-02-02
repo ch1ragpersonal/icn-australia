@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import { Grid, Box, Image, Heading, Text } from "theme-ui"
 
 // Sample prop shape for each video item:
@@ -11,7 +11,39 @@ import { Grid, Box, Image, Heading, Text } from "theme-ui"
 //   slug: "video-slug"  // for the video's page URL
 // }
 
-const VideoGrid = ({ videos }) => {
+const VideoGrid = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulVideo {
+        nodes {
+          id
+          title
+          video{
+            url
+          }
+          description {
+            description
+          }
+          thumbnail {
+            file {
+              url
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const videos = data.allContentfulVideo.nodes.map((video) => ({
+    id: video.id,
+    title: video.title,
+    description: video.description?.description,
+    thumbnail: video.thumbnail?.file.url 
+      ? `https:${video.thumbnail.file.url}`
+      : "/images/default-placeholder.webp",
+    slug: video.video.url,
+  }));
+
   return (
     <Grid
       columns={[1, 2, 3]} // responsive: 1 column on mobile, 2 on tablet, 3 on desktop
@@ -20,8 +52,8 @@ const VideoGrid = ({ videos }) => {
     >
       {videos.map((video) => (
         <Link
-          key={video.slug}
-          to={`/videos/${video.slug}`}
+          key={video.id}
+          to={`${video.slug}`}
           sx={{
             textDecoration: "none",
             color: "inherit",
@@ -52,26 +84,12 @@ const VideoGrid = ({ videos }) => {
                 objectFit: "cover",
               }}
             />
-            <Text
-              sx={{
-                position: "absolute",
-                bottom: "8px",
-                right: "8px",
-                backgroundColor: "rgba(0,0,0,0.75)",
-                color: "white",
-                padding: "2px 6px",
-                borderRadius: "4px",
-                fontSize: 1,
-              }}
-            >
-              {video.duration}
-            </Text>
             <Box sx={{ padding: 3 }}>
               <Heading
                 as="h3"
                 sx={{
                   fontSize: 2,
-                  marginY: 0,
+                  marginY: 2,
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
@@ -79,6 +97,19 @@ const VideoGrid = ({ videos }) => {
               >
                 {video.title}
               </Heading>
+              <Text
+                sx={{
+                  fontSize: 1,
+                  color: "gray.600",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                {video.description}
+              </Text>
             </Box>
           </Box>
         </Link>

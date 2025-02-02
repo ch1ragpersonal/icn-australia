@@ -3,57 +3,17 @@ import { Box, Heading } from 'theme-ui';
 import Seo from '../components/seo'
 import VideoGrid from '../components/Livestream-library'
 
-const videos = [
-  {
-    title: "Introduction to ICN",
-    thumbnail: "../images/image1.jpg",
-    duration: "5:30",
-    slug: "intro-to-icn"
-  },
-  {
-    title: "Competition Guidelines",
-    thumbnail: "../images/image1.jpg",
-    duration: "8:45",
-    slug: "competition-guidelines"
-  },
-  {
-    title: "Competition Guidelines",
-    thumbnail: "../images/image1.jpg",
-    duration: "8:45",
-    slug: "competition-guidelines"
-  },
-  {
-    title: "Competition Guidelines",
-    thumbnail: "../images/image1.jpg",
-    duration: "8:45",
-    slug: "competition-guidelines"
-  },
-  {
-    title: "Competition Guidelines",
-    thumbnail: "../images/image1.jpg",
-    duration: "8:45",
-    slug: "competition-guidelines"
-  },
-  {
-    title: "Competition Guidelines",
-    thumbnail: "../images/image1.jpg",
-    duration: "8:45",
-    slug: "competition-guidelines"
-  },
-  
-  // ... more videos
-];
-
-export default function HomePage() {
+export default function LivestreamsPage() {
   return (
     <>
       <Seo 
         title="Livestreams"
-        description="Livestreams"
+        description="Watch ICN Australia livestreams and videos"
       />
-      <Heading sx={{ color: 'text' }}>Livestreams YAY</Heading>
-      <VideoGrid videos={videos} />
+      <Box sx={{ padding: 4 }}>
+        <Heading as="h1" sx={{ mb: 4 }}>Livestreams</Heading>
+        <VideoGrid />
+      </Box>
     </>
-      
   );
 }

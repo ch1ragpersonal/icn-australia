@@ -42,17 +42,7 @@ const Login = () => {
         <UserProfile username={username} onLogout={handleLogout} />
       ) : (
         <>
-          <FaUserCircle
-            size={40}
-            sx={{
-              color: "primary",
-              cursor: "pointer",
-              display: "inline-block",
-              height: "40px",
-              width: "40px",
-            }}
-            onClick={() => setShowModal(true)}
-          />
+          <LoginButton onClick={() => setShowModal(true)} />
           {showModal && (
             <LoginForm onSuccess={handleLoginSuccess} onClose={() => setShowModal(false)} />
           )}
