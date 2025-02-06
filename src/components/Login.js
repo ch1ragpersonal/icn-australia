@@ -35,7 +35,6 @@ const Login = () => {
         justifyContent: "center",
         backgroundColor: "background",
         padding: 2
-        padding: 2
       }}
     >
       <ToastContainer position="top-right" />
