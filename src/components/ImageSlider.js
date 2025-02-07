@@ -53,7 +53,7 @@ const ImageSlider = () => {
         modules={[Navigation, Pagination, Autoplay]}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
+        autoplay={{ delay: 4500 }}
         loop={true}
         spaceBetween={0}
         slidesPerView={1}
