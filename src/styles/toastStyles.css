@@ -13,3 +13,23 @@
     background-color: #17a2b8 !important; /* Blue */
     color: white !important;
   }
+
+  svg {
+    background: none !important;
+  }
+
+  /* src/styles/toastStyles.css */
+.toast-success {
+  background-color: #4caf50 !important; /* Green */
+  color: white !important;
+}
+
+.toast-error {
+  background-color: #f44336 !important; /* Red */
+  color: white !important;
+}
+
+.toast-info {
+  background-color: #2196f3 !important; /* Blue */
+  color: white !important;
+}

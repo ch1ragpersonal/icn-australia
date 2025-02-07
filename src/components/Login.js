@@ -6,6 +6,7 @@ import LoginButton from "./LoginButton";
 import LoginForm from "./LoginForm";
 import UserProfile from "./UserProfile";
 import "../styles/toastStyles.css";
+import { Box } from "theme-ui";
 
 
 const Login = () => {
@@ -28,15 +29,17 @@ const Login = () => {
   };
 
   return (
-    <div
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "background",
-        padding: 2
-      }}
-    >
+
+<Box
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "primary",
+    padding: 2
+  }}
+>
+
       <ToastContainer position="top-right" />
       {isLoggedIn ? (
         <UserProfile username={username} onLogout={handleLogout} />
@@ -48,7 +51,7 @@ const Login = () => {
           )}
         </>
       )}
-    </div>
+    </Box>
   );
 };
 
