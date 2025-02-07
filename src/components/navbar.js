@@ -8,7 +8,7 @@ const Navbar = () => {
     <Flex as="nav" sx={{ gap: 4, backgroundColor: "primary" }}>
       
       <img 
-        src="/icon.png"
+        src="/logo.png"
         alt="Logo" 
         sx={{
           width: '30px', // Set the width
