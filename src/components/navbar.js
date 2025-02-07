@@ -148,6 +148,9 @@ const Navbar = () => {
       <NavLink as={Link} to="/register" sx={{ color: 'logo', textDecoration: 'none' }}>
         Register
       </NavLink>
+      <NavLink as={Link} to="/rules_and_regulations" sx={{ color: 'logo', textDecoration: 'none' }}>
+        Rules and Regulations
+      </NavLink>
     </Flex>
   )
 }
