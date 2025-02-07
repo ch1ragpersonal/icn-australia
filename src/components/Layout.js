@@ -16,6 +16,7 @@ const Layout = ({ children, title, description }) => (
     justifyContent: "space-between",
     padding: "16px",
     backgroundColor: "primary",
+    overflow:"hidden",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     position: "sticky",
     top: 0,
