@@ -20,25 +20,30 @@ const StateCard = ({ state, onClick }) => {
       }}
       sx={{
         cursor: "pointer",
-        padding: "20px",
+        padding: "15px",
         boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-        borderRadius: "10px",
+        borderRadius: "50%", // Fully rounded shape
         textAlign: "center",
         backgroundColor: "#f8f9fa",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        height: "250px",
+        justifyContent: "center",
+        height: "200px", // Smaller height
+        width: "200px", // Less wide
+        margin: "10px", // More spacing between cards
       }}
     >
       {state.logo?.file.url && (
         <Image
           src={state.logo.file.url}
           alt={`${state.name} Logo`}
-          sx={{ width: "80px", height: "80px", marginBottom: "10px" }}
+          sx={{ width: "100px", height: "100px", marginBottom: "10px" }} // Larger logo
         />
       )}
-      <Heading as="h2">{state.name || "Unnamed State"}</Heading>
+      <Heading as="h3" sx={{ fontSize: "16px", textAlign: "center" }}>
+        {state.name || "Unnamed State"}
+      </Heading>
     </Card>
   );
 };

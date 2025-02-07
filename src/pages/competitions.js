@@ -13,8 +13,9 @@ const CompetitionsPage = () => {
       allContentfulState {
         nodes {
           id
-          name   # Ensure this field exists in Contentful
+          name
           symbol
+          website   # Added to fetch state website
           logo {
             file {
               url
@@ -25,8 +26,9 @@ const CompetitionsPage = () => {
       allContentfulCompetition {
         nodes {
           id
-          competitionName  # Match Contentful's actual field name
+          competitionName
           date
+          location  # Added to fetch competition location
           poster {
             file {
               url
@@ -58,34 +60,33 @@ const CompetitionsPage = () => {
   return (
     <Box sx={{ width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "20px", textAlign: "center" }}>
       <Heading as="h1" sx={{ fontSize: "32px", marginBottom: "20px" }}>
-        {selectedState ? `Competitions in ${selectedState.name}` : "Select a State"}
+        {selectedState ? `Competitions in ${selectedState.name}` : "Select a Region to View Competitions"}
       </Heading>
 
       {/* State Selection */}
       <AnimatePresence mode="wait">
-  {!selectedState && (
-    <Box
-      key="state-selection"
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-        gap: "20px",
-      }}
-    >
-      {states.map((state) => (
-        <StateCard
-          key={state.id}
-          state={state}
-          onClick={() => {
-            console.log("Clicked State:", state); // Debug log
-            setSelectedState(state);
-          }}
-        />
-      ))}
-    </Box>
-  )}
-</AnimatePresence>
-
+        {!selectedState && (
+          <Box
+            key="state-selection"
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "20px",
+            }}
+          >
+            {states.map((state) => (
+              <StateCard
+                key={state.id}
+                state={state}
+                onClick={() => {
+                  console.log("Clicked State:", state); // Debug log
+                  setSelectedState(state);
+                }}
+              />
+            ))}
+          </Box>
+        )}
+      </AnimatePresence>
 
       {/* Competition Display */}
       <AnimatePresence mode="wait">

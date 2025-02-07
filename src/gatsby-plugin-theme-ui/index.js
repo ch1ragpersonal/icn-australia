@@ -1,14 +1,13 @@
 export default {
   colors: {
-    text: '#0004118',
+    text: '#000411', // Adjusted to correct hex code length
     background: '#fff',
     primary: '#160C28',
     logo: '#AB7823',
-
   },
   fonts: {
-    body: 'system-ui, sans-serif',
-    heading: 'Georgia, serif',
+    body: 'Roboto, system-ui, sans-serif',
+    heading: 'Merriweather, Georgia, serif',
     monospace: 'Menlo, monospace',
   },
   styles: {
