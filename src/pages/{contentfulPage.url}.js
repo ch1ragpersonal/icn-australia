@@ -1,8 +1,13 @@
 // import * as React from 'react'
 import { graphql } from 'gatsby'
-
+import Seo from '../components/seo'
 const Page = ({ data }) => {
   return (
+    <>
+    <Seo 
+      title={data.contentfulPage.title}
+      description={data.contentfulPage.description.description}
+    />
     <main>
       <h1>{data.contentfulPage.title}</h1>
       <p>{data.contentfulPage.description.description}</p>
@@ -10,8 +15,9 @@ const Page = ({ data }) => {
         src={data.contentfulPage.image.file.url}
         alt={data.title}
         style={{ width: 300, height: 'auto' }}
-     />
+     /> 
    </main>
+   </>
  );
 };
 

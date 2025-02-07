@@ -1,16 +1,22 @@
 /** @jsxImportSource theme-ui */
 import { Box, Container, Flex } from 'theme-ui'
 import Login from '../components/Login'
-import Navbar from './navbar'  // Import the Navbar component
+import Navbar from './navbar'
+import Seo from './seo'
 
-const Layout = ({ children }) => (
+const Layout = ({ children, title, description }) => (
   <Box>
+    <Seo 
+      title={title}
+      description={description || "ICN Australia - Australia's Leading Natural Bodybuilding Competition"}
+    />
     <header sx={{
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     padding: "16px",
     backgroundColor: "primary",
+    overflow:"hidden",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     position: "sticky",
     top: 0,
@@ -20,7 +26,7 @@ const Layout = ({ children }) => (
   }}>
       <Container>
         <Flex sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-          <Navbar />  {/* Add the Navbar component */}
+          <Navbar />
           <Login />
         </Flex>
       </Container>

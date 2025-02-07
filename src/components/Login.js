@@ -33,10 +33,8 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
         backgroundColor: "background",
-        minHeight: isLoggedIn ? "auto" : "100vh",
-        padding: 3,
+        padding: 2
       }}
     >
       <ToastContainer position="top-right" />
