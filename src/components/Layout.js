@@ -47,7 +47,7 @@ const Layout = ({ children, title, description }) => (
     <main>{children}</main>
 
     <footer sx={{ bg: 'muted', padding: '1rem', textAlign: 'center' }}>
-      © 2024 My Gatsby Site
+      © 2024 ICN Australia
     </footer>
   </Box>
 );
