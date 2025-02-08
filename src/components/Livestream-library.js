@@ -29,7 +29,7 @@ const VideoGrid = ({ filterType }) => {
     }
   `);
 
-  // Process and filter videos based on the filterType
+  // Process and filter videos based on filterType
   const videos = data.allContentfulVideo.nodes
     .map((video) => ({
       id: video.id,
@@ -42,9 +42,9 @@ const VideoGrid = ({ filterType }) => {
       link: video.link,
     }))
     .filter((video) => {
-      if (filterType === "upcoming") return !video.completed; // Show uncompleted ones
-      if (filterType === "complete") return video.completed; // Show completed ones
-      return true; // Show all otherwise
+      if (filterType.upcoming && !video.completed) return true; // Show uncompleted ones
+      if (filterType.complete && video.completed) return true; // Show completed ones
+      return false;
     });
 
   return (
@@ -87,7 +87,7 @@ const VideoGrid = ({ filterType }) => {
               {video.title}
             </Heading>
             
-            {filterType === "upcoming" ? (
+            {filterType.upcoming && !video.completed ? (
               <>
                 <Text sx={{ fontSize: 1, color: "gray.600", fontWeight: "bold" }}>
                   Starts at: {video.startTime}
@@ -107,7 +107,7 @@ const VideoGrid = ({ filterType }) => {
                   </Link>
                 )}
               </>
-            ) : filterType === "complete" ? (
+            ) : filterType.complete && video.completed ? (
               <Text
                 sx={{
                   fontSize: 1,
