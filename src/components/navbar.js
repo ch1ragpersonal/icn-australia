@@ -86,8 +86,8 @@ const Navbar = () => {
       <Dropdown
         title="Livestreams"
         links={[
-          { to: '/livestreams/upcoming', label: 'Upcoming Events' },
-          { to: '/livestreams/past', label: 'Past Events' },
+          { to: '/livestreams?upcoming=true', label: 'Upcoming Events' },
+          { to: '/livestreams?complete=true', label: 'Past Events' },
         ]}
       />
 
