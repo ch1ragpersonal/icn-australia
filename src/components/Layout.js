@@ -32,7 +32,7 @@ const Layout = ({ children, title, description }) => (
         position: "sticky",
         top: 0,
         zIndex: 1000, // Ensure the header stays on top
-        height: "60px", // Fix the height of the header
+        height: "18vh", // Fix the height of the header
         width: "100%", // Ensure it spans the viewport width
       }}
     >
