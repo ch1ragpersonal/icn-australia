@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { Flex, NavLink, Box } from 'theme-ui';
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -61,12 +61,12 @@ const Dropdown = ({ title, links, defaultTo }) => {
             {links.map(({ to, label }) => (
               <NavLink
                 key={to}
-                as="button"
+                as="button" // Keep as a button for accessibility
                 onClick={() => {
-                  window.location.href = to;
-                  document.activeElement.blur();
+                  navigate(to); // Use navigate here!
+                  document.activeElement.blur(); // Good for accessibility
                 }}
-                onBlur={(e) => e.target.blur()}
+                onBlur={(e) => e.target.blur()} // Good for accessibility
                 sx={{
                   color: 'logo',
                   textDecoration: 'none',
