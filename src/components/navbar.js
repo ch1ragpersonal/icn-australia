@@ -8,7 +8,7 @@ const Portal = ({ children }) => {
   return createPortal(children, document.body);
 };
 
-const Dropdown = ({ title, links }) => {
+const Dropdown = ({ title, links, defaultTo }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
@@ -24,7 +24,11 @@ const Dropdown = ({ title, links }) => {
 
   return (
     <Box sx={{ position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <NavLink as={Link} to="#" sx={{ color: 'logo', textDecoration: 'none', cursor: 'pointer' }}>
+      <NavLink
+        as={Link}
+        to={defaultTo}
+        sx={{ color: 'logo', textDecoration: 'none', cursor: 'pointer' }}
+      >
         {title}
       </NavLink>
 
@@ -45,19 +49,24 @@ const Dropdown = ({ title, links }) => {
           >
             {links.map(({ to, label }) => (
               <NavLink
-                key={to}
-                as={Link}
-                to={to}
-                sx={{
-                  color: 'logo',
-                  textDecoration: 'none',
-                  display: 'block',
-                  padding: '12px 16px',
-                  '&:hover': { backgroundColor: 'secondary' },
-                }}
-              >
-                {label}
-              </NavLink>
+              key={to}
+              as="button"
+              onClick={() => (window.location.href = to)}
+              sx={{
+                color: 'logo',
+                textDecoration: 'none',
+                display: 'block',
+                padding: '12px 16px',
+                background: 'none',
+                border: 'none',
+                textAlign: 'left',
+                width: '100%',
+                cursor: 'pointer',
+                '&:hover': { backgroundColor: 'secondary' },
+              }}
+            >
+              {label}
+            </NavLink>
             ))}
           </Box>
         </Portal>
@@ -85,6 +94,7 @@ const Navbar = () => {
 
       <Dropdown
         title="Livestreams"
+        defaultTo="/livestreams"
         links={[
           { to: '/livestreams?upcoming=true', label: 'Upcoming Events' },
           { to: '/livestreams?complete=true', label: 'Past Events' },
@@ -93,8 +103,10 @@ const Navbar = () => {
 
       <Dropdown
         title="Competitions"
+        defaultTo="/competitions"
         links={[
-          { to: '/competitions/schedule', label: 'Schedule' },
+          { to: '/competitions', label: 'By State' },
+          { to: '/competitions?view=schedule', label: 'Schedule' },
           { to: '/competitions/results', label: 'Results' },
           { to: '/competitions/rules', label: 'Rules' },
         ]}
