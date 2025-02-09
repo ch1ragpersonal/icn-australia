@@ -11,7 +11,6 @@ export default function App() {
     <>
       <Seo title="HomePage" description="Welcome to ICN Australia" />
       <div>
-        <Heading as="h2" sx={{ fontSize: 3, textAlign: 'left', mb: 2 }}>I Compete Natural Australia </Heading>
         <ImageSlider />
         <EventShowcase />
         {/* Wrap RecentLivestreams and RecentResults in a Grid */}
