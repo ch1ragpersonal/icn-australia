@@ -24,14 +24,25 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
   return (
     <Box sx={{ position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {/* Navbar Link */}
       <NavLink
         as={Link}
         to={defaultTo}
-        sx={{ color: 'logo', textDecoration: 'none', cursor: 'pointer' }}
+        sx={{
+          color: 'logo', // Ensures visibility
+          textDecoration: 'none',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          '&:hover, &:focus': {
+            backgroundColor: 'secondary', // Proper contrast on hover
+            color: 'white', // Text remains visible
+          },
+        }}
       >
         {title}
       </NavLink>
 
+      {/* Dropdown Items */}
       {isOpen && (
         <Portal>
           <Box
@@ -49,24 +60,31 @@ const Dropdown = ({ title, links, defaultTo }) => {
           >
             {links.map(({ to, label }) => (
               <NavLink
-              key={to}
-              as="button"
-              onClick={() => (window.location.href = to)}
-              sx={{
-                color: 'logo',
-                textDecoration: 'none',
-                display: 'block',
-                padding: '12px 16px',
-                background: 'none',
-                border: 'none',
-                textAlign: 'left',
-                width: '100%',
-                cursor: 'pointer',
-                '&:hover': { backgroundColor: 'secondary' },
-              }}
-            >
-              {label}
-            </NavLink>
+                key={to}
+                as="button"
+                onClick={() => {
+                  window.location.href = to;
+                  document.activeElement.blur(); // Fix: Remove focus after clicking
+                }}
+                onBlur={(e) => e.target.blur()} // Ensures focus is removed
+                sx={{
+                  color: 'logo', // Ensures proper contrast
+                  textDecoration: 'none',
+                  display: 'block',
+                  padding: '12px 16px',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  width: '100%',
+                  cursor: 'pointer',
+                  '&:hover, &:focus': {
+                    backgroundColor: 'secondary',
+                    color: 'white',
+                  },
+                }}
+              >
+                {label}
+              </NavLink>
             ))}
           </Box>
         </Portal>
@@ -77,7 +95,8 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
 const Navbar = () => {
   return (
-    <Flex as="nav" sx={{ gap: 4, backgroundColor: 'primary' }}>
+    <Flex as="nav" sx={{ gap: 4, backgroundColor: 'primary', padding: '10px' }}>
+      {/* Logo */}
       <img
         src="/logo.png"
         alt="Logo"
@@ -88,7 +107,20 @@ const Navbar = () => {
         }}
       />
 
-      <NavLink as={Link} to="/" sx={{ color: 'logo', textDecoration: 'none' }}>
+      {/* Navbar Links */}
+      <NavLink
+        as={Link}
+        to="/"
+        sx={{
+          color: 'logo', // Fix: Ensures visibility against primary background
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          '&:hover, &:focus': {
+            backgroundColor: 'secondary',
+            color: 'white',
+          },
+        }}
+      >
         Home
       </NavLink>
 
@@ -107,15 +139,40 @@ const Navbar = () => {
         links={[
           { to: '/competitions', label: 'By State' },
           { to: '/competitions?view=schedule', label: 'Schedule' },
-          { to: '/competitions/results', label: 'Results' },
-          { to: '/competitions/rules', label: 'Rules' },
+          { to: '/results', label: 'Results' },
+          { to: '/rules_and_regulations', label: 'Rules' },
         ]}
       />
 
-      <NavLink as={Link} to="/register" sx={{ color: 'logo', textDecoration: 'none' }}>
+      <NavLink
+        as={Link}
+        to="/register"
+        sx={{
+          color: 'logo',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          '&:hover, &:focus': {
+            backgroundColor: 'secondary',
+            color: 'white',
+          },
+        }}
+      >
         Register
       </NavLink>
-      <NavLink as={Link} to="/rules_and_regulations" sx={{ color: 'logo', textDecoration: 'none' }}>
+
+      <NavLink
+        as={Link}
+        to="/rules_and_regulations"
+        sx={{
+          color: 'logo',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          '&:hover, &:focus': {
+            backgroundColor: 'secondary',
+            color: 'white',
+          },
+        }}
+      >
         Rules and Regulations
       </NavLink>
     </Flex>
