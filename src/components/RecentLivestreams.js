@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"; // Import Link as GatsbyLink
+import { graphql, useStaticQuery, navigate } from "gatsby"; // Import navigate
 import { Box, Heading, Text, Image, Link, Grid } from "theme-ui";
 import { format } from 'date-fns';
 
@@ -142,8 +142,11 @@ const RecentLivestreams = () => {
       </Grid>
 
       <Box sx={{ textAlign: 'center', mt: 3 }}>
-        {/* Internal Link - Use Gatsby's <Link> */}
-        <Link as={GatsbyLink} to="/livestreams" sx={{
+        {/* Use navigate for programmatic navigation */}
+        <Link
+          as="button"  // Render as a button for accessibility
+          onClick={() => navigate("/livestreams")} // Simple navigate call
+          sx={{
             display: 'inline-block',
             px: 4,
             py: 2,
@@ -153,10 +156,12 @@ const RecentLivestreams = () => {
             textDecoration: 'none',
             fontWeight: 'bold',
             fontSize: '16px',
+            cursor: 'pointer', // Add cursor: pointer
             '&:hover': {
               bg: 'secondary',
             }
-        }}>
+          }}
+        >
           See More Livestreams
         </Link>
       </Box>
