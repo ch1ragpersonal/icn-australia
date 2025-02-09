@@ -2,8 +2,9 @@ import React from "react";
 import Seo from "../components/seo";
 import ImageSlider from "../components/ImageSlider";
 import EventShowcase from "../components/EventShowcase";
-import RecentLivestreams from "../components/RecentLivestreams"; // Import the new component
-import RecentResults from "../components/RecentResults";       // Import the new component
+import RecentLivestreams from "../components/RecentLivestreams";
+import RecentResults from "../components/RecentResults";
+import { Grid } from "theme-ui"; // Import Grid
 
 export default function App() {
   return (
@@ -12,8 +13,11 @@ export default function App() {
       <div>
         <ImageSlider />
         <EventShowcase />
-        <RecentLivestreams />
-        <RecentResults />
+        {/* Wrap RecentLivestreams and RecentResults in a Grid */}
+        <Grid columns={[1, 1, 2]} gap={4} sx={{ px: [2, 4], mb:4 }}> {/*Added padding here*/}
+          <RecentLivestreams />
+          <RecentResults />
+        </Grid>
       </div>
     </>
   );
