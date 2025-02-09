@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import { Box, Heading, Text, Grid, Link } from "theme-ui";
+import { graphql, useStaticQuery, navigate, Link as GatsbyLink } from "gatsby"; // Import navigate and rename Link
+import { Box, Heading, Text, Grid, Link } from "theme-ui"; // Keep theme-ui Link for styling
 import { format } from 'date-fns';
 
 const RecentResults = () => {
@@ -51,23 +51,46 @@ const RecentResults = () => {
           </Box>
         ))}
       </Grid>
-        <Box sx={{ textAlign: 'center', mt: 2 }}>
-        <Link href="/results" sx={{
+      <Box sx={{ textAlign: 'center', mt: 2 }}>
+        {/* Use Gatsby's <Link> component (best practice) */}
+        <Link as={GatsbyLink} to="/results" sx={{
             display: 'inline-block',
-            px: 4, // Match Livestreams
-            py: 2, // Match Livestreams
+            px: 4,
+            py: 2,
             bg: 'primary',
             color: 'white',
             borderRadius: '8px',
             textDecoration: 'none',
             fontWeight: 'bold',
-            fontSize: '16px', // Match Livestreams
+            fontSize: '16px',
             '&:hover': {
               bg: 'secondary',
             }
         }}>
           See More Results
         </Link>
+
+        {/* Alternative: Using navigate (less preferred for simple links) */}
+        {/* <Link
+            onClick={() => navigate("/results")} // Use navigate here
+            sx={{
+                display: 'inline-block',
+                px: 4,
+                py: 2,
+                bg: 'primary',
+                color: 'white',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                '&:hover': {
+                    bg: 'secondary',
+                },
+                cursor: 'pointer', // Add cursor pointer since it's now a button
+            }}
+        >
+          See More Results
+        </Link> */}
        </Box>
     </Box>
   );

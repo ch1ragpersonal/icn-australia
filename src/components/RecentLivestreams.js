@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby"; // Import Link as GatsbyLink
 import { Box, Heading, Text, Image, Link, Grid } from "theme-ui";
 import { format } from 'date-fns';
 
@@ -33,16 +33,16 @@ const RecentLivestreams = () => {
   const videos = data.allContentfulVideo.nodes.map(video => ({
     id: video.id,
     title: video.title,
-    description: video.description?.description,  // Include description
+    description: video.description?.description,
     thumbnail: video.thumbnail?.file?.url ? `https:${video.thumbnail.file.url}` : "/images/default-placeholder.webp",
-    videoUrl: video.video?.url,  // Include video URL
+    videoUrl: video.video?.url,
     completed: video.completed,
-    startTime: video.startTime ? new Date(video.startTime) : null,  // Parse startTime to Date
+    startTime: video.startTime ? new Date(video.startTime) : null,
     link: video.link,
   }));
 
-  const mostRecentCompleted = videos.find(v => v.completed); // Simplest way to get *a* completed video
-  const nextUpcoming = videos.find(v => !v.completed);  //Simplest way to get the first upcoming
+  const mostRecentCompleted = videos.find(v => v.completed);
+  const nextUpcoming = videos.find(v => !v.completed);
 
   return (
     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -55,13 +55,13 @@ const RecentLivestreams = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',  // Center content vertically
+            justifyContent: 'center',
             p: 3,
             borderRadius: '8px',
             boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
             bg: 'white',
             overflow: 'hidden',
-            flexGrow: 1, // Allow box to grow
+            flexGrow: 1,
           }}>
             <Heading as="h3" sx={{ fontSize: '18px', mb: 2, textAlign: 'center' }}>Most Recent</Heading>
             <Image src={mostRecentCompleted.thumbnail} alt={mostRecentCompleted.title} sx={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: '8px' }} />
@@ -70,6 +70,7 @@ const RecentLivestreams = () => {
               <Text sx={{ fontSize: '14px', color: "gray.600", fontWeight: "bold", textAlign: 'center', mb: 2 }}>
                 Streamed at: {mostRecentCompleted.startTime ? format(mostRecentCompleted.startTime, "PPP, p") : "No start time"}
               </Text>
+              {/* External Link - Keep as regular <a> */}
               {mostRecentCompleted.videoUrl && (
                 <Link
                   href={mostRecentCompleted.videoUrl}
@@ -77,7 +78,7 @@ const RecentLivestreams = () => {
                   rel="noopener noreferrer"
                   sx={{
                     display: "block",
-                    mt: 'auto', // Push to the bottom
+                    mt: 'auto',
                     color: "primary",
                     textDecoration: "none",
                     fontWeight: "bold",
@@ -99,13 +100,13 @@ const RecentLivestreams = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center', // Center content vertically
+            justifyContent: 'center',
             p: 3,
             borderRadius: '8px',
             boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
             bg: 'white',
             overflow: 'hidden',
-            flexGrow: 1,  // Allow box to grow
+            flexGrow: 1,
 
           }}>
             <Heading as="h3" sx={{ fontSize: '18px', mb: 2, textAlign: 'center' }}>Next Upcoming</Heading>
@@ -115,15 +116,16 @@ const RecentLivestreams = () => {
               <Text sx={{ fontSize: '14px', color: "gray.600", fontWeight: "bold", textAlign: 'center', mb: 2 }}>
                 Starts at: {nextUpcoming.startTime ? format(nextUpcoming.startTime, "PPP, p") : "No Start Time"}
               </Text>
+              {/* External Link - Keep as regular <a> */}
               {nextUpcoming.link && (
                 <Link
                 href={nextUpcoming.link}
                 target="_blank"
-                rel="noopener noreferrer"  // Add noopener noreferrer
+                rel="noopener noreferrer"
                 sx={{
                   display: 'block',
-                  mt: 'auto', // Push link to bottom
-                  color: 'primary', // Use theme's primary color
+                  mt: 'auto',
+                  color: 'primary',
                   textDecoration: 'none',
                   fontWeight: 'bold',
                   '&:hover': {
@@ -140,7 +142,8 @@ const RecentLivestreams = () => {
       </Grid>
 
       <Box sx={{ textAlign: 'center', mt: 3 }}>
-        <Link href="/livestreams" sx={{
+        {/* Internal Link - Use Gatsby's <Link> */}
+        <Link as={GatsbyLink} to="/livestreams" sx={{
             display: 'inline-block',
             px: 4,
             py: 2,
