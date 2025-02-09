@@ -7,9 +7,9 @@ require('dotenv').config();
 
 module.exports = {
   jsxRuntime: 'automatic',
+  pathPrefix: "/icn-australia", // If deploying to username.github.io, omit this
   siteMetadata: {
     title: `ICN AUSTRALIA`,
-    siteUrl: `https://www.yourdomain.tld`,
     description: `Your site description`,
   },
   plugins: [

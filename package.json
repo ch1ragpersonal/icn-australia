@@ -10,9 +10,11 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "build": "gatsby build --prefix-paths",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.0.1",
@@ -37,5 +39,8 @@
     "react-toastify": "^11.0.3",
     "swiper": "^11.2.1",
     "theme-ui": "^0.17.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
