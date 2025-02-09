@@ -22,43 +22,49 @@ const RecentResults = () => {
   const recentResults = data.allContentfulCompetitionResults.nodes;
 
   return (
-    <Box sx={{ mb: 4 }}>
-      <Heading as="h2" sx={{ fontSize: 3, textAlign: 'center', mb:3 }}>Recent Results</Heading>
-      <Grid columns={[1, 2]} gap={3}>
+    <Box>
+      <Heading as="h2" sx={{ fontSize: 3, textAlign: 'center', mb: 2 }}>Recent Results</Heading>
+      <Grid columns={[1, 2]} gap={2}>
         {recentResults.map((result, index) => (
           <Box key={index} sx={{
-            p: 3,
-            border: '1px solid',
-            borderColor: 'gray.200',
-            borderRadius: 'md',
-            boxShadow: 'sm',
-            bg: 'white'
+            display: 'flex',
+            flexDirection: 'column',
+            p: 2,
+            // REMOVE THESE:
+            // border: '1px solid',
+            // borderColor: 'gray.200',
+            borderRadius: '8px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Keep the shadow!
+            bg: 'white',
           }}>
-            <Heading as="h3" sx={{ fontSize: 2, mb: 1 }}>{result.competitionName}</Heading>
-            <Text sx={{ fontSize: 1, color: 'gray.600', mb: 2 }}>
+            <Heading as="h3" sx={{ fontSize: '16px', mb: 1, textAlign: 'center' }}>{result.competitionName}</Heading>
+            <Text sx={{ fontSize: '12px', color: 'gray.600', mb: 1, textAlign: 'center', fontWeight: 'bold' }}>
               {result.date ? format(new Date(result.date), "MMMM dd, yyyy") : "Date Not Available"}
             </Text>
             <Text sx={{
-                fontSize: 1,
+                fontSize: '12px',
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 display: "-webkit-box",
-                WebkitLineClamp: 3, /* Number of lines to show */
+                WebkitLineClamp: 3,
                 WebkitBoxOrient: "vertical",
+                flexGrow: 1,
+                textAlign: 'center'
               }}>{result.results.results}</Text>
           </Box>
         ))}
       </Grid>
-        <Box sx={{ textAlign: 'center', mt: 3 }}>
+        <Box sx={{ textAlign: 'center', mt: 2 }}>
         <Link href="/results" sx={{
             display: 'inline-block',
-            px: 4,
-            py: 2,
+            px: 3,
+            py: 1,
             bg: 'primary',
             color: 'white',
-            borderRadius: 'md',
+            borderRadius: '8px',
             textDecoration: 'none',
             fontWeight: 'bold',
+            fontSize: '14px',
             '&:hover': {
               bg: 'secondary',
             }

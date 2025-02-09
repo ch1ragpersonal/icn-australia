@@ -1,8 +1,9 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { Box, Image, Button, Flex } from "theme-ui";
+import { Box, Image, Button, Flex,Heading } from "theme-ui";
 import { Link } from "gatsby";
+
 
 const EventShowcase = () => {
   const data = useStaticQuery(graphql`
@@ -49,6 +50,7 @@ const EventShowcase = () => {
 
   return (
     <Box sx={{ textAlign: "center", my: 4 }}>
+        <Heading as="h2" sx={{ fontSize: 3, textAlign: 'center', mb: 2 }}>Upcoming Competitions</Heading>
       <Flex
         sx={{
           justifyContent: "center",
