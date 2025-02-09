@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { Grid, Box, Image, Heading, Text, Link } from "theme-ui";
+import { Grid, Box, Image, Heading, Text, Link, Flex } from "theme-ui";
 
 const VideoGrid = ({ filterType }) => {
   const data = useStaticQuery(graphql`
@@ -29,23 +29,41 @@ const VideoGrid = ({ filterType }) => {
     }
   `);
 
-  // Process and filter videos based on filterType
   const videos = data.allContentfulVideo.nodes
     .map((video) => ({
       id: video.id,
       title: video.title,
       description: video.description?.description,
-      thumbnail: video.thumbnail?.file.url ? `https:${video.thumbnail.file.url}` : "/images/default-placeholder.webp",
-      slug: video.video?.url,
+      thumbnail: video.thumbnail?.file?.url
+        ? `https:${video.thumbnail.file.url}`
+        : "/images/default-placeholder.webp",
+      videoUrl: video.video?.url,
       completed: video.completed,
       startTime: video.startTime,
       link: video.link,
     }))
     .filter((video) => {
-      if (filterType.upcoming && !video.completed) return true; // Show uncompleted ones
-      if (filterType.complete && video.completed) return true; // Show completed ones
+      if (filterType.upcoming && !video.completed) return true;
+      if (filterType.complete && video.completed) return true;
       return false;
     });
+
+  // Function to format the date and time
+  const formatDateTime = (dateTimeString) => {
+    if (!dateTimeString) return ""; // Handle missing startTime
+    const date = new Date(dateTimeString);
+    const formattedDate = date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    const formattedTime = date.toLocaleTimeString(undefined, {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true, // Use 12-hour format with AM/PM
+    });
+    return `${formattedDate}, ${formattedTime}`;
+  };
 
   return (
     <Grid columns={[1, 2, 3]} gap={4} sx={{ marginY: 4 }}>
@@ -61,6 +79,8 @@ const VideoGrid = ({ filterType }) => {
             "&:hover": {
               transform: "translateY(-4px)",
             },
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <Image
@@ -73,7 +93,14 @@ const VideoGrid = ({ filterType }) => {
               objectFit: "cover",
             }}
           />
-          <Box sx={{ padding: 3 }}>
+          <Box
+            sx={{
+              padding: 3,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <Heading
               as="h3"
               sx={{
@@ -86,42 +113,75 @@ const VideoGrid = ({ filterType }) => {
             >
               {video.title}
             </Heading>
-            
-            {filterType.upcoming && !video.completed ? (
+
+            {/* Conditional Rendering based on filterType */}
+            {filterType.upcoming && !video.completed && (
               <>
                 <Text sx={{ fontSize: 1, color: "gray.600", fontWeight: "bold" }}>
-                  Starts at: {video.startTime}
+                  Starts at: {formatDateTime(video.startTime)} {/* Format date/time */}
                 </Text>
                 {video.link && (
                   <Link
                     href={video.link}
                     target="_blank"
+                    rel="noopener noreferrer"
                     sx={{
                       display: "block",
-                      marginTop: 2,
-                      color: "blue",
-                      textDecoration: "underline",
+                      marginTop: "auto",
+                      color: "primary",
+                      textDecoration: "none",
+                      fontWeight: "bold",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
                     }}
                   >
-                    Watch Now
+                    Join Event
                   </Link>
                 )}
               </>
-            ) : filterType.complete && video.completed ? (
-              <Text
-                sx={{
-                  fontSize: 1,
-                  color: "gray.600",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                {video.description}
-              </Text>
-            ) : null}
+            )}
+
+            {filterType.complete && video.completed && (
+              <>
+                <Text sx={{ fontSize: 1, color: "gray.600", fontWeight: "bold" }}>
+                  Streamed at: {formatDateTime(video.startTime)} {/* Format date/time */}
+                </Text>
+                <Text
+                  sx={{
+                    fontSize: 1,
+                    color: "gray.600",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    marginBottom: 2,
+                  }}
+                >
+                  {video.description}
+                </Text>
+                {video.videoUrl && (
+                  <Link
+                    href={video.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{
+                      display: "block",
+                      marginTop: "auto",
+                      color: "primary",
+                      textDecoration: "none",
+                      fontWeight: "bold",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    Watch Replay
+                  </Link>
+                )}
+              </>
+            )}
           </Box>
         </Box>
       ))}

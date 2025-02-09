@@ -1,17 +1,27 @@
-/** @jsxImportSource theme-ui */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { auth } from "../firebase";
 import { toast } from "react-toastify";
 
-
 const UserProfile = ({ username, onLogout }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handleLogout = () => {
-    auth.signOut();
-    onLogout();
+    if (isClient) {
+      auth.signOut().then(() => {
+        onLogout();
+        toast.success("Logged out successfully");
+      }).catch(error => {
+        toast.error("Logout failed");
+      });
+    }
   };
 
-  return (
+  return isClient ? (
     <div
       sx={{
         display: "flex",
@@ -21,8 +31,8 @@ const UserProfile = ({ username, onLogout }) => {
         backgroundColor: "secondary",
         borderRadius: "8px",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-        width: "fit-content", // Only take up as much space as needed
-        margin: "0 auto", // Centers the profile
+        width: "fit-content",
+        margin: "0 auto",
       }}
     >
       <FaUserCircle size={40} sx={{ color: "logo" }} />
@@ -46,7 +56,7 @@ const UserProfile = ({ username, onLogout }) => {
         Logout
       </button>
     </div>
-  );
+  ) : null; // Render nothing during SSR
 };
 
 export default UserProfile;

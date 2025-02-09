@@ -24,25 +24,24 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
   return (
     <Box sx={{ position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      {/* Navbar Link */}
       <NavLink
         as={Link}
         to={defaultTo}
         sx={{
-          color: 'logo', // Ensures visibility
+          color: 'logo',
           textDecoration: 'none',
           cursor: 'pointer',
           fontWeight: 'bold',
+          fontSize: '2vmin',
           '&:hover, &:focus': {
-            backgroundColor: 'secondary', // Proper contrast on hover
-            color: 'white', // Text remains visible
+            backgroundColor: 'secondary',
+            color: 'white',
           },
         }}
       >
         {title}
       </NavLink>
 
-      {/* Dropdown Items */}
       {isOpen && (
         <Portal>
           <Box
@@ -51,10 +50,10 @@ const Dropdown = ({ title, links, defaultTo }) => {
               top: `${dropdownPosition.top}px`,
               left: `${dropdownPosition.left}px`,
               backgroundColor: 'primary',
-              minWidth: '200px',
-              boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+              minWidth: '20vw',
+              boxShadow: '0 1vmin 2vmin rgba(0,0,0,0.1)',
               zIndex: 1000,
-              borderRadius: '0 0 4px 4px',
+              borderRadius: '0 0 1vmin 1vmin',
               display: 'block',
             }}
           >
@@ -64,19 +63,20 @@ const Dropdown = ({ title, links, defaultTo }) => {
                 as="button"
                 onClick={() => {
                   window.location.href = to;
-                  document.activeElement.blur(); // Fix: Remove focus after clicking
+                  document.activeElement.blur();
                 }}
-                onBlur={(e) => e.target.blur()} // Ensures focus is removed
+                onBlur={(e) => e.target.blur()}
                 sx={{
-                  color: 'logo', // Ensures proper contrast
+                  color: 'logo',
                   textDecoration: 'none',
                   display: 'block',
-                  padding: '12px 16px',
+                  padding: '1vmin 2vmin',
                   background: 'none',
                   border: 'none',
                   textAlign: 'left',
                   width: '100%',
                   cursor: 'pointer',
+                  fontSize: '1.8vmin',
                   '&:hover, &:focus': {
                     backgroundColor: 'secondary',
                     color: 'white',
@@ -95,24 +95,22 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
 const Navbar = () => {
   return (
-    <Flex as="nav" sx={{ gap: 4, backgroundColor: 'primary', padding: '10px' }}>
-      {/* Logo */}
+    <Flex as="nav" sx={{ gap: '4vmin', backgroundColor: 'primary', padding: '2vmin', alignItems: 'center', fontSize: '2.2vmin' }}>
       <img
         src="/logo.png"
         alt="Logo"
         sx={{
-          width: '30px',
+          width: '12vmin',
           height: 'auto',
-          borderRadius: '8px',
+          borderRadius: '2vmin',
         }}
       />
 
-      {/* Navbar Links */}
       <NavLink
         as={Link}
         to="/"
         sx={{
-          color: 'logo', // Fix: Ensures visibility against primary background
+          color: 'logo',
           textDecoration: 'none',
           fontWeight: 'bold',
           '&:hover, &:focus': {
@@ -162,6 +160,22 @@ const Navbar = () => {
 
       <NavLink
         as={Link}
+        to="/divisions"
+        sx={{
+          color: 'logo',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          '&:hover, &:focus': {
+            backgroundColor: 'secondary',
+            color: 'white',
+          },
+        }}
+      >
+        Divisions
+      </NavLink>
+
+      <NavLink
+        as={Link}
         to="/rules_and_regulations"
         sx={{
           color: 'logo',
@@ -173,7 +187,7 @@ const Navbar = () => {
           },
         }}
       >
-        Rules and Regulations
+        Regulations
       </NavLink>
     </Flex>
   );

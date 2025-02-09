@@ -22,7 +22,7 @@ const RecentResults = () => {
   const recentResults = data.allContentfulCompetitionResults.nodes;
 
   return (
-    <Box>
+    <Box sx={{ mb: 4 }}>
       <Heading as="h2" sx={{ fontSize: 3, textAlign: 'center', mb: 2 }}>Recent Results</Heading>
       <Grid columns={[1, 2]} gap={2}>
         {recentResults.map((result, index) => (
@@ -30,11 +30,8 @@ const RecentResults = () => {
             display: 'flex',
             flexDirection: 'column',
             p: 2,
-            // REMOVE THESE:
-            // border: '1px solid',
-            // borderColor: 'gray.200',
             borderRadius: '8px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Keep the shadow!
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
             bg: 'white',
           }}>
             <Heading as="h3" sx={{ fontSize: '16px', mb: 1, textAlign: 'center' }}>{result.competitionName}</Heading>
@@ -57,14 +54,14 @@ const RecentResults = () => {
         <Box sx={{ textAlign: 'center', mt: 2 }}>
         <Link href="/results" sx={{
             display: 'inline-block',
-            px: 3,
-            py: 1,
+            px: 4, // Match Livestreams
+            py: 2, // Match Livestreams
             bg: 'primary',
             color: 'white',
             borderRadius: '8px',
             textDecoration: 'none',
             fontWeight: 'bold',
-            fontSize: '14px',
+            fontSize: '16px', // Match Livestreams
             '&:hover': {
               bg: 'secondary',
             }
