@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { Flex, NavLink, Box } from 'theme-ui';
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import logo from '../images/logo.png'; // Adjust path if needed
 
 const Portal = ({ children }) => {
   return createPortal(children, document.body);
@@ -97,7 +98,7 @@ const Navbar = () => {
   return (
     <Flex as="nav" sx={{ gap: '4vmin', backgroundColor: 'primary', padding: '2vmin', alignItems: 'center', fontSize: '2.2vmin' }}>
       <img
-        src="/logo.png"
+        src={ logo }
         alt="Logo"
         sx={{
           width: '12vmin',
