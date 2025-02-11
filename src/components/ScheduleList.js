@@ -51,6 +51,7 @@ const ScheduleList = ({ competitions, states }) => {
                       alignItems: "center",
                       gap: "20px",
                       height: "350px",
+                      overflow: "hidden",
                     }}
                   >
                     {comp.poster?.file?.url && (
@@ -59,21 +60,57 @@ const ScheduleList = ({ competitions, states }) => {
                         alt={`${comp.competitionName} Poster`}
                         sx={{
                           width: "300px",
+                          height: "300px",
                           borderRadius: "5px",
                           flexShrink: 0,
+                          objectFit: "cover",
                         }}
                       />
                     )}
                     <Box sx={{ flex: 1, textAlign: "left", height: "100%" }}>
-                      <Heading as="h3" sx={{ fontSize: "22px", marginBottom: "10px" }}>
+                      <Heading
+                        as="h3"
+                        sx={{ fontSize: "22px", marginBottom: "10px" }}
+                      >
                         {comp.competitionName}
                       </Heading>
-                      <Text sx={{ fontSize: "16px", color: "#555", marginBottom: "8px" }}>
-                        Location: {comp.location || "TBA"}
-                      </Text>
-                      <Text sx={{ fontSize: "16px", color: "#555", marginBottom: "8px" }}>
-                        Date: {comp.date || "TBA"}
-                      </Text>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        <Text sx={{ fontSize: "18px" }}>📍</Text>
+                        <Text
+                          sx={{
+                            fontSize: "16px",
+                            color: "primary",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {comp.location || "TBA"}
+                        </Text>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <Text sx={{ fontSize: "18px" }}>📅</Text>
+                        <Text
+                          sx={{
+                            fontSize: "16px",
+                            color: "primary",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {comp.date || "TBA"}
+                        </Text>
+                      </Box>
                     </Box>
                   </Card>
                 );
