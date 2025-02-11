@@ -1,10 +1,7 @@
-// EventShowcase.js (MODIFIED - No New Component)
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import { Box, Image, Button, Flex, Heading, Card, Text, Link } from "theme-ui"; // Import Card, Text, Link
-import { Link as GatsbyLink } from "gatsby";
-
+import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
+import { Box, Image, Button, Heading, Card, Text, Link } from "theme-ui";
 
 const EventShowcase = () => {
   const data = useStaticQuery(graphql`
@@ -14,6 +11,7 @@ const EventShowcase = () => {
           id
           competitionName
           date
+          location
           starred
           poster {
             file {
@@ -31,26 +29,18 @@ const EventShowcase = () => {
 
   const today = new Date();
 
-  // Process competitions
+  // Process competitions: only include those with a poster and convert date strings to Date objects.
   let competitions = data.allContentfulCompetition.nodes
-    .filter((event) => event.poster?.file?.url) // Ensure poster exists
+    .filter((event) => event.poster?.file?.url)
     .map((event) => ({
       ...event,
-      date: new Date(event.date), // Convert date to Date object
+      date: new Date(event.date),
     }));
 
-  // Separate starred and non-starred, sort by date
-  const starredEvents = competitions
-    .filter((event) => event.starred)
-    .sort((a, b) => a.date - b.date);
-
-  const otherEvents = competitions
-    .filter((event) => !event.starred)
-    .sort((a, b) => a.date - b.date);
-
-  // Combine: starred first, then closest events, limiting to 4 total
-  const displayEvents = [...starredEvents, ...otherEvents]
-    .filter((event) => event.date >= today) // Only future events
+  // Filter for future events and sort by date (ascending), then take the first 4.
+  const displayEvents = competitions
+    .filter((event) => event.date >= today)
+    .sort((a, b) => a.date - b.date)
     .slice(0, 4);
 
   return (
@@ -58,55 +48,91 @@ const EventShowcase = () => {
       <Heading as="h2" sx={{ fontSize: 3, textAlign: "center", mb: 2 }}>
         Upcoming Competitions
       </Heading>
-      <Flex
+      <Box
         sx={{
-          justifyContent: "center",
-          gap: 3,
-          flexWrap: "wrap",
-          // Removed overflowX: "auto"
-          paddingBottom: "10px",
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "20px",
         }}
       >
-        {displayEvents.map((event) => (
-          // Use Card, Text, and Link here
-          <Card
-            key={event.id}
-            sx={{
-              maxWidth: "250px",
-              textAlign: "center",
-              borderRadius: "8px",
-              overflow: "hidden",
-              boxShadow: "md",
-              background: "white",
-              padding: "20px", // Add padding similar to CompetitionCard
-            }}
-          >
-            <Image
-              src={event.poster.file.url}
-              alt={event.competitionName}
-              sx={{ width: "100%", borderRadius: "8px" }}
-            />
-             <Box sx={{ flex: 1, textAlign: "left", height: "100%" }}>
-                <Heading as="h3" sx={{ fontSize: "22px", marginBottom: "10px" }}>
+        {displayEvents.map((event) => {
+          const cardContent = (
+            <Card
+              sx={{
+                padding: "20px",
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+                borderRadius: "10px",
+                backgroundColor: "white",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "20px",
+                height: "350px",
+                overflow: "hidden",
+              }}
+            >
+              {event.poster?.file?.url && (
+                <Image
+                  src={event.poster.file.url}
+                  alt={event.competitionName}
+                  sx={{
+                    width: "300px",
+                    height: "300px",
+                    borderRadius: "5px",
+                    flexShrink: 0,
+                    objectFit: "cover",
+                  }}
+                />
+              )}
+              <Box sx={{ flex: 1, textAlign: "left", height: "100%" }}>
+                <Heading as="h3" sx={{ fontSize: "22px", marginBottom: "16px" }}>
                   {event.competitionName}
                 </Heading>
-                <Text sx={{ fontSize: "16px", color: "#555", marginBottom: "8px" }}>
-                  Date: {event.date.toDateString()}
-                </Text>
-                {/* Add the link, using event.state.website */}
-                {event.state && event.state.website && (
-                <a href={event.state.website} target="_blank" rel="noopener noreferrer">
-                    <Text sx={{ fontSize: "16px", color: "primary", marginBottom: "8px" }}>
-                        <br></br>
-                    Find Out More
-                    </Text>
-                </a>
-                )}
-            </Box>
-          </Card>
-        ))}
-      </Flex>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <Text sx={{ fontSize: "18px" }}>📅</Text>
+                  <Text sx={{ fontSize: "16px", color: "primary", fontWeight: "bold" }}>
+                    {event.date.toDateString()}
+                  </Text>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <Text sx={{ fontSize: "18px" }}>📍</Text>
+                  <Text sx={{ fontSize: "16px", color: "primary", fontWeight: "bold" }}>
+                    {event.location}
+                  </Text>
+                </Box>
+              </Box>
+            </Card>
+          );
 
+          return event.state && event.state.website ? (
+            <Link
+              key={event.id}
+              href={event.state.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ textDecoration: "none", color: "inherit" }}
+            >
+              {cardContent}
+            </Link>
+          ) : (
+            <Box key={event.id}>{cardContent}</Box>
+          );
+        })}
+      </Box>
       <GatsbyLink to="/competitions">
         <Button
           sx={{
