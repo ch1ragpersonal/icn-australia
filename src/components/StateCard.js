@@ -3,45 +3,56 @@ import { Card, Heading, Box, Image } from "theme-ui";
 import { motion } from "framer-motion";
 
 const StateCard = ({ state, onClick }) => {
-  console.log("Rendering StateCard:", state); // Debug log
-
   return (
     <Card
       as={motion.div}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => {
-        console.log("StateCard Clicked:", state); // Debug log
-        if (onClick) {
-          onClick(state);
-        } else {
-          console.warn("onClick function is missing!");
-        }
+        if (onClick) onClick(state);
       }}
       sx={{
         cursor: "pointer",
-        padding: "15px",
-        boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-        borderRadius: "50%", // Fully rounded shape
+        padding: "20px",
+        boxShadow: "0px 8px 16px rgba(0,0,0,0.1)",
+        borderRadius: "12px",
         textAlign: "center",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "white",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "200px", // Smaller height
-        width: "200px", // Less wide
-        margin: "10px", // More spacing between cards
+        height: "200px",
+        width: "200px",
+        margin: "10px",
+        transition: "box-shadow 0.3s ease",
+        ":hover": {
+          boxShadow: "0px 12px 24px rgba(0,0,0,0.15)",
+        },
       }}
     >
-      {state.logo?.file.url && (
+      {state.logo?.file?.url && (
         <Image
           src={state.logo.file.url}
           alt={`${state.name} Logo`}
-          sx={{ width: "100px", height: "100px", marginBottom: "10px" }} // Larger logo
+          sx={{
+            width: "80px",
+            height: "80px",
+            marginBottom: "10px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
         />
       )}
-      <Heading as="h3" sx={{ fontSize: "16px", textAlign: "center" }}>
+      <Heading
+        as="h3"
+        sx={{
+          fontSize: "18px",
+          fontWeight: "500",
+          color: "text",
+          mt: 0,
+        }}
+      >
         {state.name || "Unnamed State"}
       </Heading>
     </Card>

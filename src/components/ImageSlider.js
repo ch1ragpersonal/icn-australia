@@ -59,7 +59,7 @@ const ImageSlider = () => {
         spaceBetween={0}
         slidesPerView={1}
         style={{
-          height: "60vh",
+          height: "85vh",
         }}
       >
         {slides.map((slide) => (

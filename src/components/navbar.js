@@ -15,7 +15,10 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
   const handleMouseEnter = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    setDropdownPosition({ top: rect.bottom + window.scrollY, left: rect.left + window.scrollX });
+    setDropdownPosition({
+      top: rect.bottom + window.scrollY,
+      left: rect.left + window.scrollX,
+    });
     setIsOpen(true);
   };
 
@@ -24,7 +27,11 @@ const Dropdown = ({ title, links, defaultTo }) => {
   };
 
   return (
-    <Box sx={{ position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <Box
+      sx={{ position: 'relative' }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <NavLink
         as={Link}
         to={defaultTo}
@@ -34,9 +41,23 @@ const Dropdown = ({ title, links, defaultTo }) => {
           cursor: 'pointer',
           fontWeight: 'bold',
           fontSize: '2vmin',
-          '&:hover, &:focus': {
+          position: 'relative',
+          padding: '0.5rem 1rem',
+          '&:after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            height: '2px',
+            width: '0%',
             backgroundColor: 'secondary',
-            color: 'white',
+            transition: 'width 0.3s ease',
+          },
+          '&:hover:after, &:focus:after': {
+            width: '100%',
+          },
+          '&:hover': {
+            color: 'logo',
           },
         }}
       >
@@ -61,12 +82,12 @@ const Dropdown = ({ title, links, defaultTo }) => {
             {links.map(({ to, label }) => (
               <NavLink
                 key={to}
-                as="button" // Keep as a button for accessibility
+                as="button" // For accessibility
                 onClick={() => {
-                  navigate(to); // Use navigate here!
-                  document.activeElement.blur(); // Good for accessibility
+                  navigate(to);
+                  document.activeElement.blur();
                 }}
-                onBlur={(e) => e.target.blur()} // Good for accessibility
+                onBlur={(e) => e.target.blur()}
                 sx={{
                   color: 'logo',
                   textDecoration: 'none',
@@ -78,9 +99,22 @@ const Dropdown = ({ title, links, defaultTo }) => {
                   width: '100%',
                   cursor: 'pointer',
                   fontSize: '1.8vmin',
-                  '&:hover, &:focus': {
+                  position: 'relative',
+                  '&:after': {
+                    content: '""',
+                    position: 'absolute',
+                    left: 0,
+                    bottom: 0,
+                    height: '2px',
+                    width: '0%',
                     backgroundColor: 'secondary',
-                    color: 'white',
+                    transition: 'width 0.3s ease',
+                  },
+                  '&:hover:after, &:focus:after': {
+                    width: '100%',
+                  },
+                  '&:hover': {
+                    color: 'logo',
                   },
                 }}
               >
@@ -96,16 +130,35 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
 const Navbar = () => {
   return (
-    <Flex as="nav" sx={{ gap: '4vmin', backgroundColor: 'primary', padding: '2vmin', alignItems: 'center', fontSize: '2.2vmin' }}>
-      <img
-        src={ logo }
-        alt="Logo"
+    <Flex
+      as="nav"
+      sx={{
+        gap: '4vmin',
+        backgroundColor: 'primary',
+        padding: '2vmin',
+        alignItems: 'center',
+        fontSize: '2.2vmin',
+      }}
+    >
+      <NavLink
+        as={Link}
+        to="/"
         sx={{
-          width: '12vmin',
-          height: 'auto',
-          borderRadius: '2vmin',
+          color: 'logo',
+          textDecoration: 'none',
+          fontWeight: 'bold',
         }}
-      />
+      >
+        <img
+          src={logo}
+          alt="Logo"
+          sx={{
+            width: '12vmin',
+            height: 'auto',
+            borderRadius: '2vmin',
+          }}
+        />
+      </NavLink>
 
       <NavLink
         as={Link}
@@ -114,9 +167,23 @@ const Navbar = () => {
           color: 'logo',
           textDecoration: 'none',
           fontWeight: 'bold',
-          '&:hover, &:focus': {
+          position: 'relative',
+          padding: '0.5rem 1rem',
+          '&:after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            height: '2px',
+            width: '0%',
             backgroundColor: 'secondary',
-            color: 'white',
+            transition: 'width 0.3s ease',
+          },
+          '&:hover:after, &:focus:after': {
+            width: '100%',
+          },
+          '&:hover': {
+            color: 'logo',
           },
         }}
       >
@@ -150,9 +217,23 @@ const Navbar = () => {
           color: 'logo',
           textDecoration: 'none',
           fontWeight: 'bold',
-          '&:hover, &:focus': {
+          position: 'relative',
+          padding: '0.5rem 1rem',
+          '&:after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            height: '2px',
+            width: '0%',
             backgroundColor: 'secondary',
-            color: 'white',
+            transition: 'width 0.3s ease',
+          },
+          '&:hover:after, &:focus:after': {
+            width: '100%',
+          },
+          '&:hover': {
+            color: 'logo',
           },
         }}
       >
@@ -166,9 +247,23 @@ const Navbar = () => {
           color: 'logo',
           textDecoration: 'none',
           fontWeight: 'bold',
-          '&:hover, &:focus': {
+          position: 'relative',
+          padding: '0.5rem 1rem',
+          '&:after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            height: '2px',
+            width: '0%',
             backgroundColor: 'secondary',
-            color: 'white',
+            transition: 'width 0.3s ease',
+          },
+          '&:hover:after, &:focus:after': {
+            width: '100%',
+          },
+          '&:hover': {
+            color: 'logo',
           },
         }}
       >
@@ -182,9 +277,23 @@ const Navbar = () => {
           color: 'logo',
           textDecoration: 'none',
           fontWeight: 'bold',
-          '&:hover, &:focus': {
+          position: 'relative',
+          padding: '0.5rem 1rem',
+          '&:after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            height: '2px',
+            width: '0%',
             backgroundColor: 'secondary',
-            color: 'white',
+            transition: 'width 0.3s ease',
+          },
+          '&:hover:after, &:focus:after': {
+            width: '100%',
+          },
+          '&:hover': {
+            color: 'logo',
           },
         }}
       >
