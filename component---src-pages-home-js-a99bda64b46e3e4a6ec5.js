@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkicn_australia=self.webpackChunkicn_australia||[]).push([[912],{4760:function(e,a,i){i.r(a);i(6540),i(2022);var c=i(7528),l=i(6835),t=i(853);a.default=()=>(0,t.FD)(t.FK,{children:[(0,t.Y)(c.A,{title:"Home",description:"Welcome to ICN Australia"}),(0,t.Y)(l.mc,{children:(0,t.Y)(l.az,{sx:{py:5},children:(0,t.Y)(l.DZ,{as:"h1",sx:{fontSize:5,mb:4},children:"Welcome to ICN Australia"})})})]})}}]);
-//# sourceMappingURL=component---src-pages-home-js-a99bda64b46e3e4a6ec5.js.map

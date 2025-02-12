@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkicn_australia=self.webpackChunkicn_australia||[]).push([[854],{9184:function(e,s,i){i.r(s);i(6540);var t=i(7528),a=i(4848);s.default=()=>(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(t.A,{title:"Test Page 2",description:"This is a test page for ICN Australia"}),(0,a.jsxs)("div",{children:[(0,a.jsx)("h1",{children:"Welcome to My Gatsby Site"}),(0,a.jsx)("p",{children:"This is the homepage content."})]})]})}}]);
-//# sourceMappingURL=component---src-pages-test-page-2-js-bf546129601cba38c288.js.map
