@@ -191,6 +191,15 @@ const Navbar = () => {
       </NavLink>
 
       <Dropdown
+        title="Competitions"
+        defaultTo="/competitions"
+        links={[
+          { to: '/competitions', label: 'By State' },
+          { to: '/competitions?view=schedule', label: 'Schedule' },
+        ]}
+      />
+
+      <Dropdown
         title="Livestreams"
         defaultTo="/livestreams"
         links={[
@@ -199,16 +208,7 @@ const Navbar = () => {
         ]}
       />
 
-      <Dropdown
-        title="Competitions"
-        defaultTo="/competitions"
-        links={[
-          { to: '/competitions', label: 'By State' },
-          { to: '/competitions?view=schedule', label: 'Schedule' },
-          { to: '/results', label: 'Results' },
-          { to: '/rules_and_regulations', label: 'Rules' },
-        ]}
-      />
+
 
       <NavLink
         as={Link}

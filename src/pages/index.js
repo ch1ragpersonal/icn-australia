@@ -1,12 +1,41 @@
+/** @jsxImportSource theme-ui */
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import Seo from "../components/seo";
 import ImageSlider from "../components/ImageSlider";
 import EventShowcase from "../components/EventShowcase";
 import RecentLivestreams from "../components/RecentLivestreams";
 import RecentResults from "../components/RecentResults";
-import { Box, Container, Heading } from "theme-ui";
+import { Box, Container, Heading, Text, Image } from "theme-ui";
 
 export default function App() {
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulVideo {
+        nodes {
+          id
+          title
+          description {
+            description
+          }
+          thumbnail {
+            file {
+              url
+            }
+          }
+          video {
+            file {
+              url
+            }
+          }
+          completed
+          startTime
+          link
+        }
+      }
+    }
+  `);
+
   return (
     <>
       <Seo title="HomePage" description="Welcome to ICN Australia" />
@@ -25,9 +54,46 @@ export default function App() {
             px: [3, 4],
           }}
         >
+          {/* AutoPlay Video Section - Filtered by Title */}
+          <Box sx={{ mb: 5 }}>
+            {data.allContentfulVideo.nodes
+              .filter(({ title }) => "ICN ACT Video" === title)
+              .map((video) =>
+                video.video?.file?.url ? (
+                  <Box key={video.id} sx={{ mb: 4 }}>
+                    <video
+                      width="100%"
+                      height="auto"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controls
+                      poster={
+                        video.thumbnail?.file?.url
+                          ? `https:${video.thumbnail.file.url}`
+                          : "/images/default-placeholder.webp"
+                      }
+                    >
+                      <source
+                        src={`https:${video.video.file.url}`}
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video element.
+                    </video>
+                    {video.description && (
+                      <Text sx={{ mt: 2 }}>
+                        {video.description.description}
+                      </Text>
+                    )}
+                  </Box>
+                ) : null
+              )}
+          </Box>
+
           {/* Image Slider Section */}
           <Box sx={{ mb: 5 }}>
-            <ImageSlider />
+            {/* <ImageSlider /> */}
           </Box>
 
           {/* Upcoming Competitions Section */}
