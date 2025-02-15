@@ -57,6 +57,7 @@ export default {
       justifyContent: 'center',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      
     },
     root: {  // Applies to the root element (usually <html>)
       fontFamily: 'body',

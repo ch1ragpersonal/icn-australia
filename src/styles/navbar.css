@@ -1,0 +1,11 @@
+.active-link {
+    /* Important:  Use !important ONLY if absolutely necessary.
+       It can make overriding styles later difficult.
+       Try removing it first.  If the underline still doesn't
+       show, then add it back. */
+    text-decoration: none !important; /* Prevent default browser underline */
+  }
+  
+  .active-link:after {
+      width: 100% !important;
+  }
