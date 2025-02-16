@@ -33,15 +33,8 @@ const Dropdown = ({ title, links, defaultTo }) => {
       onMouseLeave={handleMouseLeave}
     >
       <NavLink
-        as="a" // Use regular anchor tag
-        href={defaultTo} // Use href for full reload
-        onClick={(e) => {
-          if (window.location.pathname === defaultTo) {
-             return; // Let the browser handle the full reload
-          }
-          e.preventDefault(); // Prevent default for other links
-          navigate(defaultTo); // Use Gatsby's navigate for other pages
-        }}
+        as={Link}
+        to={defaultTo}
         sx={{
           color: 'logo',
           textDecoration: 'none',
@@ -89,7 +82,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
             {links.map(({ to, label }) => (
               <NavLink
                 key={to}
-                as="button"
+                as="button" // For accessibility
                 onClick={() => {
                   navigate(to);
                   document.activeElement.blur();
@@ -148,15 +141,8 @@ const Navbar = () => {
       }}
     >
       <NavLink
-        as="a"  // Use <a> instead of <Link>
-        href="/" // Use href for full reload
-        onClick={(e) => {
-          if (window.location.pathname === '/') {
-            return; // Let the browser do its thing
-          }
-          e.preventDefault(); // Prevent default for other links
-          navigate('/'); // Use Gatsby's navigate
-        }}
+        as={Link}
+        to="/"
         sx={{
           color: 'logo',
           textDecoration: 'none',
@@ -175,15 +161,8 @@ const Navbar = () => {
       </NavLink>
 
       <NavLink
-        as="a"
-        href="/"
-        onClick={(e) => {
-            if (window.location.pathname === '/') {
-              return;
-            }
-            e.preventDefault();
-            navigate('/');
-          }}
+        as={Link}
+        to="/"
         sx={{
           color: 'logo',
           textDecoration: 'none',
@@ -229,16 +208,11 @@ const Navbar = () => {
         ]}
       />
 
+
+
       <NavLink
-        as="a"
-        href="/register"
-        onClick={(e) => {
-            if (window.location.pathname === '/register') {
-              return;
-            }
-            e.preventDefault();
-            navigate('/register');
-          }}
+        as={Link}
+        to="/register"
         sx={{
           color: 'logo',
           textDecoration: 'none',
@@ -267,15 +241,8 @@ const Navbar = () => {
       </NavLink>
 
       <NavLink
-        as="a"
-        href="/divisions"
-        onClick={(e) => {
-            if (window.location.pathname === '/divisions') {
-              return;
-            }
-            e.preventDefault();
-            navigate('/divisions');
-          }}
+        as={Link}
+        to="/divisions"
         sx={{
           color: 'logo',
           textDecoration: 'none',
@@ -304,15 +271,8 @@ const Navbar = () => {
       </NavLink>
 
       <NavLink
-        as="a"
-        href="/rules_and_regulations"
-        onClick={(e) => {
-          if (window.location.pathname === '/rules_and_regulations') {
-            return; // Do nothing, let the browser reload
-          }
-          e.preventDefault(); // Prevent default for other links
-          navigate('/rules_and_regulations'); // Use Gatsby's navigate
-        }}
+        as={Link}
+        to="/rules_and_regulations"
         sx={{
           color: 'logo',
           textDecoration: 'none',

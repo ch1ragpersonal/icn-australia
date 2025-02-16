@@ -36,10 +36,10 @@ const Layout = ({ children, title, description }) => (
         width: "100%", // Ensure it spans the viewport width
       }}
     >
-      <Container>
-        <Flex sx={{ backgroundColor: 'primary', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Navbar />
-          <Login />
+          <Container>
+          <Flex sx={{ backgroundColor: 'primary', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Navbar />
+        <Login />
         </Flex>
       </Container>
     </header>

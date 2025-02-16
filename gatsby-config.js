@@ -12,6 +12,9 @@ module.exports = {
     title: `ICN AUSTRALIA`,
     description: `Your site description`,
   },
+  flags: {
+    FAST_DEV: true,
+  },
   plugins: [
     'gatsby-plugin-theme-ui',
     {
@@ -25,6 +28,7 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-stripe`,
     // {
     //   resolve: "gatsby-source-filesystem",
     //   options: {
