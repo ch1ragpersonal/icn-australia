@@ -26,6 +26,8 @@ const Dropdown = ({ title, links, defaultTo }) => {
     setIsOpen(false);
   };
 
+
+
   return (
     <Box
       sx={{ position: 'relative' }}
@@ -40,7 +42,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
           textDecoration: 'none',
           cursor: 'pointer',
           fontWeight: 'bold',
-          fontSize: '2vmin',
+          fontSize: '1.5vmin',
           position: 'relative',
           padding: '0.5rem 1rem',
           '&:after': {
@@ -98,7 +100,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
                   textAlign: 'left',
                   width: '100%',
                   cursor: 'pointer',
-                  fontSize: '1.8vmin',
+                  fontSize: '1.5vmin',
                   position: 'relative',
                   '&:after': {
                     content: '""',
@@ -127,9 +129,36 @@ const Dropdown = ({ title, links, defaultTo }) => {
     </Box>
   );
 };
+const navLinkStyles = {
+  color: 'logo',
+  textDecoration: 'none',
+  fontWeight: 'bold',
+  position: 'relative',
+  padding: '0.5rem 1rem',
+  '&:after': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    height: '2px',
+    width: '0%',
+    backgroundColor: 'secondary',
+    transition: 'width 0.3s ease',
+  },
+  '&:hover:after, &:focus:after': {
+    width: '100%',
+  },
+  '&:hover': {
+    color: 'logo',
+  },
+};
 
 const Navbar = () => {
   return (
+
+    
+
+    
     <Flex
       as="nav"
       sx={{
@@ -137,7 +166,7 @@ const Navbar = () => {
         backgroundColor: 'primary',
         padding: '2vmin',
         alignItems: 'center',
-        fontSize: '2.2vmin',
+        fontSize: '1.5vmin',
       }}
     >
       <NavLink
@@ -163,29 +192,7 @@ const Navbar = () => {
       <NavLink
         as={Link}
         to="/"
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
+        sx={navLinkStyles}
       >
         Home
       </NavLink>
@@ -199,73 +206,29 @@ const Navbar = () => {
         ]}
       />
 
-      <Dropdown
+      {/* <Dropdown
         title="Livestreams"
         defaultTo="/livestreams"
         links={[
           { to: '/livestreams?upcoming=true', label: 'Upcoming Events' },
           { to: '/livestreams?complete=true', label: 'Past Events' },
         ]}
-      />
+      /> */}
 
 
 
       <NavLink
         as={Link}
         to="/register"
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
+        sx={navLinkStyles}
       >
-        Register
+        Membership & Registration 
       </NavLink>
 
       <NavLink
         as={Link}
         to="/divisions"
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
+        sx={navLinkStyles}
       >
         Divisions
       </NavLink>
@@ -273,31 +236,25 @@ const Navbar = () => {
       <NavLink
         as={Link}
         to="/rules_and_regulations"
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
+        sx={navLinkStyles}
       >
-        Regulations
+        Rules
+      </NavLink>
+
+      <NavLink
+        as={Link}
+        to="/rules_and_regulations"
+        sx={navLinkStyles}
+      >
+        Contact us
+      </NavLink>
+
+      <NavLink
+        as={Link}
+        to="/rules_and_regulations"
+        sx={navLinkStyles}
+      >
+        About us
       </NavLink>
     </Flex>
   );
