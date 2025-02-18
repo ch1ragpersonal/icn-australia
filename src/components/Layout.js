@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'; // Import Helmet for adding fonts
 import Login from '../components/Login';
 import Navbar from './navbar';
 import Seo from './seo';
+import SiteMap from './SiteMap';
 
 const Layout = ({ children, title, description }) => (
   <Box>
@@ -19,7 +20,7 @@ const Layout = ({ children, title, description }) => (
       title={title}
       description={description || "ICN Australia - Australia's Leading Natural Bodybuilding Competition"}
     />
-
+    
     <header
       sx={{
         display: "flex",
@@ -47,6 +48,7 @@ const Layout = ({ children, title, description }) => (
     <main>{children}</main>
 
     <footer sx={{ bg: 'muted', padding: '1rem', textAlign: 'center' }}>
+      <SiteMap/>
       © 2024 ICN Australia
     </footer>
   </Box>

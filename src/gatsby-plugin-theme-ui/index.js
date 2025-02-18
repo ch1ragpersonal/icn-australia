@@ -2,8 +2,8 @@ export default {
   colors: {
     text: '#000411',        // Corrected hex code (6 digits or 3 digits)
     background: '#fff',
-    primary: '#160C28',
-    logo: '#AB7823',
+    primary: '#133f2c',
+    logo: '#ca8b20',
     secondary: '#3f3f46',  // Added secondary color -  good practice
     gray: [              // Added gray scale (VERY IMPORTANT)
       '#f8f9fa',

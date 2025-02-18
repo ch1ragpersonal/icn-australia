@@ -7,7 +7,7 @@ import EventShowcase from "../components/EventShowcase";
 import RecentLivestreams from "../components/RecentLivestreams";
 import RecentResults from "../components/RecentResults";
 import { Box, Container, Heading, Text, Image } from "theme-ui";
-
+import AboutUs from "../components/AboutUs"
 export default function App() {
   const data = useStaticQuery(graphql`
     query {
@@ -96,6 +96,11 @@ export default function App() {
             {/* <ImageSlider /> */}
           </Box>
 
+          <Box>
+          <AboutUs/>
+
+          </Box>
+
           {/* Upcoming Competitions Section */}
           <Box sx={{ mb: 5 }}>
             <Heading
@@ -117,7 +122,7 @@ export default function App() {
             </Heading>
             <EventShowcase />
           </Box>
-
+          
           {/* Recent Livestreams Section */}
           <Box sx={{ mb: 5 }}>
             <Heading
@@ -157,9 +162,9 @@ export default function App() {
                 mx: "auto",
               }}
             >
-              Recent Results
+              Recent Posts
             </Heading>
-            <RecentResults />
+          
           </Box>
         </Container>
       </Box>
