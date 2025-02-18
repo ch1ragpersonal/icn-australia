@@ -39,7 +39,7 @@ const Layout = ({ children, title, description }) => (
       <Container>
         <Flex sx={{ backgroundColor: 'primary', justifyContent: 'space-between', alignItems: 'center' }}>
           <Navbar />
-          <Login />
+          
         </Flex>
       </Container>
     </header>
