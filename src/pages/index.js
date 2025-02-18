@@ -39,6 +39,7 @@ export default function App() {
   return (
     <>
       <Seo title="HomePage" description="Welcome to ICN Australia" />
+      
       <Box
         sx={{
           background: "linear-gradient(135deg, #f6f9fc 0%, #e9eff5 100%)",
@@ -55,7 +56,14 @@ export default function App() {
           }}
         >
           {/* AutoPlay Video Section - Filtered by Title */}
-          <Box sx={{ mb: 5 }}>
+          <Box sx={{
+                  mb: 5,
+                  width: '100vw',
+                  position: 'relative',
+                  left: '50%',
+                  ml: '-50vw',
+                  }}
+            >
             {data.allContentfulVideo.nodes
               .filter(({ title }) => "ICN ACT Video" === title)
               .map((video) =>
@@ -91,9 +99,26 @@ export default function App() {
               )}
           </Box>
 
+          
           {/* Image Slider Section */}
           <Box sx={{ mb: 5 }}>
-            {/* <ImageSlider /> */}
+            <Heading
+              as="h2"
+              sx={{
+                fontSize: ["2rem", "2.5rem", "3rem"],
+                fontWeight: "bold",
+                textAlign: "center",
+                color: "text",
+                mb: 3,
+                borderBottom: "2px solid",
+                borderColor: "secondary",
+                pb: 1,
+                width: "fit-content",
+                mx: "auto",
+              }}
+            >
+              About Us
+            </Heading>
           </Box>
 
           {/* Upcoming Competitions Section */}
@@ -118,49 +143,7 @@ export default function App() {
             <EventShowcase />
           </Box>
 
-          {/* Recent Livestreams Section */}
-          <Box sx={{ mb: 5 }}>
-            <Heading
-              as="h2"
-              sx={{
-                fontSize: ["2rem", "2.5rem", "3rem"],
-                fontWeight: "bold",
-                textAlign: "center",
-                color: "text",
-                mb: 3,
-                borderBottom: "2px solid",
-                borderColor: "secondary",
-                pb: 1,
-                width: "fit-content",
-                mx: "auto",
-              }}
-            >
-              Purchase PPVs
-            </Heading>
-            <RecentLivestreams />
-          </Box>
-
-          {/* Recent Results Section */}
-          <Box sx={{ mb: 5 }}>
-            <Heading
-              as="h2"
-              sx={{
-                fontSize: ["2rem", "2.5rem", "3rem"],
-                fontWeight: "bold",
-                textAlign: "center",
-                color: "text",
-                mb: 3,
-                borderBottom: "2px solid",
-                borderColor: "secondary",
-                pb: 1,
-                width: "fit-content",
-                mx: "auto",
-              }}
-            >
-              Recent Results
-            </Heading>
-            <RecentResults />
-          </Box>
+          
         </Container>
       </Box>
     </>

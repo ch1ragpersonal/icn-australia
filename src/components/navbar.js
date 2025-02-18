@@ -26,8 +26,6 @@ const Dropdown = ({ title, links, defaultTo }) => {
     setIsOpen(false);
   };
 
-
-
   return (
     <Box
       sx={{ position: 'relative' }}
@@ -42,7 +40,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
           textDecoration: 'none',
           cursor: 'pointer',
           fontWeight: 'bold',
-          fontSize: '1.5vmin',
+          fontSize: '2vmin',
           position: 'relative',
           padding: '0.5rem 1rem',
           '&:after': {
@@ -78,13 +76,12 @@ const Dropdown = ({ title, links, defaultTo }) => {
               boxShadow: '0 1vmin 2vmin rgba(0,0,0,0.1)',
               zIndex: 1000,
               borderRadius: '0 0 1vmin 1vmin',
-              display: 'block',
             }}
           >
             {links.map(({ to, label }) => (
               <NavLink
                 key={to}
-                as="button" // For accessibility
+                as="button"
                 onClick={() => {
                   navigate(to);
                   document.activeElement.blur();
@@ -129,6 +126,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
     </Box>
   );
 };
+
 const navLinkStyles = {
   color: 'logo',
   textDecoration: 'none',
@@ -155,107 +153,77 @@ const navLinkStyles = {
 
 const Navbar = () => {
   return (
-
-    
-
-    
     <Flex
       as="nav"
       sx={{
-        gap: '4vmin',
+        width: '100%',
         backgroundColor: 'primary',
-        padding: '2vmin',
         alignItems: 'center',
-        fontSize: '1.5vmin',
+        fontSize: '2vmin',
+        padding: '2vmin',
       }}
     >
-      <NavLink
-        as={Link}
-        to="/"
+      {/* Left: Logo */}
+      <Box sx={{ flex: '0 0 auto' }}>
+        <NavLink as={Link} to="/" sx={{ color: 'logo', textDecoration: 'none', fontWeight: 'bold' }}>
+          <img
+            src={logo}
+            alt="Logo"
+            sx={{
+              width: '12vmin',
+              height: 'auto',
+              borderRadius: '2vmin',
+            }}
+          />
+        </NavLink>
+      </Box>
+
+      {/* Center: Nav Links and Dropdowns */}
+      <Flex
         sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
+          flex: '1 1 auto',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '4vmin',
+          flexWrap: 'wrap',
         }}
       >
-        <img
-          src={logo}
-          alt="Logo"
-          sx={{
-            width: '12vmin',
-            height: 'auto',
-            borderRadius: '2vmin',
-          }}
+        <NavLink as={Link} to="/" sx={navLinkStyles}>
+          Home
+        </NavLink>
+
+        <Dropdown
+          title="Competitions"
+          defaultTo="/competitions"
+          links={[
+            { to: '/competitions', label: 'By State' },
+            { to: '/competitions?view=schedule', label: 'Schedule' },
+          ]}
         />
-      </NavLink>
 
-      <NavLink
-        as={Link}
-        to="/"
-        sx={navLinkStyles}
-      >
-        Home
-      </NavLink>
+        <NavLink as={Link} to="/register" sx={navLinkStyles}>
+          Membership & Registration
+        </NavLink>
 
-      <Dropdown
-        title="Competitions"
-        defaultTo="/competitions"
-        links={[
-          { to: '/competitions', label: 'By State' },
-          { to: '/competitions?view=schedule', label: 'Schedule' },
-        ]}
-      />
+        <NavLink as={Link} to="/divisions" sx={navLinkStyles}>
+          Divisions
+        </NavLink>
 
-      {/* <Dropdown
-        title="Livestreams"
-        defaultTo="/livestreams"
-        links={[
-          { to: '/livestreams?upcoming=true', label: 'Upcoming Events' },
-          { to: '/livestreams?complete=true', label: 'Past Events' },
-        ]}
-      /> */}
+        <NavLink as={Link} to="/rules_and_regulations" sx={navLinkStyles}>
+          Rules
+        </NavLink>
 
+        <NavLink as={Link} to="/contact" sx={navLinkStyles}>
+          Contact us
+        </NavLink>
 
+        <NavLink as={Link} to="/about" sx={navLinkStyles}>
+          About us
+        </NavLink>
+      </Flex>
 
-      <NavLink
-        as={Link}
-        to="/register"
-        sx={navLinkStyles}
-      >
-        Membership & Registration 
-      </NavLink>
-
-      <NavLink
-        as={Link}
-        to="/divisions"
-        sx={navLinkStyles}
-      >
-        Divisions
-      </NavLink>
-
-      <NavLink
-        as={Link}
-        to="/rules_and_regulations"
-        sx={navLinkStyles}
-      >
-        Rules
-      </NavLink>
-
-      <NavLink
-        as={Link}
-        to="/rules_and_regulations"
-        sx={navLinkStyles}
-      >
-        Contact us
-      </NavLink>
-
-      <NavLink
-        as={Link}
-        to="/rules_and_regulations"
-        sx={navLinkStyles}
-      >
-        About us
-      </NavLink>
+      {/* Right: Optional placeholder for balance (or additional icons) */}
+      <Box sx={{ flex: '0 0 auto' }} />
     </Flex>
   );
 };
