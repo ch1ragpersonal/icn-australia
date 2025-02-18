@@ -83,7 +83,6 @@ const Dropdown = ({ title, links, defaultTo }) => {
               boxShadow: '0 1vmin 2vmin rgba(0,0,0,0.1)',
               zIndex: 1000,
               borderRadius: '0 0 1vmin 1vmin',
-              display: 'block',
             }}
           >
             {links.map(({ to, label }) => (
@@ -105,7 +104,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
                   textAlign: 'left',
                   width: '100%',
                   cursor: 'pointer',
-                  fontSize: '1.8vmin',
+                  fontSize: '1.5vmin',
                   position: 'relative',
                   '&:after': {
                     content: '""',
@@ -135,210 +134,169 @@ const Dropdown = ({ title, links, defaultTo }) => {
   );
 };
 
+const navLinkStyles = {
+  color: 'logo',
+  textDecoration: 'none',
+  fontWeight: 'bold',
+  position: 'relative',
+  padding: '0.5rem 1rem',
+  '&:after': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    height: '2px',
+    width: '0%',
+    backgroundColor: 'secondary',
+    transition: 'width 0.3s ease',
+  },
+  '&:hover:after, &:focus:after': {
+    width: '100%',
+  },
+  '&:hover': {
+    color: 'logo',
+  },
+};
+
 const Navbar = () => {
   return (
     <Flex
       as="nav"
       sx={{
-        gap: '4vmin',
+        width: '100%',
         backgroundColor: 'primary',
-        padding: '2vmin',
         alignItems: 'center',
-        fontSize: '2.2vmin',
+        fontSize: '2vmin',
+        padding: '2vmin',
       }}
     >
-      <NavLink
-        as="a"  // Use <a> instead of <Link>
-        href="/" // Use href for full reload
-        onClick={(e) => {
-          if (window.location.pathname === '/') {
-            return; // Let the browser do its thing
-          }
-          e.preventDefault(); // Prevent default for other links
-          navigate('/'); // Use Gatsby's navigate
-        }}
+      {/* Left: Logo */}
+      <Box sx={{ flex: '0 0 auto' }}>
+        <NavLink as={Link} to="/" sx={{ color: 'logo', textDecoration: 'none', fontWeight: 'bold' }}>
+          <img
+            src={logo}
+            alt="Logo"
+            sx={{
+              width: '12vmin',
+              height: 'auto',
+              borderRadius: '2vmin',
+            }}
+          />
+        </NavLink>
+      </Box>
+
+      {/* Center: Nav Links and Dropdowns */}
+      <Flex
         sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
+          flex: '1 1 auto',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '4vmin',
+          flexWrap: 'wrap',
         }}
       >
-        <img
-          src={logo}
-          alt="Logo"
-          sx={{
-            width: '12vmin',
-            height: 'auto',
-            borderRadius: '2vmin',
-          }}
+        <NavLink
+                sx={navLinkStyles}
+                as="a"  // Use <a> instead of <Link>
+                href="/" // Use href for full reload
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    return; // Let the browser do its thing
+                  }
+                  e.preventDefault(); // Prevent default for other links
+                  navigate('/'); // Use Gatsby's navigate
+                }}
+          >
+          Home
+        </NavLink>
+
+        <Dropdown
+          title="Competitions"
+          defaultTo="/competitions"
+          links={[
+            { to: '/competitions', label: 'By State' },
+            { to: '/competitions?view=schedule', label: 'Schedule' },
+          ]}
         />
-      </NavLink>
 
-      <NavLink
-        as="a"
-        href="/"
-        onClick={(e) => {
-            if (window.location.pathname === '/') {
-              return;
-            }
-            e.preventDefault();
-            navigate('/');
-          }}
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
-      >
-        Home
-      </NavLink>
+        <NavLink
+                sx={navLinkStyles}
+                as="a"  // Use <a> instead of <Link>
+                href="/" // Use href for full reload
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    return; // Let the browser do its thing
+                  }
+                  e.preventDefault(); // Prevent default for other links
+                  navigate('/'); // Use Gatsby's navigate
+                }}
+          >
+          Membership & Registration
+        </NavLink>
 
-      <Dropdown
-        title="Competitions"
-        defaultTo="/competitions"
-        links={[
-          { to: '/competitions', label: 'By State' },
-          { to: '/competitions?view=schedule', label: 'Schedule' },
-        ]}
-      />
+        <NavLink
+                sx={navLinkStyles}
+                as="a"  // Use <a> instead of <Link>
+                href="/" // Use href for full reload
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    return; // Let the browser do its thing
+                  }
+                  e.preventDefault(); // Prevent default for other links
+                  navigate('/'); // Use Gatsby's navigate
+                }}
+          >          
+          Divisions
+        </NavLink>
 
-      <Dropdown
-        title="Livestreams"
-        defaultTo="/livestreams"
-        links={[
-          { to: '/livestreams?upcoming=true', label: 'Upcoming Events' },
-          { to: '/livestreams?complete=true', label: 'Past Events' },
-        ]}
-      />
+        <NavLink
+                sx={navLinkStyles}
+                as="a"  // Use <a> instead of <Link>
+                href="/" // Use href for full reload
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    return; // Let the browser do its thing
+                  }
+                  e.preventDefault(); // Prevent default for other links
+                  navigate('/'); // Use Gatsby's navigate
+                }}
+          >          
+          Rules
+        </NavLink>
 
-      <NavLink
-        as="a"
-        href="/register"
-        onClick={(e) => {
-            if (window.location.pathname === '/register') {
-              return;
-            }
-            e.preventDefault();
-            navigate('/register');
-          }}
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
-      >
-        Register
-      </NavLink>
+        <NavLink
+                sx={navLinkStyles}
+                as="a"  // Use <a> instead of <Link>
+                href="/" // Use href for full reload
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    return; // Let the browser do its thing
+                  }
+                  e.preventDefault(); // Prevent default for other links
+                  navigate('/'); // Use Gatsby's navigate
+                }}
+          >          
+          Contact us
+        </NavLink>
 
-      <NavLink
-        as="a"
-        href="/divisions"
-        onClick={(e) => {
-            if (window.location.pathname === '/divisions') {
-              return;
-            }
-            e.preventDefault();
-            navigate('/divisions');
-          }}
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
-      >
-        Divisions
-      </NavLink>
+        <NavLink
+                sx={navLinkStyles}
+                as="a"  // Use <a> instead of <Link>
+                href="/" // Use href for full reload
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    return; // Let the browser do its thing
+                  }
+                  e.preventDefault(); // Prevent default for other links
+                  navigate('/'); // Use Gatsby's navigate
+                }}
+          >          
+          About us
+        </NavLink>
+      </Flex>
 
-      <NavLink
-        as="a"
-        href="/rules_and_regulations"
-        onClick={(e) => {
-          if (window.location.pathname === '/rules_and_regulations') {
-            return; // Do nothing, let the browser reload
-          }
-          e.preventDefault(); // Prevent default for other links
-          navigate('/rules_and_regulations'); // Use Gatsby's navigate
-        }}
-        sx={{
-          color: 'logo',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-          position: 'relative',
-          padding: '0.5rem 1rem',
-          '&:after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: '2px',
-            width: '0%',
-            backgroundColor: 'secondary',
-            transition: 'width 0.3s ease',
-          },
-          '&:hover:after, &:focus:after': {
-            width: '100%',
-          },
-          '&:hover': {
-            color: 'logo',
-          },
-        }}
-      >
-        Regulations
-      </NavLink>
+      {/* Right: Optional placeholder for balance (or additional icons) */}
+      <Box sx={{ flex: '0 0 auto' }} />
     </Flex>
   );
 };
