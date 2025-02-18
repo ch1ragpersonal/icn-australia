@@ -47,7 +47,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
           textDecoration: 'none',
           cursor: 'pointer',
           fontWeight: 'bold',
-          fontSize: '2vmin',
+          fontSize: '2.4vmin',
           position: 'relative',
           padding: '0.5rem 1rem',
           '&:after': {
@@ -104,7 +104,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
                   textAlign: 'left',
                   width: '100%',
                   cursor: 'pointer',
-                  fontSize: '1.5vmin',
+                  fontSize: '1.9vmin',
                   position: 'relative',
                   '&:after': {
                     content: '""',
@@ -166,7 +166,7 @@ const Navbar = () => {
         width: '100%',
         backgroundColor: 'primary',
         alignItems: 'center',
-        fontSize: '2vmin',
+        fontSize: '2.4vmin',
         padding: '2vmin',
       }}
     >
@@ -222,13 +222,13 @@ const Navbar = () => {
         <NavLink
                 sx={navLinkStyles}
                 as="a"  // Use <a> instead of <Link>
-                href="/" // Use href for full reload
+                href="/register" // Use href for full reload
                 onClick={(e) => {
-                  if (window.location.pathname === '/') {
+                  if (window.location.pathname === '/register') {
                     return; // Let the browser do its thing
                   }
                   e.preventDefault(); // Prevent default for other links
-                  navigate('/'); // Use Gatsby's navigate
+                  navigate('/register'); // Use Gatsby's navigate
                 }}
           >
           Membership & Registration
@@ -237,13 +237,13 @@ const Navbar = () => {
         <NavLink
                 sx={navLinkStyles}
                 as="a"  // Use <a> instead of <Link>
-                href="/" // Use href for full reload
+                href="/divisions" // Use href for full reload
                 onClick={(e) => {
-                  if (window.location.pathname === '/') {
+                  if (window.location.pathname === '/divisions') {
                     return; // Let the browser do its thing
                   }
                   e.preventDefault(); // Prevent default for other links
-                  navigate('/'); // Use Gatsby's navigate
+                  navigate('/divisions'); // Use Gatsby's navigate
                 }}
           >          
           Divisions
@@ -252,13 +252,13 @@ const Navbar = () => {
         <NavLink
                 sx={navLinkStyles}
                 as="a"  // Use <a> instead of <Link>
-                href="/" // Use href for full reload
+                href="/rules_and_regulations" // Use href for full reload
                 onClick={(e) => {
-                  if (window.location.pathname === '/') {
+                  if (window.location.pathname === '/rules_and_regulations') {
                     return; // Let the browser do its thing
                   }
                   e.preventDefault(); // Prevent default for other links
-                  navigate('/'); // Use Gatsby's navigate
+                  navigate('/rules_and_regulations'); // Use Gatsby's navigate
                 }}
           >          
           Rules
@@ -267,13 +267,13 @@ const Navbar = () => {
         <NavLink
                 sx={navLinkStyles}
                 as="a"  // Use <a> instead of <Link>
-                href="/" // Use href for full reload
+                href="/contact" // Use href for full reload
                 onClick={(e) => {
-                  if (window.location.pathname === '/') {
+                  if (window.location.pathname === '/contact') {
                     return; // Let the browser do its thing
                   }
                   e.preventDefault(); // Prevent default for other links
-                  navigate('/'); // Use Gatsby's navigate
+                  navigate('/contact'); // Use Gatsby's navigate
                 }}
           >          
           Contact us
@@ -282,13 +282,13 @@ const Navbar = () => {
         <NavLink
                 sx={navLinkStyles}
                 as="a"  // Use <a> instead of <Link>
-                href="/" // Use href for full reload
+                href="/about" // Use href for full reload
                 onClick={(e) => {
-                  if (window.location.pathname === '/') {
+                  if (window.location.pathname === '/about') {
                     return; // Let the browser do its thing
                   }
                   e.preventDefault(); // Prevent default for other links
-                  navigate('/'); // Use Gatsby's navigate
+                  navigate('/about'); // Use Gatsby's navigate
                 }}
           >          
           About us
