@@ -5,6 +5,7 @@ import { Box, Heading, Button, Flex } from "theme-ui";
 import StateCard from "../components/StateCard";
 import CompetitionList from "../components/CompetitionList";
 import ScheduleList from "../components/ScheduleList";
+import Seo from "../components/seo";
 
 // Dynamically import Framer Motion for Gatsby SSR compatibility
 const AnimatePresence = lazy(() => import("framer-motion").then((mod) => ({ default: mod.AnimatePresence })));
@@ -92,7 +93,10 @@ const CompetitionsPage = () => {
   });
 
   return (
+    
     <Box sx={{ width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "20px", textAlign: "center" }}>
+    <Seo title="Competitions" description="ICN Australia Competitions" />
+
       <Heading as="h1" sx={{ fontSize: "32px", marginBottom: "20px" }}>
         {selectedState
           ? `Competitions in ${selectedState.name}`

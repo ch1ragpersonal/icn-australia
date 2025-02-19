@@ -1,5 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { Box, Heading, Button, Flex } from "theme-ui";
+import Seo from '../components/seo';
 
 const DivisionsPage = () => {
   const data = useStaticQuery(graphql`
@@ -32,6 +34,8 @@ const DivisionsPage = () => {
 
   return (
     <div style={{ padding: '2rem' }}>
+    <Seo title="Divisions" description="ICN Australia Competitor Divisions" />
+
       <style>
         {`
           .division-card {
@@ -63,7 +67,8 @@ const DivisionsPage = () => {
           }
         `}
       </style>
-      <h1>Competitor Divisions</h1>
+      
+      <Heading as="h1" sx={{ mb: 4 }}>Competitor Divisions</Heading>
 
       {/* Male Divisions Section */}
       <section>

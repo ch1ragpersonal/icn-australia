@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <>
-      <Seo title="HomePage" description="Welcome to ICN Australia" />
+      <Seo title="Home" description="Welcome to ICN Australia" />
       
       <Box
         sx={{
