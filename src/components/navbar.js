@@ -79,7 +79,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
             position: 'absolute',
             top: `${dropdownPosition.top}px`,
             left: `${dropdownPosition.left}px`,
-            backgroundColor: 'primary',
+            backgroundColor: '#fff',
             minWidth: '20vw',
             boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
             zIndex: 1000,
@@ -121,7 +121,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
                     width: '100%',
                   },
                   '&:hover': {
-                    color: 'logo',
+                    color: 'buttonback',
                   },
                 }}
               >
