@@ -1,7 +1,23 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
+import { Link as GatsbyLink } from "gatsby";
 import { Box, Heading, Flex } from "theme-ui";
+
+// Column 1 Links
+const column1Links = [
+  { title: "Home", url: "/" },
+  { title: "About Us", url: "/about" },
+  { title: "Membership", url: "/register" },
+  { title: "Competitions", url: "/competition" },
+  { title: "Contact", url: "/contact" }
+];
+
+// Column 2 Links
+const column2Links = [
+  { title: "Polices", url: "/" },
+  { title: "By-laws", url: "/" }, // External
+  { title: "Licensing", url: "/" } // External
+];
 
 const SiteLink = ({ to, children }) => {
   const isExternal = to.startsWith("http");
@@ -18,37 +34,17 @@ const SiteLink = ({ to, children }) => {
 };
 
 const SiteMap = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allSitePage {
-        nodes {
-          path
-        }
-      }
-    }
-  `);
-
-  // Filter out unwanted pages
-  const pages = data.allSitePage.nodes
-    .map((page) => page.path)
-    .filter((path) => !path.includes("404") && path !== "/");
-
-  // Split pages into two roughly equal columns
-  const midIndex = Math.ceil(pages.length / 2);
-  const column1 = pages.slice(0, midIndex);
-  const column2 = pages.slice(midIndex);
-
   return (
     <Box as="footer" sx={{ backgroundColor: "muted", p: 4, textAlign: "center" }}>
       <Flex sx={{ justifyContent: "center", gap: [3, 5], flexWrap: "wrap" }}>
         {/* Column 1 */}
         <Box sx={{ minWidth: 150, display: "flex", flexDirection: "column", alignItems: "center" }}>
           <Heading as="h4" sx={{ fontSize: 2, mb: 2 }}>
-            Column 1
+            Quicklinks
           </Heading>
-          {column1.map((path) => (
-            <SiteLink key={path} to={path} sx={{ mb: 2 }}>
-              {path === "/" ? "Home" : path.replace(/-/g, " ").replace(/\//g, "").toUpperCase()}
+          {column1Links.map(({ title, url }) => (
+            <SiteLink key={url} to={url}>
+              {title}
             </SiteLink>
           ))}
         </Box>
@@ -56,11 +52,11 @@ const SiteMap = () => {
         {/* Column 2 */}
         <Box sx={{ minWidth: 150, display: "flex", flexDirection: "column", alignItems: "center" }}>
           <Heading as="h4" sx={{ fontSize: 2, mb: 2 }}>
-            Column 2
+            Legal
           </Heading>
-          {column2.map((path) => (
-            <SiteLink key={path} to={path} sx={{ mb: 2 }}>
-              {path === "/" ? "Home" : path.replace(/-/g, " ").replace(/\//g, "").toUpperCase()}
+          {column2Links.map(({ title, url }) => (
+            <SiteLink key={url} to={url}>
+              {title}
             </SiteLink>
           ))}
         </Box>
