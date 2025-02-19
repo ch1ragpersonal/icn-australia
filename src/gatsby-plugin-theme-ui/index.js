@@ -4,6 +4,7 @@ export default {
     background: '#fff',
     primary: '#004225',
     buttonback: '#004225',
+    whiteBack: '#fff',
     buttontext: '#FFB000',
     logo: '#FFB000',
     cardback: 'white',

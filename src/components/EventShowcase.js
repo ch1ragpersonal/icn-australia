@@ -2,6 +2,7 @@
 import React from "react";
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
 import { Box, Image, Button, Heading, Card, Text, Link } from "theme-ui";
+import SecondaryButton from "./SecondaryButton";
 
 const EventShowcase = () => {
   const data = useStaticQuery(graphql`
@@ -137,7 +138,7 @@ const EventShowcase = () => {
           );
         })}
       </Box>
-      <GatsbyLink to="/competitions">
+      {/* <GatsbyLink to="/competitions">
         <Button
           sx={{
             mt: 3,
@@ -157,7 +158,8 @@ const EventShowcase = () => {
         >
           See More Events
         </Button>
-      </GatsbyLink>
+      </GatsbyLink> */}
+      <SecondaryButton to='/competitions' text={'See More Events'}/>
     </Box>
   );
 };
