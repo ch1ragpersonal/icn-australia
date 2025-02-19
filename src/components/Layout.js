@@ -25,7 +25,7 @@ const Layout = ({ children, title, description }) => (
       sx={{
         backgroundColor: 'primary',
         overflow: 'hidden',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
         position: 'sticky',
         top: 0,
         zIndex: 1000,

@@ -42,7 +42,7 @@ export default function App() {
       
       <Box
         sx={{
-          background: "linear-gradient(135deg, #f6f9fc 0%, #e9eff5 100%)",
+          background: "F5F5DC",
           minHeight: "100vh",
         }}
       >
@@ -99,54 +99,25 @@ export default function App() {
               )}
           </Box>
 
-          
-          {/* Image Slider Section */}
-          <Box sx={{ mb: 5 }}>
-            {/* <ImageSlider /> */}
-          </Box>
-
+          {/* About us section */}
           <Box>
           <AboutUs/>
 
           </Box>
 
-          {/* Upcoming Competitions Section */}
-          <Box sx={{ mb: 5 }}>
-            <Heading
-              as="h2"
-              sx={{
-                fontSize: ["2rem", "2.5rem", "3rem"],
-                fontWeight: "bold",
-                textAlign: "center",
-                color: "text",
-                mb: 3,
-                borderBottom: "2px solid",
-                borderColor: "secondary",
-                pb: 1,
-                width: "fit-content",
-                mx: "auto",
-              }}
-            >
-              About Us
-            </Heading>
-          </Box>
 
           {/* Upcoming Competitions Section */}
-          <Box sx={{ mb: 5 }}>
-            <Heading
-              as="h2"
-              sx={{
-                fontSize: ["2rem", "2.5rem", "3rem"],
-                fontWeight: "bold",
-                textAlign: "center",
-                color: "text",
-                mb: 3,
-                borderBottom: "2px solid",
-                borderColor: "secondary",
-                pb: 1,
-                width: "fit-content",
-                mx: "auto",
+          <Box      
+            sx={{
+              maxWidth: "100%",
+              py: 5,
+              px: 4,
+              textAlign: "center",
+              backgroundColor: "muted",
               }}
+            >
+            <Heading
+              as="h1" sx={{ fontSize: 7, mb: 3 }}
             >
               ICN Season A 2025
             </Heading>

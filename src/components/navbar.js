@@ -28,7 +28,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
   return (
     <Box
-      sx={{ position: 'relative' }}
+      sx={{ position: 'relative'}}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -75,14 +75,14 @@ const Dropdown = ({ title, links, defaultTo }) => {
         <Portal>
           <Box
             sx={{
-              position: 'absolute',
-              top: `${dropdownPosition.top}px`,
-              left: `${dropdownPosition.left}px`,
-              backgroundColor: 'primary',
-              minWidth: '20vw',
-              boxShadow: '0 1vmin 2vmin rgba(0,0,0,0.1)',
-              zIndex: 1000,
-              borderRadius: '0 0 1vmin 1vmin',
+            position: 'absolute',
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`,
+            backgroundColor: 'primary',
+            minWidth: '20vw',
+            boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
+            zIndex: 1000,
+            borderRadius: '0 0 1vmin 1vmin',
             }}
           >
             {links.map(({ to, label }) => (
@@ -168,6 +168,7 @@ const Navbar = () => {
         alignItems: 'center',
         fontSize: '2.4vmin',
         padding: '2vmin',
+        boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
       }}
     >
       {/* Left: Logo */}

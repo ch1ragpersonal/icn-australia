@@ -69,6 +69,10 @@ const EventShowcase = () => {
                 gap: "20px",
                 height: "350px",
                 overflow: "hidden",
+                transition: 'transform 0.2s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                },
               }}
             >
               {event.poster?.file?.url && (
