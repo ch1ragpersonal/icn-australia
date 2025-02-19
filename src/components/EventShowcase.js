@@ -45,7 +45,7 @@ const EventShowcase = () => {
 
   return (
     <Box sx={{ textAlign: "center", my: 4 }}>
-      <Heading as="h2" sx={{ fontSize: 3, textAlign: "center", mb: 2 }}>
+      <Heading as="h2" sx={{color:"black", fontSize: 3, textAlign: "center", mb: 2 }}>
         Upcoming Competitions
       </Heading>
       <Box
@@ -62,7 +62,7 @@ const EventShowcase = () => {
                 padding: "20px",
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
                 borderRadius: "10px",
-                backgroundColor: "white",
+                backgroundColor: "cardback",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
@@ -85,7 +85,7 @@ const EventShowcase = () => {
                 />
               )}
               <Box sx={{ flex: 1, textAlign: "left", height: "100%" }}>
-                <Heading as="h3" sx={{ fontSize: "22px", marginBottom: "16px" }}>
+                <Heading as="h3" sx={{color: "cardtext", fontSize: "22px", marginBottom: "16px" }}>
                   {event.competitionName}
                 </Heading>
                 <Box
@@ -97,7 +97,7 @@ const EventShowcase = () => {
                   }}
                 >
                   <Text sx={{ fontSize: "18px" }}>📅</Text>
-                  <Text sx={{ fontSize: "16px", color: "primary", fontWeight: "bold" }}>
+                  <Text sx={{ fontSize: "16px", color: "cardtext", fontWeight: "bold" }}>
                     {event.date.toDateString()}
                   </Text>
                 </Box>
@@ -110,7 +110,7 @@ const EventShowcase = () => {
                   }}
                 >
                   <Text sx={{ fontSize: "18px" }}>📍</Text>
-                  <Text sx={{ fontSize: "16px", color: "primary", fontWeight: "bold" }}>
+                  <Text sx={{ fontSize: "16px", color: "cardtext", fontWeight: "bold" }}>
                     {event.location}
                   </Text>
                 </Box>
@@ -137,8 +137,8 @@ const EventShowcase = () => {
         <Button
           sx={{
             mt: 3,
-            background: "primary",
-            color: "white",
+            background: "buttonback",
+            color: "buttontext",
             fontSize: "16px",
             borderRadius: "8px",
             px: 4,

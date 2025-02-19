@@ -3,7 +3,11 @@ export default {
     text: '#000411',        // Corrected hex code (6 digits or 3 digits)
     background: '#fff',
     primary: '#133f2c',
+    buttonback: '#133f2c',
+    buttontext: '#ca8b20',
     logo: '#ca8b20',
+    cardback: 'white',
+    cardtext: 'black',
     secondary: '#3f3f46',  // Added secondary color -  good practice
     gray: [              // Added gray scale (VERY IMPORTANT)
       '#f8f9fa',

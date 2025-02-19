@@ -106,8 +106,8 @@ const CompetitionsPage = () => {
         <Button
           onClick={() => setViewMode("state")}
           sx={{
-            backgroundColor: viewMode === "state" ? "primary" : "#bbb",
-            color: "white",
+            backgroundColor: viewMode === "state" ? "buttonback" : "#bbb",
+            color: "buttontext",
             padding: "14px 28px",
             borderRadius: "8px",
             cursor: "pointer",
@@ -124,8 +124,8 @@ const CompetitionsPage = () => {
         <Button
           onClick={() => setViewMode("schedule")}
           sx={{
-            backgroundColor: viewMode === "schedule" ? "primary" : "#bbb",
-            color: "white",
+            backgroundColor: viewMode === "schedule" ? "buttonback" : "#bbb",
+            color: "buttontext",
             padding: "14px 28px",
             borderRadius: "8px",
             cursor: "pointer",
@@ -133,7 +133,7 @@ const CompetitionsPage = () => {
             fontWeight: "bold",
             transition: "background-color 0.3s ease-in-out",
             "&:hover": {
-              backgroundColor: viewMode === "schedule" ? "primary" : "#999",
+              backgroundColor: viewMode === "schedule" ? "buttonback" : "#999",
             },
           }}
         >

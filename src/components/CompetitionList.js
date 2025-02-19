@@ -27,8 +27,8 @@ const CompetitionList = ({ state, competitions, onBack }) => {
             onClick={onBack}
             sx={{
               marginBottom: "20px",
-              backgroundColor: "primary",
-              color: "white",
+              backgroundColor: "buttonback",
+              color: "buttontext",
               cursor: "pointer",
             }}
           >
