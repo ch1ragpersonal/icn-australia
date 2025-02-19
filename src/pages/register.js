@@ -1,146 +1,65 @@
-// src/pages/register.js
 /** @jsxImportSource theme-ui */
-import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify"; // Add ToastContainer here
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import TextInput from "../components/registration/TextInput";
-import PasswordInput from "../components/registration/PasswordInput";
-import Button from "../components/registration/Button"; 
-import FormContainer from "../components/registration/FormContainer";  // Import from the components folder
-import { Box } from "theme-ui";
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { Box, Heading, Image, Grid } from "theme-ui";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Seo from '../components/seo';
 
-const RegisterPage = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = {};
-
-    if (!formData.username.trim()) {
-      newErrors.username = "Username is required";
-      isValid = false;
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-      isValid = false;
-    }
-
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-      isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-      isValid = false;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setLoading(true);
-
-    const auth = getAuth();
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-      const user = userCredential.user;
-        toast.success(`Account created for ${formData.username}!`, { className: "toast-success" });
-      console.log("Registered user:", user);
-
-        setFormData({
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-          });
-
-
-    } catch (error) {
-      console.error("Registration error:", error);
-        if (error.code === "auth/email-already-in-use") {
-            toast.error("This email is already in use.", { className: "toast-error" });
+const RegistrationPage = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      longText: allContentfulLongText(filter: { title: { eq: "Registration" } }) {
+        nodes {
+          title
+          content {
+            raw
+          }
         }
-       else {
-        toast.error(error.message, { className: "toast-error" });
       }
-    } finally {
-      setLoading(false);
+      image: allContentfulImage(filter: { title: { eq: "rego" } }) {
+        nodes {
+          image{
+            file {
+              url
+            }
+          }
+        }
+      }
     }
-  };
+  `);
+
+  const textNode = data.longText.nodes[0];
+  const imageNode = data.image.nodes[0];
 
   return (
-    <div>
-        <FormContainer>
-        <h2 sx={{ textAlign: "center", mb: 3 }}>Register</h2>
-        <form onSubmit={handleSubmit}>
-            <TextInput
-            label="Username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            error={errors.username}
-            />
-            <TextInput
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={errors.email}
-            />
-            <PasswordInput
-            label="Password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            error={errors.password}
-            />
-            <PasswordInput
-            label="Confirm Password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            error={errors.confirmPassword}
-            />
-            <Button type="submit" disabled={loading} sx={{ width: "100%" }}>
-            {loading ? "Registering..." : "Register"}
-            </Button>
-        </form>
-        </FormContainer>
-        <ToastContainer position="top-right" />
-        </div>
+    <>
+      <Seo title={textNode?.title || "Registration"} />
+      <Box sx={{ p: 4 }}>
+        <Grid columns={[1, 2, "2fr 1fr"]} gap={4}>
+          {/* Left Side - Rich Text Content */}
+          <Box>
+            <Heading as="h1" sx={{ mb: 4 }}>{textNode?.title || "Registration"}</Heading>
+            <Box sx={{
+              '& h1': { fontSize: 5 },
+              '& h2': { fontSize: 4 },
+              '& p': { fontSize: 2, lineHeight: 'body' }
+            }}>
+              {textNode ? documentToReactComponents(JSON.parse(textNode.content.raw)) : <p>No registration content found.</p>}
+            </Box>
+          </Box>
+
+          {/* Right Side - Image */}
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            {imageNode ? (
+              <Image src={imageNode.image.file.url} alt={imageNode.description || "Registration Image"} sx={{ maxWidth: "100%", height: "auto", borderRadius: 4 }} />
+            ) : (
+              <p>No image found.</p>
+            )}
+          </Box>
+        </Grid>
+      </Box>
+    </>
   );
 };
 
-export default RegisterPage;
+export default RegistrationPage;
