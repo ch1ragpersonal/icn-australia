@@ -43,7 +43,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
           navigate(defaultTo); // Use Gatsby's navigate for other pages
         }}
         sx={{
-          color: 'logo',
+          color: '#004225',
           textDecoration: 'none',
           cursor: 'pointer',
           fontWeight: 'bold',
@@ -135,7 +135,7 @@ const Dropdown = ({ title, links, defaultTo }) => {
 };
 
 const navLinkStyles = {
-  color: 'logo',
+  color: '#004225',
   textDecoration: 'none',
   fontWeight: 'bold',
   position: 'relative',
@@ -164,8 +164,9 @@ const Navbar = () => {
       as="nav"
       sx={{
         width: '100%',
-        backgroundColor: 'primary',
+        backgroundColor: '#fff',
         alignItems: 'center',
+        borderBottom: '3px solid #004225',
         fontSize: '2.4vmin',
         padding: '2vmin',
         boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
