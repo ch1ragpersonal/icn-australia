@@ -9,11 +9,10 @@ const AboutUs = () => {
         maxWidth: "100%",
         py: 5,
         px: 4,
-        textAlign: "center",
         backgroundColor: "muted",
       }}
     >
-      <Heading as="h1" sx={{ fontSize: 7, mb: 3 }}>
+      <Heading as="h1" sx={{ mb: 3 }}>
         About Us
       </Heading>
       <Text sx={{ fontSize: 3, maxWidth: "800px", mx: "auto", lineHeight: "1.6" }}>

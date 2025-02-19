@@ -100,7 +100,11 @@ export default function App() {
           </Box>
 
           {/* About us section */}
-          <Box>
+          <Box sx={{
+            "& h1": {
+              fontSize: 7,
+            }
+          }}>
           <AboutUs/>
 
           </Box>
