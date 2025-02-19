@@ -16,13 +16,12 @@ const RegistrationPage = () => {
           }
         }
       }
-      image: allContentfulImage(filter: { title: { eq: "rego" } }) {
+      image: allContentfulAsset(filter: { title: { eq: "rego" } }) {
         nodes {
-          image{
-            file {
-              url
-            }
+          file {
+            url
           }
+          description
         }
       }
     }
@@ -38,7 +37,7 @@ const RegistrationPage = () => {
         <Grid columns={[1, 2, "2fr 1fr"]} gap={4}>
           {/* Left Side - Rich Text Content */}
           <Box>
-            <Heading as="h1" sx={{ mb: 4 }}>{textNode?.title || "Registration"}</Heading>
+            <Heading as="h1" sx={{ mb: 3 }}>{textNode?.title || "Registration"}</Heading>
             <Box sx={{
               '& h1': { fontSize: 5 },
               '& h2': { fontSize: 4 },
@@ -51,7 +50,7 @@ const RegistrationPage = () => {
           {/* Right Side - Image */}
           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             {imageNode ? (
-              <Image src={imageNode.image.file.url} alt={imageNode.description || "Registration Image"} sx={{ maxWidth: "100%", height: "auto", borderRadius: 4 }} />
+              <Image src={imageNode.file.url} alt={imageNode.description || "Registration Image"} sx={{ maxWidth: "100%", height: "auto", borderRadius: 4 }} />
             ) : (
               <p>No image found.</p>
             )}

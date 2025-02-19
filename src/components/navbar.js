@@ -253,13 +253,13 @@ const Navbar = () => {
         <NavLink
                 sx={navLinkStyles}
                 as="a"  // Use <a> instead of <Link>
-                href="/rules_and_regulations" // Use href for full reload
+                href="/rules" // Use href for full reload
                 onClick={(e) => {
-                  if (window.location.pathname === '/rules_and_regulations') {
+                  if (window.location.pathname === '/rules') {
                     return; // Let the browser do its thing
                   }
                   e.preventDefault(); // Prevent default for other links
-                  navigate('/rules_and_regulations'); // Use Gatsby's navigate
+                  navigate('/rules'); // Use Gatsby's navigate
                 }}
           >          
           Rules

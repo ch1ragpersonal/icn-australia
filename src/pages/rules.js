@@ -5,10 +5,10 @@ import { Box, Heading } from "theme-ui";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Seo from '../components/seo';
 
-const RulesAndRegulationsPage = () => {
+const RulesPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulLongText(filter: { title: { eq: "Rules and Regulations" } }) {
+      allContentfulLongText(filter: { title: { eq: "Rules" } }) {
         nodes {
           title
           content {
@@ -23,7 +23,7 @@ const RulesAndRegulationsPage = () => {
   if (!data.allContentfulLongText.nodes || data.allContentfulLongText.nodes.length === 0) {
     return (
       <Box sx={{ p: 4 }}>
-        <Heading as="h1">Rules and Regulations</Heading>
+        <Heading as="h1">Rules</Heading>
         <p>No rules and regulations found.</p>
       </Box>
     );
@@ -48,4 +48,4 @@ const RulesAndRegulationsPage = () => {
   );
 };
 
-export default RulesAndRegulationsPage;
+export default RulesPage;
