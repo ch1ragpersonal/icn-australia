@@ -148,8 +148,9 @@ const CompetitionsPage = () => {
             <Box
               key="state-selection"
               sx={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
                 gap: "20px",
               }}
             >
@@ -181,8 +182,7 @@ const CompetitionsPage = () => {
       {/* Schedule Display (schedule view) */}
       <Suspense fallback={<div>Loading schedule...</div>}>
         <AnimatePresence mode="wait">
-          {viewMode === "schedule" && <ScheduleList competitions={sortedCompetitions} states={states} />
-        }
+          {viewMode === "schedule" && <ScheduleList competitions={sortedCompetitions} states={states} />}
         </AnimatePresence>
       </Suspense>
     </Box>
