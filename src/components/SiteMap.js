@@ -9,7 +9,8 @@ const column1Links = [
   { title: "About Us", url: "/about" },
   { title: "Membership", url: "/register" },
   { title: "Competitions", url: "/competition" },
-  { title: "Contact", url: "/contact" }
+  { title: "Contact", url: "/contact" },
+  { title: "Livestreams", url: "/livestreams"}
 ];
 
 // Column 2 Links
