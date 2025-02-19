@@ -30,6 +30,17 @@ const CompetitionList = ({ state, competitions, onBack }) => {
               backgroundColor: "buttonback",
               color: "buttontext",
               cursor: "pointer",
+              mt: 3,
+              fontSize: "16px",
+              borderRadius: "8px",
+              px: 4,
+              py: 2,
+              cursor: "pointer",
+              fontWeight: "bold",
+              transition: "background-color 0.3s ease-in-out",
+                  "&:hover": {
+                    backgroundColor: "#999",
+              },
             }}
           >
             Back to Region Selection
