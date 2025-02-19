@@ -4,6 +4,7 @@ import { Flex, NavLink, Box } from 'theme-ui';
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import logo from '../images/logo.png'; // Adjust path if needed
+import member_portal from '../images/member_portal.png'
 
 const Portal = ({ children }) => {
   return createPortal(children, document.body);
@@ -298,7 +299,19 @@ const Navbar = () => {
       </Flex>
 
       {/* Right: Optional placeholder for balance (or additional icons) */}
-      <Box sx={{ flex: '0 0 auto' }} />
+      <Box sx={{ flex: '0 0 auto' }}>
+        <a href='https://www.icompetenatural.com/' target='_blank' rel='noopener noreferrer' sx={{ color: 'logo', textDecoration: 'none', fontWeight: 'bold' }}>
+          <img
+            src={member_portal}
+            alt="Member's Portal"
+            sx={{
+              width: '17vmin',
+              height: 'auto',
+              borderRadius: '2vmin',
+            }}
+          />
+        </a>
+      </Box>
     </Flex>
   );
 };
