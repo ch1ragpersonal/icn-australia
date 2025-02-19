@@ -4,6 +4,8 @@ import { Flex, NavLink, Box } from 'theme-ui';
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import logo from '../images/logo.png'; // Adjust path if needed
+import logo_hover from '../images/logo_hover.png'; // Adjust path if needed
+
 import member_portal from '../images/member_portal.png'
 
 const Portal = ({ children }) => {
@@ -175,17 +177,32 @@ const Navbar = () => {
     >
       {/* Left: Logo */}
       <Box sx={{ flex: '0 0 auto' }}>
-        <NavLink as={Link} to="/" sx={{ color: 'logo', textDecoration: 'none', fontWeight: 'bold' }}>
-          <img
-            src={logo}
-            alt="Logo"
-            sx={{
-              width: '12vmin',
-              height: 'auto',
-              borderRadius: '2vmin',
-            }}
-          />
-        </NavLink>
+      <NavLink
+      as={Link}
+      to="/"
+      sx={{
+        color: "logo",
+        textDecoration: "none",
+        fontWeight: "bold",
+        display: "inline-block",
+      }}
+    >
+      <img
+        src={logo}
+        alt="Logo"
+        sx={{
+          width: "12vmin",
+          height: "auto",
+          borderRadius: "2vmin",
+          filter: "grayscale(100%) brightness(0%)", // Make it black initially
+          transition: "filter 0.3s ease",
+          "&:hover": {
+            filter:
+              "invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)",
+          },
+        }}
+      />
+    </NavLink>
       </Box>
 
       {/* Center: Nav Links and Dropdowns */}
@@ -300,17 +317,34 @@ const Navbar = () => {
 
       {/* Right: Optional placeholder for balance (or additional icons) */}
       <Box sx={{ flex: '0 0 auto' }}>
-        <a href='https://www.icompetenatural.com/' target='_blank' rel='noopener noreferrer' sx={{ color: 'logo', textDecoration: 'none', fontWeight: 'bold' }}>
-          <img
-            src={member_portal}
-            alt="Member's Portal"
-            sx={{
-              width: '17vmin',
-              height: 'auto',
-              borderRadius: '2vmin',
-            }}
-          />
-        </a>
+      <a
+  href="https://www.icompetenatural.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+  sx={{
+    color: "logo",
+    textDecoration: "none",
+    fontWeight: "bold",
+    display: "inline-block",
+  }}
+>
+  <img
+    src={member_portal}
+    alt="Member's Portal"
+    sx={{
+      width: "17vmin",
+      height: "auto",
+      borderRadius: "2vmin",
+      filter: "grayscale(100%) brightness(0%)", // Make it black initially
+      transition: "filter 0.3s ease",
+      "&:hover": {
+        filter:
+          "invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)",
+      },
+    }}
+  />
+</a>
+
       </Box>
     </Flex>
   );
