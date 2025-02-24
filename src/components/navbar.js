@@ -1,12 +1,11 @@
 /** @jsxImportSource theme-ui */
 import { Link, navigate } from 'gatsby';
-import { Flex, NavLink, Box } from 'theme-ui';
+import { Flex, NavLink, Box, Button } from 'theme-ui';
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import logo from '../images/logo.png'; // Adjust path if needed
-import logo_hover from '../images/logo_hover.png'; // Adjust path if needed
-
-import member_portal from '../images/member_portal.png'
+import logo from '../images/logo.png';
+import logo_hover from '../images/logo_hover.png';
+import member_portal from '../images/member_portal.png';
 
 const Portal = ({ children }) => {
   return createPortal(children, document.body);
@@ -31,19 +30,17 @@ const Dropdown = ({ title, links, defaultTo }) => {
 
   return (
     <Box
-      sx={{ position: 'relative'}}
+      sx={{ position: 'relative' }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <NavLink
-        as="a" // Use regular anchor tag
-        href={defaultTo} // Use href for full reload
+        as="a"
+        href={defaultTo}
         onClick={(e) => {
-          if (window.location.pathname === defaultTo) {
-             return; // Let the browser handle the full reload
-          }
-          e.preventDefault(); // Prevent default for other links
-          navigate(defaultTo); // Use Gatsby's navigate for other pages
+          if (window.location.pathname === defaultTo) return;
+          e.preventDefault();
+          navigate(defaultTo);
         }}
         sx={{
           color: '#004225',
@@ -73,19 +70,19 @@ const Dropdown = ({ title, links, defaultTo }) => {
       >
         {title}
       </NavLink>
-
       {isOpen && (
         <Portal>
           <Box
             sx={{
-            position: 'absolute',
-            top: `${dropdownPosition.top}px`,
-            left: `${dropdownPosition.left}px`,
-            backgroundColor: '#fff',
-            minWidth: '20vw',
-            boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
-            zIndex: 1000,
-            borderRadius: '0 0 1vmin 1vmin',
+              position: 'absolute',
+              top: `${dropdownPosition.top}px`,
+              left: `${dropdownPosition.left}px`,
+              backgroundColor: '#fff',
+              minWidth: '20vw',
+              boxShadow:
+                '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
+              zIndex: 1000,
+              borderRadius: '0 0 1vmin 1vmin',
             }}
           >
             {links.map(({ to, label }) => (
@@ -161,192 +158,380 @@ const navLinkStyles = {
   },
 };
 
-const Navbar = () => {
+// Fullscreen mobile menu component
+const MobileMenu = ({ onClose }) => {
   return (
-    <Flex
-      as="nav"
-      sx={{
-        width: '100%',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        borderBottom: '3px solid #004225',
-        fontSize: '2.4vmin',
-        padding: '2vmin',
-        boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
-      }}
-    >
-      {/* Left: Logo */}
-      <Box sx={{ flex: '0 0 auto' }}>
-      <NavLink
-      as={Link}
-      to="/"
-      sx={{
-        color: "logo",
-        textDecoration: "none",
-        fontWeight: "bold",
-        display: "inline-block",
-      }}
-    >
-      <img
-        src={logo}
-        alt="Logo"
+    <Portal>
+      <Box
         sx={{
-          width: "12vmin",
-          height: "auto",
-          borderRadius: "2vmin",
-          filter: "grayscale(100%) brightness(0%)", // Make it black initially
-          transition: "filter 0.3s ease",
-          "&:hover": {
-            filter:
-              "invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)",
-          },
-        }}
-      />
-    </NavLink>
-      </Box>
-
-      {/* Center: Nav Links and Dropdowns */}
-      <Flex
-        sx={{
-          flex: '1 1 auto',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '4vmin',
-          flexWrap: 'wrap',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#fff',
+          zIndex: 2000,
+          p: 4,
+          overflowY: 'auto',
         }}
       >
-        <NavLink
-                sx={navLinkStyles}
-                as="a"  // Use <a> instead of <Link>
-                href="/" // Use href for full reload
-                onClick={(e) => {
-                  if (window.location.pathname === '/') {
-                    return; // Let the browser do its thing
-                  }
-                  e.preventDefault(); // Prevent default for other links
-                  navigate('/'); // Use Gatsby's navigate
-                }}
+        {/* Header with back arrow */}
+        <Flex sx={{ alignItems: 'center', mb: 4 }}>
+          <Button
+            onClick={() => {
+              navigate('/');
+              onClose();
+            }}
+            sx={{
+              background: 'none',
+              border: 'none',
+              p: 0,
+              cursor: 'pointer',
+            }}
           >
-          Home
-        </NavLink>
-
-        <Dropdown
-          title="Competitions"
-          defaultTo="/competitions"
-          links={[
-            { to: '/competitions', label: 'By State' },
-            { to: '/competitions?view=schedule', label: 'Schedule' },
-          ]}
-        />
-
-        <NavLink
-                sx={navLinkStyles}
-                as="a"  // Use <a> instead of <Link>
-                href="/register" // Use href for full reload
-                onClick={(e) => {
-                  if (window.location.pathname === '/register') {
-                    return; // Let the browser do its thing
-                  }
-                  e.preventDefault(); // Prevent default for other links
-                  navigate('/register'); // Use Gatsby's navigate
-                }}
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="#004225"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </Button>
+        </Flex>
+        {/* Vertical nav links list */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/"
+            onClick={(e) => {
+              if (window.location.pathname === '/') return;
+              e.preventDefault();
+              navigate('/');
+              onClose();
+            }}
           >
-          Membership & Registration
-        </NavLink>
-
-        <NavLink
-                sx={navLinkStyles}
-                as="a"  // Use <a> instead of <Link>
-                href="/divisions" // Use href for full reload
-                onClick={(e) => {
-                  if (window.location.pathname === '/divisions') {
-                    return; // Let the browser do its thing
-                  }
-                  e.preventDefault(); // Prevent default for other links
-                  navigate('/divisions'); // Use Gatsby's navigate
-                }}
-          >          
-          Divisions
-        </NavLink>
-
-        <NavLink
-                sx={navLinkStyles}
-                as="a"  // Use <a> instead of <Link>
-                href="/rules" // Use href for full reload
-                onClick={(e) => {
-                  if (window.location.pathname === '/rules') {
-                    return; // Let the browser do its thing
-                  }
-                  e.preventDefault(); // Prevent default for other links
-                  navigate('/rules'); // Use Gatsby's navigate
-                }}
-          >          
-          Rules
-        </NavLink>
-
-        <NavLink
-                sx={navLinkStyles}
-                as="a"  // Use <a> instead of <Link>
-                href="/contact" // Use href for full reload
-                onClick={(e) => {
-                  if (window.location.pathname === '/contact') {
-                    return; // Let the browser do its thing
-                  }
-                  e.preventDefault(); // Prevent default for other links
-                  navigate('/contact'); // Use Gatsby's navigate
-                }}
-          >          
-          Contact us
-        </NavLink>
-
-        <NavLink
-                sx={navLinkStyles}
-                as="a"  // Use <a> instead of <Link>
-                href="/about" // Use href for full reload
-                onClick={(e) => {
-                  if (window.location.pathname === '/about') {
-                    return; // Let the browser do its thing
-                  }
-                  e.preventDefault(); // Prevent default for other links
-                  navigate('/about'); // Use Gatsby's navigate
-                }}
-          >          
-          About us
-        </NavLink>
-      </Flex>
-
-      {/* Right: Optional placeholder for balance (or additional icons) */}
-      <Box sx={{ flex: '0 0 auto' }}>
-      <a
-  href="https://www.icompetenatural.com/"
-  target="_blank"
-  rel="noopener noreferrer"
-  sx={{
-    color: "logo",
-    textDecoration: "none",
-    fontWeight: "bold",
-    display: "inline-block",
-  }}
->
-  <img
-    src={member_portal}
-    alt="Member's Portal"
-    sx={{
-      width: "17vmin",
-      height: "auto",
-      borderRadius: "2vmin",
-      filter: "grayscale(100%) brightness(0%)", // Make it black initially
-      transition: "filter 0.3s ease",
-      "&:hover": {
-        filter:
-          "invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)",
-      },
-    }}
-  />
-</a>
-
+            Home
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/competitions"
+            onClick={(e) => {
+              if (window.location.pathname === '/competitions') return;
+              e.preventDefault();
+              navigate('/competitions');
+              onClose();
+            }}
+          >
+            Competitions
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/register"
+            onClick={(e) => {
+              if (window.location.pathname === '/register') return;
+              e.preventDefault();
+              navigate('/register');
+              onClose();
+            }}
+          >
+            Membership & Registration
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/divisions"
+            onClick={(e) => {
+              if (window.location.pathname === '/divisions') return;
+              e.preventDefault();
+              navigate('/divisions');
+              onClose();
+            }}
+          >
+            Divisions
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/rules"
+            onClick={(e) => {
+              if (window.location.pathname === '/rules') return;
+              e.preventDefault();
+              navigate('/rules');
+              onClose();
+            }}
+          >
+            Rules
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/contact"
+            onClick={(e) => {
+              if (window.location.pathname === '/contact') return;
+              e.preventDefault();
+              navigate('/contact');
+              onClose();
+            }}
+          >
+            Contact us
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
+            href="/about"
+            onClick={(e) => {
+              if (window.location.pathname === '/about') return;
+              e.preventDefault();
+              navigate('/about');
+              onClose();
+            }}
+          >
+            About us
+          </NavLink>
+        </Box>
       </Box>
-    </Flex>
+    </Portal>
+  );
+};
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <Flex
+        as="nav"
+        sx={{
+          width: '100%',
+          backgroundColor: '#fff',
+          alignItems: 'center',
+          borderBottom: '3px solid #004225',
+          padding: '2vmin',
+          boxShadow:
+            '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
+        }}
+      >
+        {/* Left Column */}
+        <Box sx={{ flex: '1 0 auto', textAlign: 'left' }}>
+          {/* Mobile: Hamburger icon */}
+          <Box
+            sx={{ display: ['block', 'none'], cursor: 'pointer' }}
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="#004225"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </Box>
+          {/* Desktop: Logo on left */}
+          <Box sx={{ display: ['none', 'block'] }}>
+            <NavLink
+              as={Link}
+              to="/"
+              sx={{
+                color: 'logo',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                display: 'inline-block',
+              }}
+            >
+              <img
+                src={logo}
+                alt="Logo"
+                sx={{
+                  width: '12vmin',
+                  height: 'auto',
+                  borderRadius: '2vmin',
+                  filter: 'grayscale(100%) brightness(0%)',
+                  transition: 'filter 0.3s ease',
+                  '&:hover': {
+                    filter:
+                      'invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)',
+                  },
+                }}
+              />
+            </NavLink>
+          </Box>
+        </Box>
+
+        {/* Center Column */}
+        <Box sx={{ flex: '1 0 auto', textAlign: 'center' }}>
+          {/* Mobile: Logo in center */}
+          <Box sx={{ display: ['block', 'none'] }}>
+            <NavLink
+              as={Link}
+              to="/"
+              sx={{
+                color: 'logo',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                display: 'inline-block',
+              }}
+            >
+              <img
+                src={logo}
+                alt="Logo"
+                sx={{
+                  width: '12vmin',
+                  height: 'auto',
+                  borderRadius: '2vmin',
+                  filter: 'grayscale(100%) brightness(0%)',
+                  transition: 'filter 0.3s ease',
+                  '&:hover': {
+                    filter:
+                      'invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)',
+                  },
+                }}
+              />
+            </NavLink>
+          </Box>
+          {/* Desktop: Nav Links in center */}
+          <Flex
+            sx={{
+              display: ['none', 'flex'],
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '4vmin',
+            }}
+          >
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/"
+              onClick={(e) => {
+                if (window.location.pathname === '/') return;
+                e.preventDefault();
+                navigate('/');
+              }}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/competitions"
+              onClick={(e) => {
+                if (window.location.pathname === '/competitions') return;
+                e.preventDefault();
+                navigate('/competitions');
+              }}
+            >
+              Competitions
+            </NavLink>
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/register"
+              onClick={(e) => {
+                if (window.location.pathname === '/register') return;
+                e.preventDefault();
+                navigate('/register');
+              }}
+            >
+              Membership & Registration
+            </NavLink>
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/divisions"
+              onClick={(e) => {
+                if (window.location.pathname === '/divisions') return;
+                e.preventDefault();
+                navigate('/divisions');
+              }}
+            >
+              Divisions
+            </NavLink>
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/rules"
+              onClick={(e) => {
+                if (window.location.pathname === '/rules') return;
+                e.preventDefault();
+                navigate('/rules');
+              }}
+            >
+              Rules
+            </NavLink>
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/contact"
+              onClick={(e) => {
+                if (window.location.pathname === '/contact') return;
+                e.preventDefault();
+                navigate('/contact');
+              }}
+            >
+              Contact us
+            </NavLink>
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/about"
+              onClick={(e) => {
+                if (window.location.pathname === '/about') return;
+                e.preventDefault();
+                navigate('/about');
+              }}
+            >
+              About us
+            </NavLink>
+          </Flex>
+        </Box>
+
+        {/* Right Column: Member Portal */}
+        <Box sx={{ flex: '1 0 auto', textAlign: 'right' }}>
+          <a
+            href="https://www.icompetenatural.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: 'logo',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              display: 'inline-block',
+            }}
+          >
+            <img
+              src={member_portal}
+              alt="Member's Portal"
+              sx={{
+                width: '17vmin',
+                height: 'auto',
+                borderRadius: '2vmin',
+                filter: 'grayscale(100%) brightness(0%)',
+                transition: 'filter 0.3s ease',
+                '&:hover': {
+                  filter:
+                    'invert(59%) sepia(99%) saturate(475%) hue-rotate(3deg) brightness(103%) contrast(101%)',
+                },
+              }}
+            />
+          </a>
+        </Box>
+      </Flex>
+      {isMobileMenuOpen && (
+        <MobileMenu onClose={() => setMobileMenuOpen(false)} />
+      )}
+    </>
   );
 };
 
