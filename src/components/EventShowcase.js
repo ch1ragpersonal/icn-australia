@@ -52,37 +52,37 @@ const EventShowcase = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
+          gridTemplateColumns: ["1fr", "repeat(2, 1fr)"],
           gap: "20px",
         }}
       >
         {displayEvents.map((event) => {
           const cardContent = (
             <Card
-              sx={{
-                padding: "20px",
-                boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-                borderRadius: "10px",
-                backgroundColor: "cardback",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: "20px",
-                height: "350px",
-                overflow: "hidden",
-                transition: 'transform 0.2s ease-in-out',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                },
-              }}
+            sx={{
+              padding: "20px",
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+              borderRadius: "10px",
+              backgroundColor: "cardback",
+              display: "flex",
+              flexDirection: ["column", "row"],
+              alignItems: "center",
+              gap: "20px",
+              height: ["auto", "350px"],
+              overflow: "hidden",
+              transition: "transform 0.2s ease-in-out",
+              "&:hover": {
+                transform: "translateY(-4px)",
+              },
+            }}
             >
               {event.poster?.file?.url && (
                 <Image
                   src={event.poster.file.url}
                   alt={event.competitionName}
                   sx={{
-                    width: "300px",
-                    height: "300px",
+                    width: ["100%", "300px"],
+                    height: ["auto", "300px"],
                     borderRadius: "5px",
                     flexShrink: 0,
                     objectFit: "cover",

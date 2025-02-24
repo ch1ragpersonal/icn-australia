@@ -30,7 +30,7 @@ const ScheduleList = ({ competitions, states }) => {
             <Box
               sx={{
                 display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
+                gridTemplateColumns: ["1fr", "repeat(2, 1fr)"],
                 gap: "20px",
               }}
             >
@@ -45,13 +45,17 @@ const ScheduleList = ({ competitions, states }) => {
                       padding: "20px",
                       boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
                       borderRadius: "10px",
-                      backgroundColor: "white",
+                      backgroundColor: "cardback",
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: ["column", "row"],
                       alignItems: "center",
                       gap: "20px",
-                      height: "350px",
+                      height: ["auto", "350px"],
                       overflow: "hidden",
+                      transition: "transform 0.2s ease-in-out",
+                      "&:hover": {
+                        transform: "translateY(-4px)",
+                      },
                     }}
                   >
                     {comp.poster?.file?.url && (
@@ -59,8 +63,8 @@ const ScheduleList = ({ competitions, states }) => {
                         src={comp.poster.file.url}
                         alt={`${comp.competitionName} Poster`}
                         sx={{
-                          width: "300px",
-                          height: "300px",
+                          width: ["100%", "300px"],
+                          height: ["auto", "300px"],
                           borderRadius: "5px",
                           flexShrink: 0,
                           objectFit: "cover",
