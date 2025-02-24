@@ -373,7 +373,15 @@ const Navbar = () => {
         {/* Center Column */}
         <Box sx={{ flex: '1 0 auto', textAlign: 'center' }}>
           {/* Mobile: Logo in center */}
-          <Box sx={{ display: ['block', 'none'] }}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              display: ['block', 'none'],
+            }}
+          >
             <NavLink
               as={Link}
               to="/"
@@ -401,6 +409,7 @@ const Navbar = () => {
               />
             </NavLink>
           </Box>
+
           {/* Desktop: Nav Links in center */}
           <Flex
             sx={{
