@@ -76,7 +76,6 @@ export default function App() {
                       loop
                       muted
                       playsInline
-                      controls
                       poster={
                         video.thumbnail?.file?.url
                           ? `https:${video.thumbnail.file.url}`
@@ -99,10 +98,15 @@ export default function App() {
               )}
           </Box>
 
+          {/* Welcome  section */}
+          <Heading as="h2" sx={{color:"black", fontSize: 7, textAlign: "center", mb: 2 }}>
+            Welcome to ICN Australia
+          </Heading>
+
           {/* About us section */}
           <Box sx={{
             "& h1": {
-              fontSize: 7,
+              fontSize: 5,
             }
           }}>
           <AboutUs/>
@@ -121,7 +125,7 @@ export default function App() {
               }}
             >
             <Heading
-              as="h1" sx={{ fontSize: 7, mb: 3 }}
+              as="h1" sx={{ fontSize: 6, mb: 3 }}
             >
               ICN Season A 2025
             </Heading>

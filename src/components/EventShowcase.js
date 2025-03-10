@@ -46,7 +46,7 @@ const EventShowcase = () => {
 
   return (
     <Box sx={{ textAlign: "center", my: 4 }}>
-      <Heading as="h2" sx={{color:"black", fontSize: 3, textAlign: "center", mb: 2 }}>
+      <Heading as="h2" sx={{color:"black", fontSize: 4, textAlign: "center", mb: 2 }}>
         Upcoming Competitions
       </Heading>
       <Box
@@ -89,7 +89,7 @@ const EventShowcase = () => {
                   }}
                 />
               )}
-              <Box sx={{ flex: 1, textAlign: "left", height: "100%" }}>
+              <Box sx={{ flex: 1, textAlign: "center", height: "100%" }}>
                 <Heading as="h3" sx={{color: "cardtext", fontSize: "22px", marginBottom: "16px" }}>
                   {event.competitionName}
                 </Heading>
