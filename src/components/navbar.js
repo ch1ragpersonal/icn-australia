@@ -455,6 +455,19 @@ const Navbar = () => {
             >
               Membership & Registration
             </NavLink>
+
+            <NavLink
+              sx={navLinkStyles}
+              as="a"
+              href="/store"
+              onClick={(e) => {
+                if (window.location.pathname === '/store') return;
+                e.preventDefault();
+                navigate('/store');
+              }}
+            >
+              Merchandise Store
+            </NavLink>
             <NavLink
               sx={navLinkStyles}
               as="a"
