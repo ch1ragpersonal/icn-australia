@@ -36,6 +36,7 @@
     "gatsby-source-shopify": "^9.0.0",
     "gatsby-transformer-sharp": "^5.14.0",
     "react": "^18.2.0",
+    "react-accessible-accordion": "^5.0.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.4.0",
     "react-toastify": "^11.0.3",

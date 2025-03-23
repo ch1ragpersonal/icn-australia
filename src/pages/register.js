@@ -4,7 +4,6 @@ import { graphql, useStaticQuery } from "gatsby";
 import { Box, Heading, Image, Grid } from "theme-ui";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Seo from '../components/seo';
-
 const RegistrationPage = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -55,6 +54,8 @@ const RegistrationPage = () => {
               <p>No image found.</p>
             )}
           </Box>
+
+
         </Grid>
       </Box>
     </>
