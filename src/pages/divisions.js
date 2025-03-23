@@ -1,7 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Box, Heading, Button, Flex } from "theme-ui";
+import { Heading } from "theme-ui";
 import Seo from '../components/seo';
+import DivisionCard from '../components/DivisionCard'; // Import the new component
 
 const DivisionsPage = () => {
   const data = useStaticQuery(graphql`
@@ -67,7 +68,7 @@ const DivisionsPage = () => {
           }
         `}
       </style>
-      
+
       <Heading as="h1" sx={{ mb: 4 }}>Competitor Divisions</Heading>
 
       {/* Male Divisions Section */}
@@ -82,22 +83,7 @@ const DivisionsPage = () => {
           }}
         >
           {maleDivisions.map(division => (
-            <div key={division.id} className="division-card">
-              <img
-                src={division.image.file.url}
-                alt={division.title}
-                style={{ width: '100%', height: 'auto' }}
-              />
-              <h3>{division.title}</h3>
-              <button
-                className="more-info-button"
-                onClick={() =>
-                  window.open(division.pdf.file.url, '_blank', 'noopener,noreferrer')
-                }
-              >
-                More Info
-              </button>
-            </div>
+            <DivisionCard key={division.id} division={division} /> // Use the DivisionCard component
           ))}
         </div>
       </section>
@@ -114,22 +100,7 @@ const DivisionsPage = () => {
           }}
         >
           {femaleDivisions.map(division => (
-            <div key={division.id} className="division-card">
-              <img
-                src={division.image.file.url}
-                alt={division.title}
-                style={{ width: '100%', height: 'auto' }}
-              />
-              <h3>{division.title}</h3>
-              <button
-                className="more-info-button"
-                onClick={() =>
-                  window.open(division.pdf.file.url, '_blank', 'noopener,noreferrer')
-                }
-              >
-                More Info
-              </button>
-            </div>
+            <DivisionCard key={division.id} division={division} /> // Use the DivisionCard component
           ))}
         </div>
       </section>
