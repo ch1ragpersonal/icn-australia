@@ -14,7 +14,7 @@ exports.handler = async (event) => {
         },
       ],
       success_url: "http://localhost:8888/success",
-      cancel_url: "http://localhost:8888/cancel",
+      cancel_url: "http://localhost:8888/store",
     });
 
     return {
