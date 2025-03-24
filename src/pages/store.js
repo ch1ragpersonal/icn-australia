@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import ProductCard from '../components/ProductCard'; // Import ProductCard
 
 const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
 
@@ -30,33 +31,45 @@ const StorePage = () => {
   return (
     <main style={{ padding: "2rem" }}>
       <h1>Merch Store</h1>
+      <style>
+        {`
+          .product-card {
+            border: 1px solid #ccc; /* Or your desired border style */
+            border-radius: 8px;
+            padding: 1rem;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+          }
+          .product-card:hover {
+            transform: scale(1.05);
+          }
+          .buy-now-button { /* Style for the "Buy Now" button */
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #004225; /* Example style, adjust as needed */
+            background-color: #fff;
+            color: #FFB000; /* Example style, adjust as needed */
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+          }
+          .buy-now-button:hover {
+            background-color: #004225;
+            color: white;
+          }
+        `}
+      </style>
       <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
         {products.length === 0 && <p>Loading products...</p>}
         {products.map((product) => (
-          <div
+          <ProductCard
             key={product.id}
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "1rem",
-              maxWidth: "300px",
-            }}
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              width="100%"
-              style={{ marginBottom: "1rem" }}
-            />
-            <h2>{product.name}</h2>
-            <p>
-              {(product.price / 100).toLocaleString("en-US", {
-                style: "currency",
-                currency: product.currency.toUpperCase(),
-              })}
-            </p>
-            <button onClick={() => handleCheckout(product)}>Buy Now</button>
-          </div>
+            product={product} // Pass product data
+            handleCheckout={handleCheckout} // Pass handleCheckout function
+          />
         ))}
       </div>
     </main>
