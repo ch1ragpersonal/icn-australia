@@ -1,4 +1,3 @@
-// In your component file, e.g. src/components/MyAccordion.js
 import React from "react";
 import {
   Accordion,
@@ -7,9 +6,9 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import "react-accessible-accordion/dist/fancy-example.css"; // Import the CSS library
 
-const Accordion = () => (
+const Accordion = () => {
+return (
   <Accordion>
     <AccordionItem>
       <AccordionItemHeading>
@@ -23,6 +22,7 @@ const Accordion = () => (
     </AccordionItem>
     {/* Add more AccordionItems as needed */}
   </Accordion>
-);
+    );
+};
 
 export default Accordion;
