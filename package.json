@@ -13,7 +13,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "build": "gatsby build --prefix-paths",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "update-env": "node scripts/update-env-example.js"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.0.1",
@@ -22,6 +23,7 @@
     "@heroui/system": "^2.4.7",
     "@heroui/theme": "^2.4.6",
     "@stripe/stripe-js": "^6.1.0",
+    "chalk": "^5.4.1",
     "firebase": "^11.1.0",
     "framer-motion": "^12.4.0",
     "gatsby": "^5.14.1",
