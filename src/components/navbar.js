@@ -246,6 +246,19 @@ const MobileMenu = ({ onClose }) => {
           <NavLink
             sx={navLinkStyles}
             as="a"
+            href="/store"
+            onClick={(e) => {
+              if (window.location.pathname === '/store') return;
+              e.preventDefault();
+              navigate('/store');
+              onClose();
+            }}
+          >
+            Merchandise Store
+          </NavLink>
+          <NavLink
+            sx={navLinkStyles}
+            as="a"
             href="/divisions"
             onClick={(e) => {
               if (window.location.pathname === '/divisions') return;
