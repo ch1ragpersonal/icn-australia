@@ -13,8 +13,8 @@ exports.handler = async (event) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:8888/success",
-      cancel_url: "http://localhost:8888/store",
+      success_url: "https://icnaustralia.netlify.app/success",
+      cancel_url: "https://icnaustralia.netlify.app/store",
     });
 
     return {
