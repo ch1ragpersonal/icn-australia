@@ -17,11 +17,11 @@ const StorePage = () => {
 
   const handleCheckout = async (product) => {
     const stripe = await stripePromise;
-
     const response = await fetch("/.netlify/functions/create-checkout", {
       method: "POST",
       body: JSON.stringify(product),
     });
+    console.log('test 3')
 
     const { id } = await response.json();
 
