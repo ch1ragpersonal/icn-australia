@@ -2,6 +2,8 @@ export default {
   colors: {
     text: '#000411',        // Corrected hex code (6 digits or 3 digits)
     background: '#fff',
+    //text: '#FFD700',
+    //background: '#000',
     primary: '#004225',
     buttonback: '#004225',
     whiteBack: '#fff',
