@@ -1,12 +1,13 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import ProductCard from '../components/ProductCard'; // Import ProductCard
+import ProductCard from "../components/ProductCard";
 
 const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
 
 const StorePage = () => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState({});
 
   useEffect(() => {
     fetch("/.netlify/functions/get-products")
@@ -15,16 +16,30 @@ const StorePage = () => {
       .catch((err) => console.error("Error loading products", err));
   }, []);
 
-  const handleCheckout = async (product) => {
+  const updateCart = (product, quantity) => {
+    setCart((prev) => ({
+      ...prev,
+      [product.id]: {
+        ...product,
+        quantity,
+      },
+    }));
+  };
+
+  const handleCheckout = async () => {
     const stripe = await stripePromise;
+    const lineItems = Object.values(cart).map((item) => ({
+      price: item.id,
+      quantity: item.quantity,
+    }));
+
     const response = await fetch("/.netlify/functions/create-checkout", {
       method: "POST",
-      body: JSON.stringify(product),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lineItems }),
     });
-    console.log('test 3')
 
     const { id } = await response.json();
-
     await stripe.redirectToCheckout({ sessionId: id });
   };
 
@@ -34,7 +49,7 @@ const StorePage = () => {
       <style>
         {`
           .product-card {
-            border: 1px solid #ccc; /* Or your desired border style */
+            border: 1px solid #ccc;
             border-radius: 8px;
             padding: 1rem;
             max-width: 300px;
@@ -44,14 +59,14 @@ const StorePage = () => {
           .product-card:hover {
             transform: scale(1.05);
           }
-          .buy-now-button { /* Style for the "Buy Now" button */
+          .buy-now-button {
             margin-top: 1rem;
             padding: 0.5rem 1rem;
             font-size: 16px;
             border-radius: 8px;
-            border: 2px solid #004225; /* Example style, adjust as needed */
+            border: 2px solid #004225;
             background-color: #fff;
-            color: #FFB000; /* Example style, adjust as needed */
+            color: #FFB000;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -62,16 +77,25 @@ const StorePage = () => {
           }
         `}
       </style>
+
       <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
         {products.length === 0 && <p>Loading products...</p>}
         {products.map((product) => (
           <ProductCard
             key={product.id}
-            product={product} // Pass product data
-            handleCheckout={handleCheckout} // Pass handleCheckout function
+            product={product}
+            updateCart={updateCart}
           />
         ))}
       </div>
+
+      {Object.keys(cart).length > 0 && (
+        <div style={{ marginTop: "2rem" }}>
+          <button className="buy-now-button" onClick={handleCheckout}>
+            Checkout
+          </button>
+        </div>
+      )}
     </main>
   );
 };
