@@ -123,7 +123,7 @@ const StorePage = () => {
           throw new Error("Received invalid session ID from backend.");
       }
       // console.log("Redirecting to Stripe Checkout with Session ID:", sessionId); // Debugging
-      //await stripe.redirectToCheckout({ sessionId });
+      await stripe.redirectToCheckout({ sessionId });
 
     } catch (error) {
       console.error("Checkout Error:", error);
