@@ -1,0 +1,65 @@
+.president-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+  }
+  
+  .president-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+  }
+  
+  .president-photo {
+    height: 450px !important;
+    object-fit: cover !important;
+  }
+  
+  .card-content {
+    padding: 2rem;
+    flex: 1;
+    /* overflow-y: auto; */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .president-name {
+    margin: 0.5rem 0;
+  }
+  
+  .president-title {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  
+  .president-description {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+    font-size:x-large;
+  }
+  
+  .email-link, .social-link {
+    text-decoration: none;
+    color: #007acc;
+    font-weight: bold;
+  }
+  
+  .email-link:hover, .social-link:hover {
+    text-decoration: underline;
+  }
+  
