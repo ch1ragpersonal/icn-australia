@@ -30,5 +30,14 @@
   overflow-y: auto;
 }
 
+.swiper-button-next {
+  right: -2.5px !important;
+
+}
+
+.swiper-button-prev {
+  left: -2.5px !important;
+}
+
 /* (Optional) if pages accidentally re‑include .presidents-grid, it’s no longer used: */
 /* .presidents-grid { … } */
