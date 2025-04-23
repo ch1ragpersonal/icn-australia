@@ -163,7 +163,7 @@ const StorePage = () => {
         backgroundColor: "#f4f4f4",
       }}
     >
-      {/* Header Section (Tabs + Search) */}
+      {/* Header Section (Tabs + Search + Checkout) */}
       <div
         style={{
           padding: "1rem",
@@ -172,7 +172,9 @@ const StorePage = () => {
           flexShrink: 0, // Prevent header from shrinking
         }}
       >
-        <h1 style={{ marginTop: 0, marginBottom: "1rem", textAlign: 'center' }}>Merch Store</h1>
+        <h1 style={{ marginTop: 0, marginBottom: "1rem", textAlign: "center" }}>
+          Official Merchandise
+        </h1>
         <div
           style={{
             display: "flex",
@@ -186,11 +188,10 @@ const StorePage = () => {
             <button
               key={cat}
               onClick={() => {
-                  setActiveCategory(cat);
-                  // Optionally clear search when changing category?
-                  // if (cat !== 'All') setSearchQuery('');
-                }
-              }
+                setActiveCategory(cat);
+                // Optionally clear search when changing category?
+                // if (cat !== 'All') setSearchQuery('');
+              }}
               style={{
                 padding: "8px 16px",
                 borderRadius: "6px",
@@ -204,48 +205,68 @@ const StorePage = () => {
               {cat}
             </button>
           ))}
-
-          {/* Search Bar - Always visible but could be styled differently based on category */}
+  
+          {/* Push checkout + search to the right */}
+          {totalItemsInCart > 0 && (
+            <button
+              onClick={handleCheckout}
+              style={{
+                marginLeft: "auto",
+                padding: "8px 12px",
+                fontSize: "14px",
+                border: "1px solid #ccc",
+                borderRadius: "6px",
+                backgroundColor: "#fff",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              Checkout ({totalItemsInCart} item
+              {totalItemsInCart !== 1 ? "s" : ""})
+            </button>
+          )}
+  
+          {/* Search Bar */}
           <input
             type="text"
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
-              marginLeft: "auto", // Pushes search bar to the right
+              marginLeft: totalItemsInCart !== 0 ? "0" : "auto",
               padding: "8px 12px",
               fontSize: "14px",
               border: "1px solid #ccc",
               borderRadius: "6px",
-              minWidth: '180px', // Ensure it doesn't get too small
-              maxWidth: '300px', // Limit maximum width
+              minWidth: "180px", // Ensure it doesn't get too small
+              maxWidth: "300px", // Limit maximum width
             }}
           />
         </div>
       </div>
-
+  
       {/* Scrollable Product Grid Area */}
       <div
         style={{
-          flex: "1 1 auto", // Allow this area to grow and shrink, taking available space
+          flex: "1 1 auto", // Allow this area to grow and shrink
           overflowY: "auto", // Enable vertical scrolling
           padding: "1rem",
         }}
       >
         {isLoading ? (
-          <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading products...</p>
+          <p style={{ textAlign: "center", marginTop: "2rem" }}>
+            Loading products...
+          </p>
         ) : filteredProducts.length > 0 ? (
           <div
             style={{
               display: "grid",
-              // Responsive grid columns: min 220px wide, fill available space
               gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
               gap: "1rem",
             }}
           >
             {filteredProducts.map((product) => (
               <ProductCard
-                // Assuming product.id is the unique Price ID now
                 key={product.id}
                 product={product}
                 updateCart={updateCart}
@@ -253,46 +274,16 @@ const StorePage = () => {
             ))}
           </div>
         ) : (
-           <p style={{ textAlign: 'center', marginTop: '2rem' }}>No products found matching your criteria.</p>
+          <p style={{ textAlign: "center", marginTop: "2rem" }}>
+            No products found matching your criteria.
+          </p>
         )}
       </div>
-
+  
       {/* Fixed Bottom Section (Checkout Area) */}
-      {totalItemsInCart > 0 && (
-        <div
-          style={{
-            // Removed marginTop: 'auto' as flexbox handles positioning
-            padding: "1rem",
-            borderTop: "1px solid #ddd",
-            textAlign: "center",
-            backgroundColor: "#f9f9f9",
-            flexShrink: 0, // Prevent footer from shrinking
-          }}
-        >
-          <button
-            onClick={handleCheckout}
-            style={{
-              padding: "12px 24px",
-              fontSize: "16px",
-              backgroundColor: "#f9f9f9", // Start with background color
-              color: "#FFB000",            // Start with text color
-              border: "2px solid #004225", // Border color
-              borderRadius: "8px",
-              cursor: "pointer",
-              fontWeight: 'bold',
-              transition: 'background-color 0.3s, color 0.3s', // Smooth transition
-            }}
-            // Inline hover effects using JS event handlers
-            onMouseOver={(e) => { e.target.style.backgroundColor = '#004225'; e.target.style.color = 'white'; }}
-            onMouseOut={(e) => { e.target.style.backgroundColor = '#f9f9f9'; e.target.style.color = '#FFB000'; }}
-          >
-            Checkout ({totalItemsInCart} item{totalItemsInCart !== 1 ? 's' : ''})
-          </button>
-        </div>
-      )}
-
+  
       {/* --- Keep existing <style> tag --- */}
-       <style>
+      <style>
         {`
           /* Using classes for better maintainability than pure inline styles */
           .product-card {
@@ -353,7 +344,7 @@ const StorePage = () => {
             background-color: #004225; /* Match hover state of checkout button */
             color: white;           /* Match hover state of checkout button */
           }
-
+  
           /* Optional: Custom Scrollbar Styles for Webkit browsers */
            div[style*="overflowY: auto"]::-webkit-scrollbar { width: 8px; }
            div[style*="overflowY: auto"]::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
@@ -363,6 +354,6 @@ const StorePage = () => {
       </style>
     </div>
   );
-};
-
+  
+}
 export default StorePage;
