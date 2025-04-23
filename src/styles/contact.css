@@ -1,0 +1,43 @@
+/* src/styles/contact.css */
+
+/* 1) Make every .swiper-slide a flex container that stretches its child */
+/* 1) Reset the slide’s forced 100% height so it grows only as tall as its content */
+.swiper-wrapper .swiper-slide {
+  height: auto !important;
+}
+
+/* 2) Make the wrapper stretch all slides to the wrapper’s height (which is now the tallest one) */
+.swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.swiper-slide {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+/* 2) Your card already has .president-card, so simply ensure it fills 100% */
+.president-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 3) Let the inner content scroll if it overflows */
+.card-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.swiper-button-next {
+  right: -2.5px !important;
+
+}
+
+.swiper-button-prev {
+  left: -2.5px !important;
+}
+
+/* (Optional) if pages accidentally re‑include .presidents-grid, it’s no longer used: */
+/* .presidents-grid { … } */

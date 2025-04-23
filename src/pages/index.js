@@ -8,6 +8,7 @@ import RecentLivestreams from "../components/RecentLivestreams";
 import RecentResults from "../components/RecentResults";
 import { Box, Container, Heading, Text, Image } from "theme-ui";
 import AboutUs from "../components/AboutUs"
+
 export default function App() {
   const data = useStaticQuery(graphql`
     query {
