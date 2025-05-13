@@ -47,13 +47,13 @@ const ContactPage = () => {
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={20}
-          slidesPerView={3}
+          slidesPerView={4}
           navigation
           pagination={{ clickable: true }}
           breakpoints={{
             320:  { slidesPerView: 1 },
             640:  { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
           }}
           style={{ padding: '1rem 0'}}
         >
