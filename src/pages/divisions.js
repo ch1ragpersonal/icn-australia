@@ -95,12 +95,12 @@ const DivisionsPage = () => {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '1rem',
+            gap: '3.5rem',
             justifyContent: 'space-evenly'
           }}
         >
           {femaleDivisions.map(division => (
-            <DivisionCard key={division.id} division={division} /> // Use the DivisionCard component
+              <DivisionCard key={division.id} division={division} /> // Use the DivisionCard component
           ))}
         </div>
       </section>
