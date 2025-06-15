@@ -128,7 +128,7 @@ export default function App() {
             <Heading
               as="h1" sx={{ fontSize: 6, mb: 3 }}
             >
-              ICN Season A 2025
+              ICN Season B 2025
             </Heading>
             <EventShowcase />
           </Box>

@@ -59,11 +59,18 @@ const CompetitionsPage = () => {
   `);
 
   const states = data.allContentfulState.nodes;
-  const competitions = data.allContentfulCompetition.nodes;
+  const allCompetitions = data.allContentfulCompetition.nodes;
   const location = useSafeLocation(); // Safe way to handle useLocation in Gatsby
 
   const [selectedState, setSelectedState] = useState(null);
   const [viewMode, setViewMode] = useState("state");
+
+  // Filter out past competitions (only show future/current competitions)
+  const today = new Date();
+  const competitions = allCompetitions.filter((comp) => {
+    if (!comp.date) return true; // Keep competitions without dates
+    return new Date(comp.date) >= today;
+  });
 
   // Read the 'view' query parameter safely
   useEffect(() => {

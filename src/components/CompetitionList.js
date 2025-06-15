@@ -14,6 +14,13 @@ const CompetitionList = ({ state, competitions, onBack }) => {
     setIsClient(true);
   }, []);
 
+  // Sort competitions by date (handle null dates)
+  const sortedCompetitions = [...competitions].sort((a, b) => {
+    if (!a.date) return 1; // Push items without a date to the end
+    if (!b.date) return -1;
+    return new Date(a.date) - new Date(b.date);
+  });
+
   return (
     <Suspense fallback={<div>Loading animations...</div>}>
       {isClient ? (
@@ -46,34 +53,40 @@ const CompetitionList = ({ state, competitions, onBack }) => {
             Back to Region Selection
           </Button>
 
-          {competitions.length > 0 ? (
+          {sortedCompetitions.length > 0 ? (
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: ["1fr", "repeat(2, 1fr)"],
-                gap: "20px",
+                gap: "40px",
+                justifyItems: "center",
+                width: "100%",
+                px: [2, 4],
               }}
             >
-              {competitions.map((comp) => {
+              {sortedCompetitions.map((comp) => {
                 const cardContent = (
                   <Card
                     as={isClient ? MotionDiv : "div"} // Only use Framer Motion on client
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     sx={{
-                      padding: "20px",
-                      boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-                      borderRadius: "10px",
+                      padding: "30px",
+                      boxShadow: "0px 6px 15px rgba(0,0,0,0.25)",
+                      borderRadius: "15px",
                       backgroundColor: "cardback",
                       display: "flex",
-                      flexDirection: ["column", "row"],
+                      flexDirection: "column",
                       alignItems: "center",
-                      gap: "20px",
-                      height: ["auto", "350px"],
-                      overflow: "hidden",
+                      gap: "25px",
+                      width: ["95%", "100%"],
+                      maxWidth: ["95%", "500px"],
+                      minHeight: "auto",
+                      mx: "auto",
                       transition: "transform 0.2s ease-in-out",
                       "&:hover": {
-                        transform: "translateY(-4px)",
+                        transform: "translateY(-6px)",
+                        boxShadow: "0px 8px 20px rgba(0,0,0,0.3)",
                       },
                     }}
                   >
@@ -82,28 +95,33 @@ const CompetitionList = ({ state, competitions, onBack }) => {
                         src={comp.poster.file.url}
                         alt={`${comp.competitionName} Poster`}
                         sx={{
-                          width: ["100%", "300px"],
-                          height: ["auto", "300px"],
-                          borderRadius: "5px",
-                          flexShrink: 0,
-                          objectFit: "cover",
+                          width: "100%",
+                          maxWidth: "450px",
+                          height: "auto",
+                          borderRadius: "12px",
+                          objectFit: "contain",
+                          boxShadow: "0px 4px 12px rgba(0,0,0,0.15)",
                         }}
                       />
                     )}
-                    <Box sx={{ flex: 1, textAlign: "left", height: "100%" }}>
-                      <Heading as="h3" sx={{ fontSize: "22px", marginBottom: "16px" }}>
+                    <Box sx={{ textAlign: "center", width: "100%", mt: 2 }}>
+                      <Heading as="h3" sx={{ fontSize: "26px", marginBottom: "25px", color: "cardtext", lineHeight: 1.3 }}>
                         {comp.competitionName}
                       </Heading>
                       <Box
                         sx={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "8px",
-                          marginBottom: "8px",
+                          justifyContent: "center",
+                          gap: "15px",
+                          marginBottom: "15px",
+                          padding: "10px",
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          borderRadius: "8px",
                         }}
                       >
-                        <Text sx={{ fontSize: "18px" }}>📍</Text>
-                        <Text sx={{ fontSize: "16px", color: "primary", fontWeight: "bold" }}>
+                        <Text sx={{ fontSize: "22px" }}>📍</Text>
+                        <Text sx={{ fontSize: "19px", color: "primary", fontWeight: "bold" }}>
                           {comp.location || "TBA"}
                         </Text>
                       </Box>
@@ -111,12 +129,15 @@ const CompetitionList = ({ state, competitions, onBack }) => {
                         sx={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "8px",
-                          marginBottom: "16px",
+                          justifyContent: "center",
+                          gap: "15px",
+                          padding: "10px",
+                          backgroundColor: "rgba(255,255,255,0.1)",
+                          borderRadius: "8px",
                         }}
                       >
-                        <Text sx={{ fontSize: "18px" }}>📅</Text>
-                        <Text sx={{ fontSize: "16px", color: "primary", fontWeight: "bold" }}>
+                        <Text sx={{ fontSize: "22px" }}>📅</Text>
+                        <Text sx={{ fontSize: "19px", color: "primary", fontWeight: "bold" }}>
                           {comp.date || "TBA"}
                         </Text>
                       </Box>
