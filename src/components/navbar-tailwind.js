@@ -1,222 +1,156 @@
-import React, { useEffect, useRef, useState } from "react";
+// Navbar.js
+import React, { useState } from "react";
+import { Link } from "gatsby";
 
 /**
- * XPInspiredNavbarTW (Tailwind version)
- * - Desktop: hover/focus shows dropdown; animated "drawn circle" ring
- * - Mobile: hamburger + collapsible submenus
- * - Accessible: keyboard focus opens menus, Esc closes, aria-* roles
+ * Navbar
+ * - Gatsby.js + Tailwind CSS
+ * - Right-aligned menu with a full-width "Divisions" mega menu on hover.
+ * - EXTRA: Hovering a top-level menu item draws an animated circle around the label.
  *
- * Usage (Gatsby):
- * 1) Ensure Tailwind is set up (gatsby-plugin-postcss + tailwind.config.js)
- * 2) Place this file at src/components/XPInspiredNavbarTW.jsx
- * 3) Import into your Layout and render above <main />
+ * Hover behaviour:
+ * - onMouseEnter on the "Divisions" link => show mega menu
+ * - onMouseLeave from the combined wrapper (which contains BOTH the link and the panel) => hide mega menu
+ *   This prevents flicker when moving the cursor from the link down into the panel.
  */
+const Navbar = () => {
+  const [divisionsOpen, setDivisionsOpen] = useState(false);
 
-const DEFAULT_ITEMS = [
-  {
-    label: "Le parc",
-    href: "/xperience-park/",
-    submenu: [
-      { label: "Tarifs & horaires", href: "/xperience-park/tarifs-horaires/" },
-      { label: "Infos pratiques", href: "/xperience-park/infos-pratiques/" },
-      { label: "Règlement", href: "/xperience-park/reglement/" },
-    ],
-  },
-  {
-    label: "Activités",
-    href: "/activites/",
-    submenu: [
-      { label: "Trampoline", href: "/activites/trampoline/" },
-      { label: "Ninja Warrior", href: "/activites/ninja/" },
-      { label: "Arcade & Hado", href: "/activites/arcade/" },
-    ],
-  },
-  {
-    label: "Anniversaires",
-    href: "/anniversaires/",
-    submenu: [
-      { label: "Formules", href: "/anniversaires/formules/" },
-      { label: "Réserver", href: "/anniversaires/reserver/" },
-    ],
-  },
-  {
-    label: "Groupes",
-    href: "/groupes/",
-    submenu: [
-      { label: "Scolaires", href: "/groupes/scolaires/" },
-      { label: "Entreprises", href: "/groupes/entreprises/" },
-    ],
-  },
-  { label: "Contact", href: "/contact/" },
-];
-
-export default function XPInspiredNavbarTW({ items = DEFAULT_ITEMS, logoText = "ICN AUSTRALIA" }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const navRef = useRef(null);
-
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape") setMobileOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    function onDocClick(e) {
-      if (!navRef.current) return;
-      if (!navRef.current.contains(e.target)) setMobileOpen(false);
-    }
-    document.addEventListener("click", onDocClick);
-    return () => document.removeEventListener("click", onDocClick);
-  }, []);
+  // Reusable label + animated circle wrapper
+  const DecoratedLabel = ({ children }) => (
+    <span className="relative grid place-items-center">
+      <span className="relative z-10">{children}</span>
+      {/* Drawn circle */}
+      <svg
+        viewBox="0 0 40 40"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[3.2em] w-[8em] -translate-x-1/2 -translate-y-1/2 scale-90 opacity-30 transition-transform group-hover:scale-100 group-hover:opacity-95 group-focus-within:opacity-95"
+      >
+        <circle
+          cx="20"
+          cy="20"
+          r="17.5"
+          className="fill-none stroke-[#f7e65c] stroke-[2.25] [stroke-linecap:round] [stroke-dasharray:140] [stroke-dashoffset:140] transition-[stroke-dashoffset] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-focus-within:[stroke-dashoffset:0]"
+        />
+      </svg>
+    </span>
+  );
 
   return (
-    <header ref={navRef} className="sticky top-0 z-50 border-b border-white/10 bg-[#0b0b0f]/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
-        {/* Logo */}
-        <a href="/" className="font-extrabold tracking-wide text-white/95 hover:text-white text-base sm:text-lg">
-          {logoText}
-        </a>
+    // Wrapper is relative so the mega menu can be absolutely positioned against it
+    <div
+      className="relative"
+      onMouseLeave={() => setDivisionsOpen(false)} // Hide when cursor leaves both link + panel area
+    >
+      {/* Main navbar */}
+      <nav className="w-full bg-gray-800 px-8 py-4">
+        <div className="max-w-7xl mx-auto flex justify-end items-center gap-6">
+          <Link
+            to="/"
+            className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+          >
+            <DecoratedLabel>Home</DecoratedLabel>
+          </Link>
 
-        {/* Desktop menu */}
-        <ul role="menubar" className="hidden items-center gap-3 lg:flex">
-          {items.map((item, idx) => (
-            <DesktopItem key={idx} item={item} />
-          ))}
-        </ul>
-
-        {/* Burger */}
-        <button
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((v) => !v)}
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-white/90 hover:bg-white/5"
-        >
-          <span className="sr-only">Open menu</span>
-          <div className="flex flex-col gap-1.5">
-            <span className={`h-0.5 w-6 bg-current transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}></span>
-            <span className={`h-0.5 w-6 bg-current transition-opacity ${mobileOpen ? "opacity-0" : "opacity-100"}`}></span>
-            <span className={`h-0.5 w-6 bg-current transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}></span>
+          {/* Divisions trigger: opens mega menu on hover */}
+          <div
+            className="relative"
+            onMouseEnter={() => setDivisionsOpen(true)}
+          >
+            <Link
+              to="/divisions"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+            >
+              <DecoratedLabel>Divisions</DecoratedLabel>
+            </Link>
           </div>
-        </button>
+
+          <Link
+            to="/competitions"
+            className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+          >
+            <DecoratedLabel>Competitions</DecoratedLabel>
+          </Link>
+
+          <Link
+            to="/contact"
+            className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+          >
+            <DecoratedLabel>Contact Us</DecoratedLabel>
+          </Link>
+
+          <Link
+            to="/about"
+            className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+          >
+            <DecoratedLabel>About Us</DecoratedLabel>
+          </Link>
+        </div>
       </nav>
 
-      {/* Mobile panel */}
-      <div className={`lg:hidden overflow-hidden transition-[grid-template-rows] ${mobileOpen ? "grid grid-rows-[1fr]" : "grid grid-rows-[0fr]"}`}>
-        <ul className="min-h-0 space-y-1 px-2 pb-2">
-          {items.map((item, idx) => (
-            <MobileRow key={idx} item={item} />
-          ))}
-        </ul>
-      </div>
-    </header>
-  );
-}
-
-function DesktopItem({ item }) {
-  const hasSub = Array.isArray(item.submenu) && item.submenu.length > 0;
-  const id = `dd-${item.label.replace(/\s+/g, "-").toLowerCase()}`;
-  return (
-    <li role="none" className="group relative">
-      <a
-        role="menuitem"
-        href={item.href}
-        aria-haspopup={hasSub || undefined}
-        aria-controls={hasSub ? id : undefined}
-        className="relative inline-block px-2 py-2 font-semibold text-white/90 outline-none transition-colors hover:text-white focus-visible:text-white"
-      >
-        <span className="relative grid place-items-center">
-          <span className="relative z-10">{item.label}</span>
-          {/* Drawn circle */}
-          <svg viewBox="0 0 40 40" className="pointer-events-none absolute left-1/2 top-1/2 h-[2.1em] w-[2.1em] -translate-x-1/2 -translate-y-1/2 scale-90 opacity-30 transition-transform group-hover:scale-100 group-hover:opacity-95 group-focus-within:opacity-95">
-            <circle
-              cx="20"
-              cy="20"
-              r="17.5"
-              className="fill-none stroke-[#f7e65c] stroke-[2.25] [stroke-linecap:round] [stroke-dasharray:110] [stroke-dashoffset:110] transition-[stroke-dashoffset] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-focus-within:[stroke-dashoffset:0]"
-            />
-          </svg>
-        </span>
-      </a>
-
-      {/* Dropdown */}
-      {hasSub && (
+      {/* Mega menu: full-width, sits directly underneath the navbar */}
+      {divisionsOpen && (
         <div
-          id={id}
-          role="menu"
-          aria-label={`${item.label} submenu`}
-          className="pointer-events-none absolute left-1/2 top-full z-40 mt-3 min-w-[240px] -translate-x-1/2 translate-y-2 rounded-2xl border border-white/10 bg-slate-950/95 p-2 opacity-0 shadow-2xl backdrop-blur transition-all duration-150 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100"
+          className="absolute left-0 right-0 top-full z-50 bg-gray-700 shadow-lg"
+          onMouseEnter={() => setDivisionsOpen(true)} // Keep open while hovering the panel
         >
-          <div className="grid gap-1">
-            {item.submenu.map((s, i) => (
-              <a
-                key={i}
-                role="menuitem"
-                href={s.href}
-                className="rounded-lg px-3 py-2 font-semibold text-white/90 outline-none transition-colors hover:bg-yellow-200/10 hover:text-yellow-200 focus-visible:bg-yellow-200/10 focus-visible:text-yellow-200"
-              >
-                {s.label}
-              </a>
-            ))}
+          <div className="max-w-7xl mx-auto p-8">
+            {/* Four items in a row, evenly spaced */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 justify-items-center">
+              {/* Bodybuilding */}
+              <Link to="/divisions/bodybuilding" className="group text-center">
+                <img
+                  src="https://placehold.co/100x100"
+                  alt="Bodybuilding"
+                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
+                />
+                <span className="text-white group-hover:text-blue-300 transition-colors">
+                  Bodybuilding
+                </span>
+              </Link>
+
+              {/* Classic */}
+              <Link to="/divisions/classic" className="group text-center">
+                <img
+                  src="https://placehold.co/100x100"
+                  alt="Classic"
+                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
+                />
+                <span className="text-white group-hover:text-blue-300 transition-colors">
+                  Classic
+                </span>
+              </Link>
+
+              {/* Bikini */}
+              <Link to="/divisions/bikini" className="group text-center">
+                <img
+                  src="https://placehold.co/100x100"
+                  alt="Bikini"
+                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
+                />
+                <span className="text-white group-hover:text-blue-300 transition-colors">
+                  Bikini
+                </span>
+              </Link>
+
+              {/* Sports Model */}
+              <Link to="/divisions/sports-model" className="group text-center">
+                <img
+                  src="https://placehold.co/100x100"
+                  alt="Sports Model"
+                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
+                />
+                <span className="text-white group-hover:text-blue-300 transition-colors">
+                  Sports Model
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       )}
-    </li>
+    </div>
   );
-}
+};
 
-function MobileRow({ item }) {
-  const [open, setOpen] = useState(false);
-  const hasSub = Array.isArray(item.submenu) && item.submenu.length > 0;
-
-  if (!hasSub) {
-    return (
-      <li>
-        <a
-          href={item.href}
-          className="block rounded-xl px-4 py-3 font-semibold text-white/90 outline-none transition-colors hover:bg-white/5 focus-visible:bg-white/5"
-        >
-          {item.label}
-        </a>
-      </li>
-    );
-  }
-
-  return (
-    <li>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="flex w-full items-center justify-between gap-3 rounded-xl px-4 py-3 font-bold text-white/90 outline-none transition-colors hover:bg-white/5 focus-visible:bg-white/5"
-      >
-        <span>{item.label}</span>
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
-          aria-hidden="true"
-        >
-          <path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      </button>
-      <div className={`grid transition-[grid-template-rows] ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-        <div className="min-h-0">
-          <ul className="space-y-1 pb-2">
-            {item.submenu.map((s, i) => (
-              <li key={i}>
-                <a
-                  href={s.href}
-                  className="ml-2 block rounded-lg px-4 py-2 font-semibold text-white/90 outline-none transition-colors hover:bg-white/5 focus-visible:bg-white/5"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </li>
-  );
-}
+export default Navbar;
