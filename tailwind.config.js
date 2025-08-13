@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#3490dc',
-        secondary: '#ffed4a',
+        primary: '#f50538',
+        secondary: '#000000',
         danger: '#e3342f',
         // Legacy ICN Australia colors
         'icn-green': '#004225',
