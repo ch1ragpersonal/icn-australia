@@ -5,6 +5,7 @@ import Login from '../components/Login';
 import Navbar from './navbar-tailwind';
 import Seo from './seo';
 import SiteMap from './SiteMap';
+import Footer from './Footer';
 
 const Layout = ({ children, title, description }) => (
   <Box>
@@ -25,10 +26,7 @@ const Layout = ({ children, title, description }) => (
 
     <main>{children}</main>
 
-    <footer sx={{ bg: 'muted', padding: '1rem', textAlign: 'center', backgroundColor: 'buttonback', color:'buttontext' }}>
-      <SiteMap/>
-      © 2025 ICN Australia
-    </footer>
+    <Footer/>
   </Box>
 );
 
