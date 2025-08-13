@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "gatsby";
 import logo from "../images/logo.png"; // <-- update to your actual logo path
+import memberPortal from "../images/member_portal.png";
 
 /**
  * Responsive Navbar (Gatsby + Tailwind)
@@ -91,6 +92,21 @@ const Navbar = () => {
             >
               <DecoratedLabel>About Us</DecoratedLabel>
             </Link>
+
+            {/* Member Portal (right-aligned image button) */}
+            <a
+              href="https://members.icnaustralia.com.au"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block shrink-0"
+              aria-label="Open Member Portal in a new tab"
+            >
+              <img
+                src={memberPortal}
+                alt="Member's Portal"
+                className="w-[12vmin] max-w-[120px] h-auto rounded-[2vmin] filter grayscale brightness-0 transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
+              />
+            </a>
           </div>
 
           {/* RIGHT: Mobile hamburger */}

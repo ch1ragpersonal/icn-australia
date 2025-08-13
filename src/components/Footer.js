@@ -1,5 +1,6 @@
 // src/components/Footer.js
 import React from "react";
+import Counter from "./Counter";
 
 const Footer = () => {
   return (
@@ -13,6 +14,7 @@ const Footer = () => {
             friends, or colleagues! Choose your activity to have fun 7 days a
             week, even on Sundays, just 5 minutes from Mulhouse!
           </h2>
+          <Counter target={1972} duration={1400} stagger={70} />
         </div>
         {/* Box 2 */}
         <div className="bg-gray-100 p-8 md:p-12">
