@@ -1,141 +1,101 @@
-/** @jsxImportSource theme-ui */
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import Seo from "../components/seo";
-import ImageSlider from "../components/ImageSlider";
 import EventShowcase from "../components/EventShowcase";
-import RecentLivestreams from "../components/RecentLivestreams";
-import RecentResults from "../components/RecentResults";
-import { Box, Container, Heading, Text, Image } from "theme-ui";
-import AboutUs from "../components/AboutUs"
+
+function FullBleed({ children, className = "" }) {
+  return (
+    <div
+      className={`w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function App() {
-  const data = useStaticQuery(graphql`
-    query {
-      allContentfulVideo {
-        nodes {
-          id
-          title
-          description {
-            description
-          }
-          thumbnail {
-            file {
-              url
-            }
-          }
-          video {
-            file {
-              url
-            }
-          }
-          completed
-          startTime
-          link
-        }
-      }
-    }
-  `);
-
   return (
     <>
       <Seo title="Home" description="Welcome to ICN Australia" />
-      
-      <Box
-        sx={{
-          background: "F5F5DC",
-          minHeight: "100vh",
-        }}
-      >
-        <Container
-          sx={{
-            maxWidth: "1200px",
-            mx: "auto",
-            pt: 0,
-            pb: [4, 5],
-            px: [3, 4],
-          }}
+
+      {/* Hero */}
+      <FullBleed className="min-h-[70vh] sm:min-h-[80vh]">
+        <div
+          className="min-h-[70vh] sm:min-h-[80vh] bg-cover bg-center flex items-end"
+          style={{ backgroundImage: "url(/images/placeholder-hero.jpg)" }}
         >
-          {/* AutoPlay Video Section - Filtered by Title */}
-          <Box sx={{
-                  mb: 5,
-                  width: '100vw',
-                  position: 'relative',
-                  left: '50%',
-                  ml: '-50vw',
-                  }}
-            >
-            {data.allContentfulVideo.nodes
-              .filter(({ title }) => "ICN ACT Video" === title)
-              .map((video) =>
-                video.video?.file?.url ? (
-                  <Box key={video.id} sx={{ mb: 4 }}>
-                    <video
-                      width="100%"
-                      height="auto"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      poster={
-                        video.thumbnail?.file?.url
-                          ? `https:${video.thumbnail.file.url}`
-                          : "/images/default-placeholder.webp"
-                      }
-                    >
-                      <source
-                        src={`https:${video.video.file.url}`}
-                        type="video/mp4"
-                      />
-                      Your browser does not support the video element.
-                    </video>
-                    {video.description && (
-                      <Text sx={{ mt: 2 }}>
-                        {video.description.description}
-                      </Text>
-                    )}
-                  </Box>
-                ) : null
-              )}
-          </Box>
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <h1 className="text-a text-6xl sm:text-7xl font-extrabold drop-shadow-md mb-3">
+              ICN is The Home of Australia’s Natural Bodybuilding Elite
+            </h1>
+            <p className="text-a text-lg sm:text-xl max-w-3xl drop-shadow">
+              Compete at The Pinnacle of Natural Physique Competition.
+            </p>
+          </div>
+        </div>
+      </FullBleed>
 
-          {/* Welcome  section */}
-          <Heading as="h2" sx={{color:"black", fontSize: 7, textAlign: "center", mb: 2 }}>
-            Welcome to ICN Australia
-          </Heading>
+      {/* Red background (a), black text (b), white CTA (c) */}
+      <FullBleed className="bg-a text-b">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
+          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
+            Find Your Division
+          </h1>
+          <p className="text-lg sm:text-xl max-w-3xl mb-8">
+            Giant text block to test visual rhythm and spacing. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Integer luctus, velit
+            at volutpat interdum, sem urna fermentum metus, ut tincidunt risus
+            mauris non justo.
+          </p>
+          <button className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-c border-c hover:bg-c hover:text-a">
+            Placeholder CTA
+          </button>
+        </div>
+      </FullBleed>
 
-          {/* About us section */}
-          <Box sx={{
-            "& h1": {
-              fontSize: 5,
-            }
-          }}>
-          <AboutUs/>
+      {/* Black background (b), white text (c), red CTA (a) */}
+      <FullBleed className="bg-b text-c">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
+          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
+            Come to Australia's Biggest Bodybuilding Event of the Year
+          </h1>
+          <p className="text-lg sm:text-xl max-w-3xl mb-8">
+            Another large heading with filler paragraphs to see contrast and
+            flow. Suspendisse potenti. Cras tincidunt arcu in feugiat gravida.
+            Nibh tortor hendrerit massa, quis vehicula justo sem sit amet ipsum.
+          </p>
+          <button className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-a border-a hover:bg-a hover:text-c">
+            Placeholder CTA
+          </button>
+        </div>
+      </FullBleed>
 
-          </Box>
+      {/* White background (c), red text (a), black CTA (b) */}
+      <FullBleed className="bg-c text-a">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
+          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
+            Compete at an Event, Wherever You Are
+          </h1>
+          <p className="text-lg sm:text-xl max-w-3xl mb-8">
+            One more layout so you can compare alternating sections quickly.
+            Proin iaculis, ligula vitae lacinia pharetra, mi justo pharetra
+            velit, a tristique nunc enim non nunc. Maecenas placerat felis a
+            aliquet pulvinar.
+          </p>
+          <button className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-b border-b hover:bg-b hover:text-c">
+            Placeholder CTA
+          </button>
+        </div>
+      </FullBleed>
 
-
-          {/* Upcoming Competitions Section */}
-          <Box      
-            sx={{
-              maxWidth: "100%",
-              py: 5,
-              px: 4,
-              textAlign: "center",
-              backgroundColor: "muted",
-              }}
-            >
-            <Heading
-              as="h1" sx={{ fontSize: 6, mb: 3 }}
-            >
-              ICN Season B 2025
-            </Heading>
-            <EventShowcase />
-          </Box>
-
-          
-        </Container>
-      </Box>
+      {/* Upcoming Competitions */}
+      <FullBleed className="bg-gray-100">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+          <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
+            ICN Season B 2025
+          </h1>
+          <EventShowcase />
+        </div>
+      </FullBleed>
     </>
   );
 }

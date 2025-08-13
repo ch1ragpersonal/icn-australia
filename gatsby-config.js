@@ -19,9 +19,29 @@ module.exports = {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN
-      }
+      },
+      
     },
-
+    {
+      resolve: `gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          google: [
+            {
+              family: "Bebas Neue",
+              variants: ["400", "500", "700"], // pick only what you need
+            },
+            {
+              family: "Source Sans Pro",
+              variants: ["400", "700"],
+            },
+          ],
+        },
+        formats: ["woff2", "woff"],
+        display: "swap",
+        preload: true,
+      },
+    },
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",

@@ -41,42 +41,26 @@ Custom Toast Styles
 }
 
 .login-input {
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 100%;
+
 }
 
 .login-input:focus {
-  border-color: #0073e6;
-  outline: none;
+
 }
 
 .login-button {
-  background-color: goldenrod;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
+
 }
 
 .login-button:hover {
-  background-color: gold;
+
 }
 
 .cancel-button {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
+
+
 }
 
 .cancel-button:hover {
-  background-color: #c7001e;
+
 }
