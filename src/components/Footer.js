@@ -8,7 +8,7 @@ const Footer = () => {
       {/* === Top Grid Section === */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
         {/* Box 1 */}
-        <div className="bg-gray-100 p-8 md:p-12 lg:col-span-2 flex items-start">
+        <div className="bg-c p-8 md:p-12 lg:col-span-2 flex items-start">
           <h2 className="uppercase font-extrabold tracking-tight leading-tight text-xl md:text-2xl lg:text-3xl">
             Xperience Park, a hub of fun activities to share with family,
             friends, or colleagues! Choose your activity to have fun 7 days a
@@ -17,7 +17,7 @@ const Footer = () => {
           <Counter target={1972} duration={1400} stagger={70} />
         </div>
         {/* Box 2 */}
-        <div className="bg-gray-100 p-8 md:p-12">
+        <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             900 m² of trampolines
           </h3>
@@ -27,20 +27,20 @@ const Footer = () => {
           </p>
         </div>
         {/* Box 3 */}
-        <div className="bg-yellow-400 p-8 md:p-12">
+        <div className="bg-a p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             Without reservation
           </h3>
           <p>Access to our trampoline park is without reservation.</p>
         </div>
         {/* Box 4 */}
-        <div className="bg-yellow-400 p-8 md:p-12 flex flex-col">
+        <div className="bg-a p-8 md:p-12 flex flex-col">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-6">
             Air–conditioned park
           </h3>
         </div>
         {/* Box 5 */}
-        <div className="bg-gray-100 p-8 md:p-12">
+        <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             Socks and wristbands required
           </h3>
@@ -51,7 +51,7 @@ const Footer = () => {
           </p>
         </div>
         {/* Box 6 */}
-        <div className="bg-yellow-400 p-8 md:p-12">
+        <div className="bg-a p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             Food and drinks
           </h3>
@@ -61,7 +61,7 @@ const Footer = () => {
           </p>
         </div>
         {/* Box 7 */}
-        <div className="bg-gray-100 p-8 md:p-12">
+        <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             Lockers available
           </h3>
@@ -107,7 +107,7 @@ const Footer = () => {
               {["F", "I", "X", "in", "YT", "S", "T"].map((icon, idx) => (
                 <div
                   key={idx}
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-c flex items-center justify-center"
                 >
                   <span className="text-sm font-bold">{icon}</span>
                 </div>
@@ -122,18 +122,6 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Left side */}
           <div className="flex items-center space-x-4 flex-wrap">
-            <div className="w-10 h-10 rounded-full bg-gray-900/10 border-2 border-gray-900/20 flex items-center justify-center">
-              <svg
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"
-                  className="text-gray-900"
-                />
-              </svg>
-            </div>
             {[
               "Information & documents to provide",
               "Sponsorship",
@@ -151,7 +139,7 @@ const Footer = () => {
 
           {/* Right side - Mars Rouge */}
           <div className="text-lg font-extrabold tracking-wide uppercase">
-            MARS ROUGE
+            ICN AUSTRALIA
           </div>
         </div>
       </div>

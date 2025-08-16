@@ -15,23 +15,17 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false); // mobile menu drawer
   const [mobileDivisionsOpen, setMobileDivisionsOpen] = useState(false); // mobile divisions sub-menu
 
-  // Reusable label + animated circle wrapper
+  // Reusable label with gradient text sweep + underline on hover
+  // Implements the provided CSS using Tailwind arbitrary properties
   const DecoratedLabel = ({ children }) => (
-    <span className="relative grid place-items-center">
-      <span className="relative z-10">{children}</span>
-      {/* Drawn circle */}
-      <svg
-        viewBox="0 0 40 40"
+    <span
+      className="relative inline-block py-[5px] text-c transition-all duration-300 ease-in-out group-hover:[background-image:linear-gradient(to_right,var(--color-a),var(--color-a)_50%,var(--color-b)_50%)] group-hover:[background-size:200%_100%] group-hover:[background-position:0_0] group-hover:[background-clip:text] group-hover:text-transparent"
+    >
+      <span
+        className="pointer-events-none absolute bottom-[-3px] left-0 block h-[3px] w-0 bg-[var(--color-a)] transition-all duration-300 ease-in-out group-hover:w-full"
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[2.1em] w-[2.1em] -translate-x-1/2 -translate-y-1/2 scale-90 opacity-30 transition-transform group-hover:scale-100 group-hover:opacity-95 group-focus-within:opacity-95"
-      >
-        <circle
-          cx="20"
-          cy="20"
-          r="17.5"
-          className="fill-none stroke-[#f7e65c] stroke-[2.25] [stroke-linecap:round] [stroke-dasharray:110] [stroke-dashoffset:110] transition-[stroke-dashoffset] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-focus-within:[stroke-dashoffset:0]"
-        />
-      </svg>
+      />
+      {children}
     </span>
   );
 
@@ -42,14 +36,14 @@ const Navbar = () => {
       onMouseLeave={() => setDivisionsOpen(false)} // desktop: hide when cursor leaves both link + panel area
     >
       {/* Top bar */}
-      <nav className="w-full bg-gray-800 px-4 sm:px-6 md:px-8 py-3 md:py-4">
+      <nav className="w-full bg-b px-4 sm:px-6 md:px-8 py-3 md:py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* LEFT: Logo */}
           <Link to="/" className="block shrink-0" aria-label="Go to homepage">
             <img
               src={logo}
               alt="Logo"
-              className="w-[12vmin] max-w-[72px] h-auto rounded-[2vmin] filter grayscale brightness-0 transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
+              className="w-[12vmin] max-w-[72px] h-auto rounded-[2vmin] filter brightness-0 invert transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
             />
           </Link>
 
@@ -57,7 +51,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-6">
             <Link
               to="/"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>Home</DecoratedLabel>
             </Link>
@@ -66,7 +60,7 @@ const Navbar = () => {
             <div className="relative" onMouseEnter={() => setDivisionsOpen(true)}>
               <Link
                 to="/divisions"
-                className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+                className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
               >
                 <DecoratedLabel>Divisions</DecoratedLabel>
               </Link>
@@ -74,28 +68,28 @@ const Navbar = () => {
 
             <Link
               to="/competitions"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>Competitions</DecoratedLabel>
             </Link>
 
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>Contact Us</DecoratedLabel>
             </Link>
 
             <Link
               to="/about"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>About Us</DecoratedLabel>
             </Link>
 
             {/* Member Portal (right-aligned image button) */}
             <a
-              href="https://members.icnaustralia.com.au"
+              href="https://www.icompetenatural.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="block shrink-0"
@@ -104,7 +98,7 @@ const Navbar = () => {
               <img
                 src={memberPortal}
                 alt="Member's Portal"
-                className="w-[12vmin] max-w-[120px] h-auto rounded-[2vmin] filter grayscale brightness-0 transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
+                className="w-[12vmin] max-w-[120px] h-auto rounded-[2vmin] filter brightness-0 invert transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
               />
             </a>
           </div>
