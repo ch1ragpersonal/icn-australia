@@ -149,6 +149,25 @@ const slides = [
     },
 ];
 
+  // A thin, blurred gradient seam you can pin to the top or bottom edge
+  const EdgeFade = ({
+    position = "top",                  // "top" | "bottom"
+    from = "from-black/95",           // use your design token e.g. "from-b/95"
+    to = "to-transparent",
+    height = "h-16",                  // tweak to taste: h-12, h-20, etc.
+    blur = "blur-sm",                 // blur-none | blur-sm | blur
+    className = "",
+  }) => (
+    <div
+      className={[
+        "pointer-events-none absolute inset-x-0",
+        position === "top" ? "top-0 bg-gradient-to-b" : "bottom-0 bg-gradient-to-t",
+        from, to, height, blur, className,
+      ].join(" ")}
+    />
+  );
+
+
 export default function App() {
   return (
     <>
@@ -200,7 +219,7 @@ export default function App() {
           </FadeIn>
           <FadeIn y={24} delay={0.24} className="flex justify-center">
             <a
-              href="https:/ /www.icompetenatural.com/"
+              href="https://www.icompetenatural.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-c border-c hover:bg-c hover:text-a mt-8"
@@ -214,51 +233,46 @@ export default function App() {
       {/* Black background (b), white text (c), red CTA (a) */}
       <FullBleed className="bg-b text-c">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
-
+          <FadeIn y={40}>
           <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
             Come to Australia's Biggest Bodybuilding Event of the Year
           </h1>
-
-                <MajorEventCountdown />
-
-          <p className="text-lg sm:text-xl max-w-3xl mb-8">
+          </FadeIn>
+          {/* <p className="text-lg sm:text-xl max-w-3xl mb-8">
             Another large heading with filler paragraphs to see contrast and
             flow. Suspendisse potenti. Cras tincidunt arcu in feugiat gravida.
             Nibh tortor hendrerit massa, quis vehicula justo sem sit amet ipsum.
           </p>
           <button className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-a border-a hover:bg-a hover:text-c">
             Placeholder CTA
-          </button>
+          </button> */}
+        </div>
+        <div className="relative">
+          <MajorEventCountdown />
+          <EdgeFade position="bottom" from="from-b/95" to="to-transparent" height="h-20" blur="blur" />
         </div>
       </FullBleed>
 
       {/* White background (c), red text (a), black CTA (b) */}
       <FullBleed className="bg-c text-a">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
-          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
-            Compete at an Event, Wherever You Are
-          </h1>
+          <FadeIn y={40}>
+            <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
+              Compete at an Event, Wherever You Are
+            </h1>
+          </FadeIn>
+          <FadeIn y={24} delay={0.08}>
           <p className="text-lg sm:text-xl max-w-3xl mb-8">
             One more layout so you can compare alternating sections quickly.
             Proin iaculis, ligula vitae lacinia pharetra, mi justo pharetra
             velit, a tristique nunc enim non nunc. Maecenas placerat felis a
             aliquet pulvinar.
           </p>
-          <button className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-b border-b hover:bg-b hover:text-c">
-            Placeholder CTA
-          </button>
-        </div>
-      </FullBleed>
-
-      {/* Upcoming Competitions */}
-      <FullBleed className="bg-gray-100">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
-            ICN Season B 2025
-          </h1>
+          </FadeIn>
           <EventShowcase />
         </div>
       </FullBleed>
+
     </>
   );
 }

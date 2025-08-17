@@ -22,8 +22,12 @@ import msBikiniModel from "../images/divisions/ms-bikini-model.jpg"
  */
 const Navbar = () => {
   const [divisionsOpen, setDivisionsOpen] = useState(false); // desktop hover mega menu
+  const openDivisions = () => setDivisionsOpen(true);
+  const closeDivisions = () => setDivisionsOpen(false);
   const [mobileOpen, setMobileOpen] = useState(false); // mobile menu drawer
   const [mobileDivisionsOpen, setMobileDivisionsOpen] = useState(false); // mobile divisions sub-menu
+
+  
 
   // Reusable label with gradient text sweep + underline on hover
   // Implements the provided CSS using Tailwind arbitrary properties
@@ -63,11 +67,11 @@ const Navbar = () => {
   return (
     // Wrapper is relative so the desktop mega menu can be absolutely positioned
     <div
-      className="relative"
+      className="sticky top-0 z-50 relative"
       onMouseLeave={() => setDivisionsOpen(false)} // desktop: hide when cursor leaves both link + panel area
     >
       {/* Top bar */}
-      <nav className="w-full bg-b px-4 sm:px-6 md:px-8 py-3 md:py-4">
+      <nav className="sticky top-0 inset-x-0 z-50 w-full bg-b/95 backdrop-blur px-4 sm:px-6 md:px-8 py-3 md:py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* LEFT: Logo */}
           <Link to="/" className="block shrink-0" aria-label="Go to homepage">
@@ -83,12 +87,13 @@ const Navbar = () => {
             <Link
               to="/"
               className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
+              onMouseEnter={closeDivisions}
             >
               <DecoratedLabel>Home</DecoratedLabel>
             </Link>
 
             {/* Divisions trigger (desktop hover) */}
-            <div className="relative" onMouseEnter={() => setDivisionsOpen(true)}>
+            <div className="relative" onMouseEnter={openDivisions}>
               <Link
                 to="/divisions"
                 className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
@@ -100,6 +105,7 @@ const Navbar = () => {
             <Link
               to="/competitions"
               className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
+              onMouseEnter={closeDivisions}
             >
               <DecoratedLabel>Competitions</DecoratedLabel>
             </Link>
@@ -107,6 +113,7 @@ const Navbar = () => {
             <Link
               to="/contact"
               className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
+              onMouseEnter={closeDivisions}
             >
               <DecoratedLabel>Contact Us</DecoratedLabel>
             </Link>
@@ -114,6 +121,7 @@ const Navbar = () => {
             <Link
               to="/about"
               className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
+              onMouseEnter={closeDivisions}
             >
               <DecoratedLabel>About Us</DecoratedLabel>
             </Link>

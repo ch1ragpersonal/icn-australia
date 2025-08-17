@@ -1,31 +1,28 @@
-/** @jsxImportSource theme-ui */
-import React, { useState, useEffect, lazy, Suspense } from "react";
+// src/pages/competitions.js
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { Box, Heading, Button, Flex } from "theme-ui";
-import StateCard from "../components/StateCard";
+import Seo from "../components/seo";
+import StateCard from "../components/StateCard"; // <-- Tailwind version below
 import CompetitionList from "../components/CompetitionList";
 import ScheduleList from "../components/ScheduleList";
-import Seo from "../components/seo";
 
-// Dynamically import Framer Motion for Gatsby SSR compatibility
-const AnimatePresence = lazy(() => import("framer-motion").then((mod) => ({ default: mod.AnimatePresence })));
+// Lazy-load framer-motion container for SSR safety
+const AnimatePresence = lazy(() =>
+  import("framer-motion").then((m) => ({ default: m.AnimatePresence }))
+);
 
-// Prevent SSR errors with `useLocation`
+// Safe location for Gatsby SSR
 const useSafeLocation = () => {
   const [location, setLocation] = useState(null);
-
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setLocation(window.location);
-    }
+    if (typeof window !== "undefined") setLocation(window.location);
   }, []);
-
   return location;
 };
 
-const CompetitionsPage = () => {
+export default function CompetitionsPage() {
   const data = useStaticQuery(graphql`
-    query {
+    query CompetitionsPageQuery_TW {
       allContentfulState {
         nodes {
           id
@@ -58,146 +55,139 @@ const CompetitionsPage = () => {
     }
   `);
 
-  const states = data.allContentfulState.nodes;
-  const allCompetitions = data.allContentfulCompetition.nodes;
-  const location = useSafeLocation(); // Safe way to handle useLocation in Gatsby
+  const states = data.allContentfulState.nodes || [];
+  const allCompetitions = data.allContentfulCompetition.nodes || [];
+  const location = useSafeLocation();
 
   const [selectedState, setSelectedState] = useState(null);
-  const [viewMode, setViewMode] = useState("state");
+  const [viewMode, setViewMode] = useState("state"); // "state" | "schedule"
 
-  // Filter out past competitions (only show future/current competitions)
+  // future/current only
   const today = new Date();
-  const competitions = allCompetitions.filter((comp) => {
-    if (!comp.date) return true; // Keep competitions without dates
-    return new Date(comp.date) >= today;
+  today.setHours(0, 0, 0, 0);
+
+  const competitions = allCompetitions.filter((c) => {
+    if (!c.date) return true; // allow items with unknown date
+    return new Date(c.date) >= today;
   });
 
-  // Read the 'view' query parameter safely
+  // read ?view=schedule
   useEffect(() => {
-    if (location) {
-      const params = new URLSearchParams(location.search);
-      setViewMode(params.get("view") === "schedule" ? "schedule" : "state");
-    }
+    if (!location) return;
+    const params = new URLSearchParams(location.search);
+    setViewMode(params.get("view") === "schedule" ? "schedule" : "state");
   }, [location]);
 
-  // Ensure the correct view mode
+  // if schedule view -> clear selection
   useEffect(() => {
-    if (viewMode === "schedule") {
-      setSelectedState(null);
-    }
+    if (viewMode === "schedule") setSelectedState(null);
   }, [viewMode]);
 
-  // Filter competitions by selected state
   const filteredCompetitions = selectedState
-    ? competitions.filter((comp) => comp.state?.id === selectedState.id)
+    ? competitions.filter((c) => c.state?.id === selectedState.id)
     : [];
 
-  // Sort competitions by date (handle null dates)
+  // sort ascending (unknown dates last)
   const sortedCompetitions = [...competitions].sort((a, b) => {
-    if (!a.date) return 1; // Push items without a date to the end
+    if (!a.date) return 1;
     if (!b.date) return -1;
     return new Date(a.date) - new Date(b.date);
-  });
+    });
 
   return (
-    
-    <Box sx={{ width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "20px", textAlign: "center" }}>
-    <Seo title="Competitions" description="ICN Australia Competitions" />
+    <>
+      <Seo title="Competitions" description="ICN Australia Competitions" />
 
-      <Heading as="h1" sx={{ fontSize: "32px", marginBottom: "20px" }}>
-        {selectedState
-          ? `Competitions in ${selectedState.name}`
-          : viewMode === "state"
-          ? "Select a Region to View Competitions"
-          : "Full Competition Schedule"}
-      </Heading>
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Heading */}
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-black text-center mb-6">
+          {selectedState
+            ? `Competitions in ${selectedState.name}`
+            : viewMode === "state"
+            ? "Select a Region to View Competitions"
+            : "Full Competition Schedule"}
+        </h1>
 
-      {/* View Mode Toggle Buttons */}
-      <Flex sx={{ justifyContent: "center", gap: 3, mb: 4 }}>
-        <Button
-          onClick={() => setViewMode("state")}
-          sx={{
-            backgroundColor: viewMode === "state" ? "buttonback" : "#bbb",
-            color: "buttontext",
-            padding: "14px 28px",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontSize: "16px",
-            fontWeight: "bold",
-            transition: "background-color 0.3s ease-in-out",
-            "&:hover": {
-              backgroundColor: viewMode === "state" ? "primary" : "#999",
-            },
-          }}
-        >
-          Competitions Near You
-        </Button>
-        <Button
-          onClick={() => setViewMode("schedule")}
-          sx={{
-            backgroundColor: viewMode === "schedule" ? "buttonback" : "#bbb",
-            color: "buttontext",
-            padding: "14px 28px",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontSize: "16px",
-            fontWeight: "bold",
-            transition: "background-color 0.3s ease-in-out",
-            "&:hover": {
-              backgroundColor: viewMode === "schedule" ? "buttonback" : "#999",
-            },
-          }}
-        >
-          See Full Schedule
-        </Button>
-      </Flex>
-
-      {/* State Selection (only in state view mode) */}
-      <Suspense fallback={<div>Loading animations...</div>}>
-        <AnimatePresence mode="wait">
-          {viewMode === "state" && !selectedState && (
-            <Box
-              key="state-selection"
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                gap: "20px",
-              }}
+        {/* Segmented toggle */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex rounded-full bg-gray-200/80 p-1 shadow-inner">
+            <button
+              type="button"
+              onClick={() => setViewMode("state")}
+              className={`px-4 sm:px-6 py-2 rounded-full text-sm font-bold transition-colors ${
+                viewMode === "state"
+                  ? "bg-a text-white"
+                  : "text-black hover:bg-black/10"
+              }`}
             >
-              {states.map((state) => (
-                <StateCard
-                  key={state.id}
-                  state={state}
-                  onClick={() => setSelectedState(state)}
+              Competitions Near You
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("schedule")}
+              className={`px-4 sm:px-6 py-2 rounded-full text-sm font-bold transition-colors ${
+                viewMode === "schedule"
+                  ? "bg-a text-white"
+                  : "text-black hover:bg-black/10"
+              }`}
+            >
+              See Full Schedule
+            </button>
+          </div>
+        </div>
+
+        {/* STATE GRID (default view) */}
+        <Suspense fallback={<div className="text-center py-6">Loading…</div>}>
+          <AnimatePresence mode="wait">
+            {viewMode === "state" && !selectedState && (
+              <div
+                key="state-grid"
+                className="
+                  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6
+                  place-items-stretch
+                "
+              >
+                {states.map((st) => (
+                  <StateCard
+                    key={st.id}
+                    state={st}
+                    onClick={() => setSelectedState(st)}
+                  />
+                ))}
+              </div>
+            )}
+          </AnimatePresence>
+        </Suspense>
+
+        {/* COMPETITIONS BY STATE */}
+        <Suspense fallback={<div className="text-center py-6">Loading…</div>}>
+          <AnimatePresence mode="wait">
+            {viewMode === "state" && selectedState && (
+              <div key="state-competitions" className="mt-4">
+                <CompetitionList
+                  state={selectedState}
+                  competitions={filteredCompetitions}
+                  onBack={() => setSelectedState(null)}
                 />
-              ))}
-            </Box>
-          )}
-        </AnimatePresence>
-      </Suspense>
+              </div>
+            )}
+          </AnimatePresence>
+        </Suspense>
 
-      {/* Competition Display (state view) */}
-      <Suspense fallback={<div>Loading competitions...</div>}>
-        <AnimatePresence mode="wait">
-          {viewMode === "state" && selectedState && (
-            <CompetitionList
-              state={selectedState}
-              competitions={filteredCompetitions}
-              onBack={() => setSelectedState(null)}
-            />
-          )}
-        </AnimatePresence>
-      </Suspense>
-
-      {/* Schedule Display (schedule view) */}
-      <Suspense fallback={<div>Loading schedule...</div>}>
-        <AnimatePresence mode="wait">
-          {viewMode === "schedule" && <ScheduleList competitions={sortedCompetitions} states={states} />}
-        </AnimatePresence>
-      </Suspense>
-    </Box>
+        {/* FULL SCHEDULE */}
+        <Suspense fallback={<div className="text-center py-6">Loading…</div>}>
+          <AnimatePresence mode="wait">
+            {viewMode === "schedule" && (
+              <div key="schedule" className="mt-4">
+                <ScheduleList
+                  competitions={sortedCompetitions}
+                  states={states}
+                />
+              </div>
+            )}
+          </AnimatePresence>
+        </Suspense>
+      </section>
+    </>
   );
-};
-
-export default CompetitionsPage;
+}
