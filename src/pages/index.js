@@ -14,6 +14,7 @@ import msSportsModel from "../images/divisions/ms-sports-model.jpg"
 import msBikiniModel from "../images/divisions/ms-bikini-model.jpg"
 import FadeIn from "../components/FadeIn";
 import { Stagger, StaggerItem } from "../components/Stagger";
+import MajorEventCountdown from "../components/MajorEventCountdown";
 
 function FullBleed({ children, className = "" }) {
   return (
@@ -217,6 +218,9 @@ export default function App() {
           <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
             Come to Australia's Biggest Bodybuilding Event of the Year
           </h1>
+
+                <MajorEventCountdown />
+
           <p className="text-lg sm:text-xl max-w-3xl mb-8">
             Another large heading with filler paragraphs to see contrast and
             flow. Suspendisse potenti. Cras tincidunt arcu in feugiat gravida.
