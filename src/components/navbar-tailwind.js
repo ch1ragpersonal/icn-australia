@@ -3,6 +3,16 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 import logo from "../images/logo.png"; // <-- update to your actual logo path
 import memberPortal from "../images/member_portal.png";
+import mensFitness from "../images/divisions/mens-fitness.jpg"
+import mensPhysique from "../images/divisions/mens-physique.jpg"
+import mensClassicPhysique from "../images/divisions/mens-classic-physique.jpg"
+import bodybuilding from "../images/divisions/bodybuilding.jpg"
+import msWellness from "../images/divisions/ms-wellness.jpg"
+import msSwimsuit from "../images/divisions/ms-swimsuit.jpg"
+import msFitness from "../images/divisions/ms-fitness.jpg"
+import msFigure from "../images/divisions/ms-figure.jpg"
+import msSportsModel from "../images/divisions/ms-sports-model.jpg"
+import msBikiniModel from "../images/divisions/ms-bikini-model.jpg"
 
 /**
  * Responsive Navbar (Gatsby + Tailwind)
@@ -15,25 +25,40 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false); // mobile menu drawer
   const [mobileDivisionsOpen, setMobileDivisionsOpen] = useState(false); // mobile divisions sub-menu
 
-  // Reusable label + animated circle wrapper
+  // Reusable label with gradient text sweep + underline on hover
+  // Implements the provided CSS using Tailwind arbitrary properties
   const DecoratedLabel = ({ children }) => (
-    <span className="relative grid place-items-center">
-      <span className="relative z-10">{children}</span>
-      {/* Drawn circle */}
-      <svg
-        viewBox="0 0 40 40"
+    <span
+      className="relative inline-block py-[5px] text-c transition-all duration-300 ease-in-out group-hover:[background-image:linear-gradient(to_right,var(--color-a),var(--color-a)_50%,var(--color-b)_50%)] group-hover:[background-size:200%_100%] group-hover:[background-position:0_0] group-hover:[background-clip:text] group-hover:text-transparent"
+    >
+      <span
+        className="pointer-events-none absolute bottom-[-3px] left-0 block h-[3px] w-0 bg-[var(--color-a)] transition-all duration-300 ease-in-out group-hover:w-full"
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[2.1em] w-[2.1em] -translate-x-1/2 -translate-y-1/2 scale-90 opacity-30 transition-transform group-hover:scale-100 group-hover:opacity-95 group-focus-within:opacity-95"
-      >
-        <circle
-          cx="20"
-          cy="20"
-          r="17.5"
-          className="fill-none stroke-[#f7e65c] stroke-[2.25] [stroke-linecap:round] [stroke-dasharray:110] [stroke-dashoffset:110] transition-[stroke-dashoffset] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-focus-within:[stroke-dashoffset:0]"
-        />
-      </svg>
+      />
+      {children}
     </span>
   );
+
+    // Uniform tile used in the mega menu
+    const MenuTile = ({ to, label, img, alt }) => (
+      <Link
+        to={to}
+        className="group w-[9.5rem] flex flex-col items-center text-center"  // fixed width + centered column
+      >
+        <img
+          src={img}
+          alt={alt || label}
+          className="block mx-auto w-24 h-24 rounded-full object-cover mb-3
+                     ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
+        />
+        <span className="block w-full text-white text-sm sm:text-base leading-tight
+                         group-hover:text-blue-300 transition-colors">
+          {label}
+        </span>
+      </Link>
+    );
+    
+
 
   return (
     // Wrapper is relative so the desktop mega menu can be absolutely positioned
@@ -42,14 +67,14 @@ const Navbar = () => {
       onMouseLeave={() => setDivisionsOpen(false)} // desktop: hide when cursor leaves both link + panel area
     >
       {/* Top bar */}
-      <nav className="w-full bg-gray-800 px-4 sm:px-6 md:px-8 py-3 md:py-4">
+      <nav className="w-full bg-b px-4 sm:px-6 md:px-8 py-3 md:py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* LEFT: Logo */}
           <Link to="/" className="block shrink-0" aria-label="Go to homepage">
             <img
               src={logo}
               alt="Logo"
-              className="w-[12vmin] max-w-[72px] h-auto rounded-[2vmin] filter grayscale brightness-0 transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
+              className="w-[12vmin] max-w-[72px] h-auto rounded-[2vmin] filter brightness-0 invert transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
             />
           </Link>
 
@@ -57,7 +82,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-6">
             <Link
               to="/"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>Home</DecoratedLabel>
             </Link>
@@ -66,7 +91,7 @@ const Navbar = () => {
             <div className="relative" onMouseEnter={() => setDivisionsOpen(true)}>
               <Link
                 to="/divisions"
-                className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+                className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
               >
                 <DecoratedLabel>Divisions</DecoratedLabel>
               </Link>
@@ -74,28 +99,28 @@ const Navbar = () => {
 
             <Link
               to="/competitions"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>Competitions</DecoratedLabel>
             </Link>
 
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>Contact Us</DecoratedLabel>
             </Link>
 
             <Link
               to="/about"
-              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
             >
               <DecoratedLabel>About Us</DecoratedLabel>
             </Link>
 
             {/* Member Portal (right-aligned image button) */}
             <a
-              href="https://members.icnaustralia.com.au"
+              href="https://www.icompetenatural.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="block shrink-0"
@@ -104,7 +129,7 @@ const Navbar = () => {
               <img
                 src={memberPortal}
                 alt="Member's Portal"
-                className="w-[12vmin] max-w-[120px] h-auto rounded-[2vmin] filter grayscale brightness-0 transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
+                className="w-[12vmin] max-w-[120px] h-auto rounded-[2vmin] filter brightness-0 invert transition duration-300 ease-in-out hover:invert-[59%] hover:sepia hover:saturate-[475%] hover:hue-rotate-[3deg] hover:brightness-[103%] hover:contrast-[101%]"
               />
             </a>
           </div>
@@ -151,52 +176,33 @@ const Navbar = () => {
       {/* DESKTOP: Full-width mega menu (only renders on md+ for layout sanity) */}
       {divisionsOpen && (
         <div className="hidden md:block absolute left-0 right-0 top-full z-50 bg-gray-700 shadow-lg">
-          <div className="max-w-7xl mx-auto p-8">
-            <div className="grid grid-cols-4 gap-8 justify-items-center">
-              <Link to="/divisions/bodybuilding" className="group text-center">
-                <img
-                  src="https://placehold.co/100x100"
-                  alt="Bodybuilding"
-                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
-                />
-                <span className="text-white group-hover:text-blue-300 transition-colors">
-                  Bodybuilding
-                </span>
-              </Link>
-              <Link to="/divisions/classic" className="group text-center">
-                <img
-                  src="https://placehold.co/100x100"
-                  alt="Classic"
-                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
-                />
-                <span className="text-white group-hover:text-blue-300 transition-colors">
-                  Classic
-                </span>
-              </Link>
-              <Link to="/divisions/bikini" className="group text-center">
-                <img
-                  src="https://placehold.co/100x100"
-                  alt="Bikini"
-                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
-                />
-                <span className="text-white group-hover:text-blue-300 transition-colors">
-                  Bikini
-                </span>
-              </Link>
-              <Link to="/divisions/sports-model" className="group text-center">
-                <img
-                  src="https://placehold.co/100x100"
-                  alt="Sports Model"
-                  className="w-24 h-24 rounded-full object-cover mb-3 ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
-                />
-                <span className="text-white group-hover:text-blue-300 transition-colors">
-                  Sports Model
-                </span>
-              </Link>
+          <div className="max-w-7xl mx-auto px-8 py-10">
+            <div className="space-y-8">
+              {/* Row 1: 4 items */}
+              <div className="grid grid-cols-4 gap-8 justify-items-center">
+                <MenuTile img={mensFitness} to="/divisions/mens-fitness" label="Men's Fitness" alt="Men's Fitness" />
+                <MenuTile img={mensPhysique} to="/divisions/mens-physique" label="Men's Physique" alt="Men's Physique" />
+                <MenuTile img={mensClassicPhysique} to="/divisions/mens-classic-physique" label="Men's Classic Physique" alt="Men's Classic Physique" />
+                <MenuTile img={bodybuilding} to="/divisions/bodybuilding" label="Bodybuilding" alt="Bodybuilding" />
+              </div>
+
+              {/* Row 2: 5 items */}
+              <div className="grid grid-cols-6 gap-8 justify-items-center">
+                <MenuTile img={msWellness} to="/divisions/ms-wellness" label="Ms Wellness" alt="Ms Wellness" />
+                <MenuTile img={msSwimsuit} to="/divisions/ms-swimsuit" label="Ms Swimsuit" alt="Ms Swimsuit" />
+                <MenuTile img={msFitness} to="/divisions/ms-fitness" label="Ms Fitness" alt="Ms Fitness" />
+                <MenuTile img={msFigure} to="/divisions/ms-figure" label="Ms Figure" alt="Ms Figure" />
+                <MenuTile img={msSportsModel} to="/divisions/ms-sports-model" label="Ms Sports Model" alt="Ms Sports Model" />
+                <MenuTile img={msBikiniModel} to="/divisions/ms-bikini-model" label="Ms Bikini Model" alt="Ms Bikini Model" />
+
+                {/* If you'd rather include Ms Swimsuit, replace any one of the above with: */}
+                {/* <MenuTile to="/divisions/ms-swimsuit" label="Ms Swimsuit" alt="Ms Swimsuit" /> */}
+              </div>
             </div>
           </div>
         </div>
-      )}
+)}
+
 
       {/* MOBILE: Slide-down menu */}
       <div
@@ -242,55 +248,50 @@ const Navbar = () => {
               mobileDivisionsOpen ? "opacity-100 mt-2" : "opacity-0 h-0 overflow-hidden"
             }`}
           >
-            <Link
-              to="/divisions/bodybuilding"
-              className="flex flex-col items-center text-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              <img
-                src="https://placehold.co/100x100"
-                alt="Bodybuilding"
-                className="w-20 h-20 rounded-full object-cover mb-2"
-              />
+            {/* Row 1 (4) */}
+            <Link to="/divisions/mens-fitness" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={mensFitness} alt="Men's Fitness" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Men's Fitness</span>
+            </Link>
+            <Link to="/divisions/mens-physique" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={mensPhysique} alt="Men's Physique" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Men's Physique</span>
+            </Link>
+            <Link to="/divisions/mens-classic-physique" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={mensClassicPhysique} alt="Men's Classic Physique" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Men's Classic Physique</span>
+            </Link>
+            <Link to="/divisions/bodybuilding" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={bodybuilding} alt="Bodybuilding" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Bodybuilding</span>
             </Link>
-            <Link
-              to="/divisions/classic"
-              className="flex flex-col items-center text-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              <img
-                src="https://placehold.co/100x100"
-                alt="Classic"
-                className="w-20 h-20 rounded-full object-cover mb-2"
-              />
-              <span className="text-white">Classic</span>
+
+            {/* Row 2 (5) */}
+            <Link to="/divisions/ms-wellness" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={msWellness} alt="Ms Wellness" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Ms Wellness</span>
             </Link>
-            <Link
-              to="/divisions/bikini"
-              className="flex flex-col items-center text-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              <img
-                src="https://placehold.co/100x100"
-                alt="Bikini"
-                className="w-20 h-20 rounded-full object-cover mb-2"
-              />
-              <span className="text-white">Bikini</span>
+            <Link to="/divisions/ms-fitness" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={msFitness} alt="Ms Fitness" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Ms Fitness</span>
             </Link>
-            <Link
-              to="/divisions/sports-model"
-              className="flex flex-col items-center text-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              <img
-                src="https://placehold.co/100x100"
-                alt="Sports Model"
-                className="w-20 h-20 rounded-full object-cover mb-2"
-              />
-              <span className="text-white">Sports Model</span>
+            <Link to="/divisions/ms-figure" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={msFigure} alt="Ms Figure" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Ms Figure</span>
             </Link>
+            <Link to="/divisions/ms-sports-model" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={msSportsModel} alt="Ms Sports Model" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Ms Sports Model</span>
+            </Link>
+            <Link to="/divisions/ms-bikini-model" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={msBikiniModel} alt="Ms Bikini Model" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Ms Bikini Model</span>
+            </Link>
+
+            {/* If you want Ms Swimsuit instead of one of the above: */}
+            {/* <Link to="/divisions/ms-swimsuit" ...>Ms Swimsuit</Link> */}
           </div>
+
 
           <Link
             to="/competitions"

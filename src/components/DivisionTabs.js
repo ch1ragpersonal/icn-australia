@@ -25,8 +25,9 @@ import React, { useId, useMemo, useState, useEffect, useRef } from "react";
  * - All styling is Tailwind classes; no external CSS.
  */
 
-const ovalRing =
-  "relative after:content-[''] after:absolute after:inset-[-10px_-24px] after:rounded-full after:border after:border-black after:opacity-100";
+// Base ring; apply color per state with text-* and after:border-*
+const ringBase =
+  "relative after:content-[''] after:absolute after:inset-[-10px_-24px] after:rounded-full after:border after:transition-colors after:duration-200";
 
 const DivisionTabs = ({ items = [], initial = 0, className = "" }) => {
   const [active, setActive] = useState(Math.min(initial, Math.max(0, items.length - 1)));
@@ -83,8 +84,8 @@ const DivisionTabs = ({ items = [], initial = 0, className = "" }) => {
                 "uppercase tracking-wide font-semibold text-sm md:text-base",
                 "px-6 md:px-8 py-3 transition",
                 selected
-                  ? `${ovalRing}`
-                  : "opacity-70 hover:opacity-100 focus:opacity-100 outline-none",
+                  ? `${ringBase} text-c after:border-c`
+                  : `${ringBase} after:border-transparent opacity-70 hover:opacity-100 focus:opacity-100 outline-none hover:text-c`,
               ].join(" ")}
             >
               {it.title}
@@ -115,12 +116,14 @@ const DivisionTabs = ({ items = [], initial = 0, className = "" }) => {
             {/* Image column */}
             <div className={`${sideRight ? "lg:order-2" : "lg:order-1"}`}>
               {it.image && (
-                <img
-                  src={it.image}
-                  alt={it.imageAlt || ""}
-                  className="w-full h-auto object-contain select-none"
-                  draggable="false"
-                />
+                <div className="w-full overflow-hidden rounded-t-[9999px]">
+                  <img
+                    src={it.image}
+                    alt={it.imageAlt || ""}
+                    className="w-full h-auto object-cover select-none"
+                    draggable="false"
+                  />
+                </div>
               )}
             </div>
 
