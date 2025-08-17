@@ -12,6 +12,8 @@ import msFitness from "../images/divisions/ms-fitness.jpg"
 import msFigure from "../images/divisions/ms-figure.jpg"
 import msSportsModel from "../images/divisions/ms-sports-model.jpg"
 import msBikiniModel from "../images/divisions/ms-bikini-model.jpg"
+import FadeIn from "../components/FadeIn";
+import { Stagger, StaggerItem } from "../components/Stagger";
 
 function FullBleed({ children, className = "" }) {
   return (
@@ -158,12 +160,20 @@ export default function App() {
           style={{ backgroundImage: "url(/images/placeholder-hero.jpg)" }}
         >
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-            <h1 className="text-a text-6xl sm:text-7xl font-extrabold drop-shadow-md mb-3">
-              ICN is The Home of Australia’s Natural Bodybuilding Elite
-            </h1>
-            <p className="text-a text-lg sm:text-xl max-w-3xl drop-shadow">
-              Compete at The Pinnacle of Natural Physique Competition.
-            </p>
+            <Stagger>
+              <StaggerItem>
+                <h1 className="text-a text-6xl sm:text-7xl font-extrabold drop-shadow-md mb-3">
+                  ICN is The Home of Australia’s Natural Bodybuilding Elite
+                </h1>
+              </StaggerItem>
+            </Stagger>
+            <Stagger>
+              <StaggerItem>
+                <p className="text-a text-lg sm:text-xl max-w-3xl drop-shadow">
+                  Compete at The Pinnacle of Natural Physique Competition.
+                </p>
+              </StaggerItem>
+            </Stagger>
           </div>
         </div>
       </FullBleed>
@@ -171,34 +181,39 @@ export default function App() {
       {/* Red background (a), black text (b), white CTA (c) */}
       <FullBleed className="bg-a text-b">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
-          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
-            Find Your Division
-          </h1>
-          <p className="text-lg sm:text-xl max-w-3xl mb-8">
+          <FadeIn y={40}>
+            <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
+              Find Your Division
+            </h1>
+          </FadeIn>
+          <FadeIn y={24} delay={0.08}>
+            <p className="text-lg sm:text-xl max-w-3xl mb-8">
             Giant text block to test visual rhythm and spacing. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Integer luctus, velit
             at volutpat interdum, sem urna fermentum metus, ut tincidunt risus
             mauris non justo.
           </p>
-          <div className="flex justify-center">
+          </FadeIn>
+          <FadeIn y={24} delay={0.16} className="flex justify-center">
             <DivisionTabs items={slides}/>
-          </div>
-          <div className="flex justify-center">
+          </FadeIn>
+          <FadeIn y={24} delay={0.24} className="flex justify-center">
             <a
-              href="https://www.icompetenatural.com/"
+              href="https:/ /www.icompetenatural.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-c border-c hover:bg-c hover:text-a mt-8"
             >
               Register Now
             </a>
-          </div>
+          </FadeIn>
         </div>
       </FullBleed>
 
       {/* Black background (b), white text (c), red CTA (a) */}
       <FullBleed className="bg-b text-c">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
+
           <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
             Come to Australia's Biggest Bodybuilding Event of the Year
           </h1>
