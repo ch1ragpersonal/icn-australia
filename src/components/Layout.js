@@ -8,7 +8,7 @@ import SiteMap from './SiteMap';
 import Footer from './Footer';
 
 const Layout = ({ children, title, description }) => (
-  <Box>
+  <div>
     {/* Helmet to Include Google Fonts */}
     <Helmet>
       <link
@@ -27,7 +27,7 @@ const Layout = ({ children, title, description }) => (
     <main>{children}</main>
 
     <Footer/>
-  </Box>
+  </div>
 );
 
 export default Layout;
