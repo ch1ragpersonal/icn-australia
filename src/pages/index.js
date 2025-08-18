@@ -30,11 +30,11 @@ const slides = [
   {
     key: "mens-fitness",
     title: "Men's Fitness",
-    headline: "JUMPS AND ACROBATICS FOR BEGINNERS AND EXPERTS",
+    headline: "Men's Fitness",
     body:
-      "Trampolining is the ideal sport for letting off steam, whether you're an adult or a child. When you feel the need to expend energy, head to the Men's Fitness at Xperience Park to practice somersaults and other somersaults in complete safety!",
+    "Athletic and lean with moderate muscle, visible abs, and balance between upper and lower body. Less extreme than Physique or Bodybuilding.",
     ctaText: "Learn More",
-    ctaHref: "/mens-fitness",
+    ctaHref: "/divisions/mens-fitness",
     image: mensFitness,
     imageAlt: "Athlete jumping with lightning graphics",
     imageSide: "left",
@@ -42,11 +42,11 @@ const slides = [
   {
     key: "mens-physique",
     title: "Men's Phyique",
-    headline: "OBSTACLE COURSE: BECOME A WARRIOR",
+    headline: "Men's Physique",
     body:
-      "Challenges to complete solo, or challenge friends and family, for an ever-faster time. The Ninja Warrior course is for all jumpers aged 7 and up.",
+     "Upper-body focused category with broad shoulders, small waist, and strong V-taper. Highly conditioned with visible abs, but no leg development required like in Bodybuilding.",
     ctaText: "Learn More",
-    ctaHref: "/mens-physique",
+    ctaHref: "/divisions/mens-physique",
     image: mensPhysique,
     imageAlt: "Athlete flipping with lightning graphics",
     imageSide: "left",
@@ -54,11 +54,11 @@ const slides = [
   {
     key: "mens-classic-physique",
     title: "Men's Classic Physique",
-    headline: "THE BASKETBALL VERSION OF CONNECT 4",
+    headline: "Men's Classic Physique",
     body:
-      "The Connect 4 board game takes on a new dimension here. This game involves chaining basketball shots to try to form a line of 4 balls of the same color.",
+      "Inspired by the Golden Era of bodybuilding. Emphasises symmetry, proportion, and classic lines over sheer size. Equal conditioning to Bodybuilding but less mass.",
     ctaText: "Learn More",
-    ctaHref: "/mens-classic-physique",
+    ctaHref: "/divisions/mens-classic-physique",
     image: mensClassicPhysique,
     imageAlt: "Basketball player dunking with lightning graphics",
     imageSide: "left",
@@ -66,11 +66,11 @@ const slides = [
   {
     key: "bodybuilding",
     title: "Bodybuilding",
-    headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+    headline: "Bodybuilding",
     body:
-      "Xperience Park is also an arcade and puck games area with free access.",
+      "Bodybuilding division, the most extreme and traditional category. Competitors must have visible definition on every muscle, with serious conditioning and top level aesthetics.",
     ctaText: "Learn More",
-    ctaHref: "/bodybuilding",
+    ctaHref: "/divisions/bodybuilding",
     image: bodybuilding,
     imageAlt: "Game controller with lightning graphics",
     imageSide: "left",
@@ -78,11 +78,11 @@ const slides = [
   {
       key: "ms-wellness",
       title: "Ms Wellness",
-      headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+      headline: "Ms Wellness",
       body:
-        "Xperience Park is also an arcade and puck games area with free access.",
+        "The idea of Ms Wellness is for wellness and physique health to have a place in the competition. \"Elegance, beauty, and athleticism are the most important factors.\"",
       ctaText: "Learn More",
-      ctaHref: "/ms-wellness",
+      ctaHref: "/divisions/ms-wellness",
       image: msWellness,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
@@ -90,11 +90,11 @@ const slides = [
     {
       key: "ms-swimsuit",
       title: "Ms Swimsuit",
-      headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+      headline: "Ms Swimsuit",
       body:
-        "Xperience Park is also an arcade and puck games area with free access.",
+        "Similar to Swimsuit but in a one-piece swimsuit. Emphasises toned condition, beauty, and stage confidence over muscularity.",
       ctaText: "Learn More",
-      ctaHref: "/ms-swimsuit",
+      ctaHref: "/divisions/ms-swimsuit",
       image: msSwimsuit,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
@@ -102,11 +102,11 @@ const slides = [
     {
       key: "ms-fitness",
       title: "Ms Fitness",
-      headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+      headline: "Ms Fitness",
       body:
-        "Xperience Park is also an arcade and puck games area with free access.",
+        "Balanced muscularity with visible abs, capped shoulders, and back definition. More conditioned than Sports Model, less muscular than Figure.",
       ctaText: "Learn More",
-      ctaHref: "/ms-fitness",
+      ctaHref: "/divisions/ms-fitness",
       image: msFitness,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
@@ -114,11 +114,11 @@ const slides = [
     {
       key: "ms-figure",
       title: "Ms Figure",
-      headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+      headline: "Ms Figure",
       body:
-        "Xperience Park is also an arcade and puck games area with free access.",
+        "Entry-level female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
       ctaText: "Learn More",
-      ctaHref: "/ms-figure",
+      ctaHref: "/divisions/ms-figure",
       image: msFigure,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
@@ -126,11 +126,11 @@ const slides = [
     {
       key: "ms-sports-model",
       title: "Ms Sports Model",
-      headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+      headline: "Ms Sports Model",
       body:
-        "Xperience Park is also an arcade and puck games area with free access.",
+        "Athletic, sporty look with more muscularity than Bikini, including visible abs, capped shoulders, and back/leg definition. Slightly softer than Fitness Model.",
       ctaText: "Learn More",
-      ctaHref: "/ms-sports-model",
+      ctaHref: "/divisions/ms-sports-model",
       image: msSportsModel,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
@@ -138,11 +138,11 @@ const slides = [
     {
       key: "ms-bikini-model",
       title: "Ms Bikini Model",
-      headline: "COME AND HAVE FUN WITH OUR DIFFERENT GAMES",
+      headline: "Ms Bikini Model",
       body:
-        "Xperience Park is also an arcade and puck games area with free access.",
+        "One of the most muscular female divisions, with high conditioning while keeping femininity. Requires wide back, capped shoulders, visible six-pack, and leg muscle separation.",
       ctaText: "Learn More",
-      ctaHref: "/ms-bikini-model",
+      ctaHref: "/divisions/ms-bikini-model",
       image: msBikiniModel,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
@@ -208,10 +208,7 @@ export default function App() {
           </FadeIn>
           <FadeIn y={24} delay={0.08}>
             <p className="text-lg sm:text-xl max-w-3xl mb-8">
-            Giant text block to test visual rhythm and spacing. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Integer luctus, velit
-            at volutpat interdum, sem urna fermentum metus, ut tincidunt risus
-            mauris non justo.
+            Step on stage with confidence! Whether you’re chasing the golden-era look, showcasing a lean athletic physique, or making your debut in a beginner-friendly category, there’s a division for every athlete. Explore the options below and find the one that best fits your journey.
           </p>
           </FadeIn>
           <FadeIn y={24} delay={0.16} className="flex justify-center">
@@ -263,10 +260,7 @@ export default function App() {
           </FadeIn>
           <FadeIn y={24} delay={0.08}>
           <p className="text-lg sm:text-xl max-w-3xl mb-8">
-            One more layout so you can compare alternating sections quickly.
-            Proin iaculis, ligula vitae lacinia pharetra, mi justo pharetra
-            velit, a tristique nunc enim non nunc. Maecenas placerat felis a
-            aliquet pulvinar.
+          From local classics to national showdowns, ICN events bring athletes together across Australia. Step onto the stage, showcase your hard work, and experience the energy of natural competition—no matter where you are.
           </p>
           </FadeIn>
           <EventShowcase />
