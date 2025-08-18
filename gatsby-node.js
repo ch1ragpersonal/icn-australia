@@ -27,7 +27,7 @@ exports.createPages = async ({ actions, reporter }) => {
       return;
     }
 
-    const template = path.join(process.cwd(), "src", "templates", "division.js");
+    const template = path.join(process.cwd(), "src", "templates", "DivisionPage.js");
 
     divisions.forEach((division) => {
       if (!division?.slug) {

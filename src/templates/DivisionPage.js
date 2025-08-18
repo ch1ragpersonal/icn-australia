@@ -3,8 +3,6 @@ import React from "react";
 import { Link, withPrefix } from "gatsby";
 import Seo from "../components/seo";
 
-const imgReq = require.context("../images/divisions", false, /\.(png|jpe?g|webp|svg)$/);
-
 export default function DivisionPage({ pageContext }) {
   const division = pageContext?.division;
 
@@ -18,18 +16,20 @@ export default function DivisionPage({ pageContext }) {
     );
   }
 
-  const { title, description, image, gender, pdf } = division;
-  // If your JSON uses /images/... and the files live under /static/images or similar,
-  // withPrefix keeps the path correct in dev & prod.
-  let heroSrc = null;
-  if (image) {
-    try {
-      // supports "womens-bikini.jpg"
-      heroSrc = imgReq(`./${image}`);
-    } catch {
-      heroSrc = null;
-    }
-  }
+  const {
+    title,
+    description,
+    image,           // e.g. "/images/mens-physique.jpg"
+    gender,          // "male" | "female" | "open"
+    pdf,             // optional
+    attire,          // string
+    judgingCriteria, // string[]
+    stageWalkPosing, // string
+    subdivisions,    // string[]
+  } = division;
+
+  // Expecting image paths like "/images/your-file.jpg" under static/images
+  const heroSrc = image ? withPrefix(image) : null;
 
   return (
     <>
@@ -69,29 +69,68 @@ export default function DivisionPage({ pageContext }) {
 
       {/* BODY */}
       <main className="max-w-6xl mx-auto px-6 py-10">
-        {/* Intro / Description */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,380px] gap-10 items-start">
-          <article className="prose prose-lg max-w-none prose-headings:font-extrabold prose-p:text-neutral-700">
-            <p className="text-lg leading-7 text-neutral-700">
-              {description || "More information coming soon."}
-            </p>
-
-            {/* Placeholder for the detailed content you'll paste later.
-                When you add long-form content from the PDFs, replace or extend here. */}
-            {!description && (
-              <p className="italic text-neutral-500">
-                We’re preparing detailed criteria, divisions, and posing guides.
-                Check back shortly.
+          {/* Main content */}
+          <article className="max-w-none">
+            {/* Overview */}
+            <section className="mb-10">
+              <h2 className="text-2xl font-extrabold tracking-tight">Overview</h2>
+              <p className="mt-3 text-lg leading-7 text-neutral-700">
+                {description || "More information coming soon."}
               </p>
+            </section>
+
+            {/* Attire */}
+            {attire && (
+              <section className="mb-10">
+                <h2 className="text-2xl font-extrabold tracking-tight">Attire</h2>
+                <p className="mt-3 text-neutral-700">{attire}</p>
+              </section>
             )}
 
-            {/* If you want a “Key Criteria” section, uncomment and populate later */}
-            {/* <h2>Key Criteria</h2>
-            <ul>
-              <li>Symmetry & balance</li>
-              <li>Stage presence & posing</li>
-              <li>Conditioning appropriate to the division</li>
-            </ul> */}
+            {/* Judging Criteria */}
+            {Array.isArray(judgingCriteria) && judgingCriteria.length > 0 && (
+              <section className="mb-10">
+                <h2 className="text-2xl font-extrabold tracking-tight">
+                  Judging Criteria
+                </h2>
+                <ul className="mt-4 space-y-2">
+                  {judgingCriteria.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-red-600" />
+                      <span className="text-neutral-800">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* Stage Walk & Posing */}
+            {stageWalkPosing && (
+              <section className="mb-10">
+                <h2 className="text-2xl font-extrabold tracking-tight">
+                  Stage Walk &amp; Posing
+                </h2>
+                <p className="mt-3 text-neutral-700">{stageWalkPosing}</p>
+              </section>
+            )}
+
+            {/* Subdivisions */}
+            {Array.isArray(subdivisions) && subdivisions.length > 0 && (
+              <section className="mb-6">
+                <h2 className="text-2xl font-extrabold tracking-tight">Subdivisions</h2>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {subdivisions.map((s, i) => (
+                    <span
+                      key={i}
+                      className="rounded-full border border-black/10 bg-black/5 px-3 py-1 text-sm font-semibold"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            )}
           </article>
 
           {/* Side Card / Quick Facts */}
@@ -132,7 +171,7 @@ export default function DivisionPage({ pageContext }) {
               </div>
             </div>
 
-            {/* Optional photo tile if you want a second visual */}
+            {/* Optional extra image */}
             {heroSrc && (
               <img
                 src={heroSrc}
