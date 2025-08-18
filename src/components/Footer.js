@@ -10,64 +10,60 @@ const Footer = () => {
         {/* Box 1 */}
         <div className="bg-c p-8 md:p-12 lg:col-span-2 flex items-start">
           <h2 className="uppercase font-extrabold tracking-tight leading-tight text-xl md:text-2xl lg:text-3xl">
-            Xperience Park, a hub of fun activities to share with family,
-            friends, or colleagues! Choose your activity to have fun 7 days a
-            week, even on Sundays, just 5 minutes from Mulhouse!
+            ICN AUSTRALIA – NATURAL BODYBUILDING AT ITS BEST
           </h2>
           <Counter target={1972} duration={1400} stagger={70} />
         </div>
         {/* Box 2 */}
         <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
-            900 m² of trampolines
+            EVENTS NATIONWIDE
           </h3>
           <p>
-            1500 m² of play areas, including 900 m² of trampolines to test your
-            agility in complete safety.
+            From state qualifiers to national titles, ICN Australia runs shows across the country, giving every athlete the chance to shine.
           </p>
         </div>
         {/* Box 3 */}
         <div className="bg-a p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
-            Without reservation
+            NO QUALIFIER REQUIRED
           </h3>
-          <p>Access to our trampoline park is without reservation.</p>
+          <p>Many of our events are open-entry. Step on stage without needing prior qualification and experience the thrill of competition.</p>
         </div>
         {/* Box 4 */}
         <div className="bg-a p-8 md:p-12 flex flex-col">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-6">
-            Air–conditioned park
+            CLEAN SPORT GUARANTEED
           </h3>
+          <p>
+            We are committed to 100% natural bodybuilding. Rigorous drug-testing protocols keep our sport fair, transparent, and credible
+          </p>
         </div>
         {/* Box 5 */}
         <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
-            Socks and wristbands required
+            SUPPORTIVE COMMUNITY
           </h3>
           <p>
-            For your safety and hygiene reasons, non-slip socks and a wristband
-            are mandatory. If you don&apos;t have one, the complete set is
-            available for purchase at reception.
+            Whether you’re an athlete, coach, or supporter, ICN Australia provides a welcoming community where everyone can achieve their best.
           </p>
         </div>
         {/* Box 6 */}
         <div className="bg-a p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
-            Food and drinks
+            REGISTRATION & MEMBERSHIP
           </h3>
           <p>
-            Beverages and food from your bag are prohibited within the
-            amusement park.
+            Competing with ICN Australia requires membership and registration. Sign up easily online to access all events and benefits.
           </p>
         </div>
         {/* Box 7 */}
         <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
-            Lockers available
+            PARTNERS & SPONSORS
           </h3>
           <p>
-            To keep your belongings safe, but also for your safety and that of
-            others, your valuables can be stored in our available lockers.
+            ICN Australia works with trusted partners who share our vision of health, performance, and integrity.
           </p>
         </div>
       </div>
@@ -76,7 +72,7 @@ const Footer = () => {
       <div className="bg-white p-8 md:p-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Column */}
-          <p className="text-base leading-relaxed">
+          {/* <p className="text-base leading-relaxed">
             Trampoline, Ninja Warrior, arcades, shuffleboard, Connect 4
             basketball, augmented reality: come and experience the thrills and
             activities of your trampoline park in Mulhouse, Alsace. You can
@@ -85,12 +81,12 @@ const Footer = () => {
             dodge ball or Ninja Warrior course. Come test your agility and feel
             like Lebron James for a game of Connect 4 basketball! Experience
             augmented reality with the Hado game and discover new sensations.
-          </p>
+          </p> */}
 
           {/* Right Column - Newsletter */}
           <div>
             <h3 className="font-bold text-lg mb-4">
-              Receive the latest Xperience Park news
+              Receive the latest ICN AUSTRALIA news
             </h3>
             <div className="flex items-center border-b border-gray-800 mb-6">
               <input
