@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "womens-bikini",
+    "title": "Women's Bikini",
+    "gender": "female",
+    "description": "Women's Bikini division is about balance, symmetry, and a lean but healthy physique. Competitors are judged on stage presence, posing, and overall aesthetic look.",
+    "image": "/images/womens-bikini.jpg"
+  },
+  {
+    "slug": "mens-physique",
+    "title": "Men's Physique",
+    "gender": "male",
+    "description": "Men’s Physique division rewards a lean, muscular upper body with emphasis on aesthetics and proportion. Competitors wear boardshorts and are judged on V-taper and stage presentation.",
+    "image": "/images/mens-physique.jpg"
+  },
+  {
+    "slug": "mens-classic-physique",
+    "title": "Men's Classic Physique",
+    "gender": "male",
+    "description": "Classic Physique aims to capture the golden-era bodybuilding look: symmetry, proportion, and flowing lines, with mandatory classic poses.",
+    "image": "/images/mens-classic-physique.jpg"
+  },
+  {
+    "slug": "bodybuilding",
+    "title": "Bodybuilding",
+    "gender": "male",
+    "description": "The traditional bodybuilding division. Competitors are judged on muscle size, conditioning, symmetry, and overall presentation.",
+    "image": "/images/bodybuilding.jpg"
+  }
+]

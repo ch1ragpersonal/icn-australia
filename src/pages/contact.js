@@ -35,9 +35,12 @@ const ContactPage = () => {
   return (
     <>
       <Seo title="Contact Us" description="Contact ICN Australia" />
+      <ContactUs />
+
 
       <div className="px-4 sm:px-6 lg:px-8 py-6">
         {/* Your existing contact form/section */}
+        
 
         <div className="mt-10">
           <h1
@@ -71,8 +74,6 @@ const ContactPage = () => {
             ))}
           </Swiper>
         </div>
-        <ContactUs />
-
       </div>
     </>
   );
