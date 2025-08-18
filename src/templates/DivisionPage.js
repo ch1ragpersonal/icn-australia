@@ -2,6 +2,7 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 import Seo from "../components/seo";
+import { resolveImage } from "../utils/ResolveImage";
 
 export default function DivisionPage({ pageContext }) {
   const division = pageContext?.division;
@@ -19,17 +20,20 @@ export default function DivisionPage({ pageContext }) {
   const {
     title,
     description,
-    image,           // e.g. "/images/mens-physique.jpg"
-    gender,          // "male" | "female" | "open"
-    pdf,             // optional
-    attire,          // string
-    judgingCriteria, // string[]
-    stageWalkPosing, // string
-    subdivisions,    // string[]
+    image,            // e.g. "/images/divisions/mens-classic-physique.jpg"
+    gender,           // "male" | "female" | "open"
+    pdf,              // optional (keep in /static if you want a public URL)
+    attire,           // string
+    judgingCriteria,  // string[]
+    stageWalkPosing,  // string
+    subdivisions,     // string[]
   } = division;
 
-  // Expecting image paths like "/images/your-file.jpg" under static/images
-  const heroSrc = image ? withPrefix(image) : null;
+  // IMPORTANT:
+  // - Images now live in src/images, so we bundle them (no withPrefix here).
+  // - resolveImage turns "/images/..." into a bundled URL.
+const heroSrc = resolveImage(image);
+// heroSrc should be a URL string now
 
   return (
     <>
@@ -40,10 +44,11 @@ export default function DivisionPage({ pageContext }) {
         {heroSrc ? (
           <>
             <img
-              src={heroSrc}
-              alt={title}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+  src={heroSrc}
+  alt={title}
+  className="absolute inset-0 h-full w-full object-cover"
+  style={{ objectPosition: "50% 20%" }} 
+/>
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-transparent" />
           </>
         ) : (
@@ -158,6 +163,10 @@ export default function DivisionPage({ pageContext }) {
                   Find a Competition
                 </Link>
 
+                {/*
+                  PDFs should live under /static (e.g. /static/pdfs/guide.pdf),
+                  so withPrefix(pdf) is appropriate for them.
+                */}
                 {pdf && (
                   <a
                     href={withPrefix(pdf)}
@@ -174,10 +183,10 @@ export default function DivisionPage({ pageContext }) {
             {/* Optional extra image */}
             {heroSrc && (
               <img
-                src={heroSrc}
-                alt={`${title} example`}
-                className="rounded-2xl border border-black/10 shadow-sm w-full object-cover"
-              />
+  src={heroSrc}
+  alt={`${title} example`}
+  className="rounded-2xl border border-black/10 shadow-sm w-1/2 object-cover mx-auto"
+/>
             )}
           </aside>
         </div>

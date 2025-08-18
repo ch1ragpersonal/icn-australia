@@ -1,20 +1,21 @@
 import React from "react";
 import Seo from "../components/seo";
-import EventShowcase from "../components/EventShowcase";
-import DivisionTabs from "../components/DivisionTabs";
-import mensFitness from "../images/divisions/mens-fitness.jpg"
-import mensPhysique from "../images/divisions/mens-physique.jpg"
-import mensClassicPhysique from "../images/divisions/mens-classic-physique.jpg"
-import bodybuilding from "../images/divisions/bodybuilding.jpg"
-import msWellness from "../images/divisions/ms-wellness.jpg"
-import msSwimsuit from "../images/divisions/ms-swimsuit.jpg"
-import msFitness from "../images/divisions/ms-fitness.jpg"
-import msFigure from "../images/divisions/ms-figure.jpg"
-import msSportsModel from "../images/divisions/ms-sports-model.jpg"
-import msBikiniModel from "../images/divisions/ms-bikini-model.jpg"
 import FadeIn from "../components/FadeIn";
-import { Stagger, StaggerItem } from "../components/Stagger";
+import { Stagger, StaggerItem } from "../components/Stagger";import DivisionTabs from "../components/DivisionTabs";
+import EventShowcase from "../components/EventShowcase";
 import MajorEventCountdown from "../components/MajorEventCountdown";
+
+import mensFitness from "../images/divisions/mens-fitness.jpg";
+import mensPhysique from "../images/divisions/mens-physique.jpg";
+import mensClassicPhysique from "../images/divisions/mens-classic-physique.jpg";
+import bodybuilding from "../images/divisions/bodybuilding.jpg";
+import msWellness from "../images/divisions/ms-wellness.jpg";
+import msSwimsuit from "../images/divisions/ms-swimsuit.jpg";
+import msFitness from "../images/divisions/ms-fitness.jpg";
+import msFigure from "../images/divisions/ms-figure.jpg";
+import msSportsModel from "../images/divisions/ms-sports-model.jpg";
+import msBikiniModel from "../images/divisions/ms-bikini-model.jpg";
+
 
 function FullBleed({ children, className = "" }) {
   return (
@@ -168,35 +169,40 @@ const slides = [
   );
 
 
+
 export default function App() {
   return (
     <>
       <Seo title="Home" description="Welcome to ICN Australia" />
 
-      {/* Hero */}
-      <FullBleed className="min-h-[70vh] sm:min-h-[80vh]">
-        <div
-          className="min-h-[70vh] sm:min-h-[80vh] bg-cover bg-center flex items-end"
-          style={{ backgroundImage: "url(/images/placeholder-hero.jpg)" }}
-        >
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-            <Stagger>
-              <StaggerItem>
-                <h1 className="text-a text-6xl sm:text-7xl font-extrabold drop-shadow-md mb-3">
-                  ICN is The Home of Australia’s Natural Bodybuilding Elite
-                </h1>
-              </StaggerItem>
-            </Stagger>
-            <Stagger>
-              <StaggerItem>
-                <p className="text-a text-lg sm:text-xl max-w-3xl drop-shadow">
-                  Compete at The Pinnacle of Natural Physique Competition.
-                </p>
-              </StaggerItem>
-            </Stagger>
-          </div>
-        </div>
-      </FullBleed>
+      {/* Hero with overlay, cropped bottom, full width */}
+      {/* Hero with centered image, blurred side fill, cropped from bottom */}
+{/* Hero: centered image with blurred side fill, cropped from bottom */}
+{/* Hero: centered image, blurred side fill, cropped from bottom (uses /static/hero.jpg) */}
+<FullBleed className="relative overflow-hidden">
+  <div className="relative">
+    {/* Full width image */}
+    <img
+      src="/static/hero.jpg"
+      alt="ICN Australia Hero"
+      className="w-full h-auto object-cover object-top"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  {/* Text section under image */}
+  <div className="bg-white py-10 px-4 sm:px-6 lg:px-8 text-center">
+    <h1 className="text-a text-5xl sm:text-7xl font-extrabold">
+      ICN is The Home of Australia’s Natural Bodybuilding Elite
+    </h1>
+  </div>
+</FullBleed>
+
+
+
+
+
 
       {/* Red background (a), black text (b), white CTA (c) */}
       <FullBleed className="bg-a text-b">
@@ -208,11 +214,15 @@ export default function App() {
           </FadeIn>
           <FadeIn y={24} delay={0.08}>
             <p className="text-lg sm:text-xl max-w-3xl mb-8">
-            Step on stage with confidence! Whether you’re chasing the golden-era look, showcasing a lean athletic physique, or making your debut in a beginner-friendly category, there’s a division for every athlete. Explore the options below and find the one that best fits your journey.
-          </p>
+              Step on stage with confidence! Whether you’re chasing the
+              golden-era look, showcasing a lean athletic physique, or making
+              your debut in a beginner-friendly category, there’s a division for
+              every athlete. Explore the options below and find the one that
+              best fits your journey.
+            </p>
           </FadeIn>
           <FadeIn y={24} delay={0.16} className="flex justify-center">
-            <DivisionTabs items={slides}/>
+            <DivisionTabs items={slides} />
           </FadeIn>
           <FadeIn y={24} delay={0.24} className="flex justify-center">
             <a
@@ -231,22 +241,20 @@ export default function App() {
       <FullBleed className="bg-b text-c">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
           <FadeIn y={40}>
-          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
-            Come to Australia's Biggest Bodybuilding Event of the Year
-          </h1>
+            <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">
+              Come to Australia's Biggest Bodybuilding Event of the Year
+            </h1>
           </FadeIn>
-          {/* <p className="text-lg sm:text-xl max-w-3xl mb-8">
-            Another large heading with filler paragraphs to see contrast and
-            flow. Suspendisse potenti. Cras tincidunt arcu in feugiat gravida.
-            Nibh tortor hendrerit massa, quis vehicula justo sem sit amet ipsum.
-          </p>
-          <button className="inline-flex items-center border-2 font-bold rounded-full px-6 py-3 transition-colors text-a border-a hover:bg-a hover:text-c">
-            Placeholder CTA
-          </button> */}
         </div>
         <div className="relative">
           <MajorEventCountdown />
-          <EdgeFade position="bottom" from="from-b/95" to="to-transparent" height="h-20" blur="blur" />
+          <EdgeFade
+            position="bottom"
+            from="from-b/95"
+            to="to-transparent"
+            height="h-20"
+            blur="blur"
+          />
         </div>
       </FullBleed>
 
@@ -259,14 +267,17 @@ export default function App() {
             </h1>
           </FadeIn>
           <FadeIn y={24} delay={0.08}>
-          <p className="text-lg sm:text-xl max-w-3xl mb-8">
-          From local classics to national showdowns, ICN events bring athletes together across Australia. Step onto the stage, showcase your hard work, and experience the energy of natural competition—no matter where you are.
-          </p>
+            <p className="text-lg sm:text-xl max-w-3xl mb-8">
+              From local classics to national showdowns, ICN events bring
+              athletes together across Australia. Step onto the stage, showcase
+              your hard work, and experience the energy of natural
+              competition—no matter where you are.
+            </p>
           </FadeIn>
           <EventShowcase />
         </div>
       </FullBleed>
-
     </>
   );
 }
+
