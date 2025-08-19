@@ -16,6 +16,21 @@
     "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "30+", "40+", "Momma's"]
   },
   {
+    "slug": "ms-wellness",
+    "title": "Ms Wellness",
+    "gender": "female",
+    "description": "A balance between Bikini and Figure divisions. More lower body development (glutes, thighs) than Bikini, but less muscular and conditioned than Figure. Emphasises an athletic, feminine, and healthy look.",
+    "image": "images/divisions/ms-wellness.jpg",
+    "attire": "Two-piece stage bikini (any fabric, colour, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
+    "judgingCriteria": [
+      "Overall shape, balance, and symmetry with emphasis on glutes, legs, and lower body",
+      "Toned but not overly lean condition",
+      "Stage presence, confidence, and feminine presentation"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns (front, side, back, opposite side). May include comparison rounds. Relaxed, feminine, confident stage walk.",
+    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "30+", "40+"]
+  },
+  {
     "slug": "ms-sports-model",
     "title": "Ms Sports Model",
     "gender": "female",

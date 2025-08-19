@@ -1,5 +1,5 @@
 const req = require.context(
-  "../images",
+  "../images/divisions",
   true,
   /\.(png|jpe?g|webp|avif|gif|svg)$/i
 );
