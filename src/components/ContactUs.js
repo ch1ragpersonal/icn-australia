@@ -12,14 +12,14 @@ const ContactUs = () => {
   return (
     <section className="relative overflow-hidden">
       {/* subtle red line accent */}
-      <div className="h-1 w-full bg-red-600" />
+      <div className="h-1 w-full bg-a" />
 
       {/* backdrop */}
       <div className="bg-neutral-950 text-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14">
           {/* Eyebrow + Title */}
           <div className="text-center">
-            <span className="inline-block rounded-full bg-red-600/15 px-4 py-1.5 text-xs font-semibold tracking-wider text-red-400 ring-1 ring-red-600/30">
+            <span className="inline-block rounded-full bg-a/15 px-4 py-1.5 text-xs font-semibold tracking-wider text-red-400 ring-1 ring-a/30">
               We’d love to hear from you
             </span>
             <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -36,7 +36,7 @@ const ContactUs = () => {
             {/* Email card */}
             <div className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600/20 text-red-400 ring-1 ring-red-600/30">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-a/20 text-red-400 ring-1 ring-a/30">
                   <FaEnvelope />
                 </div>
                 <h3 className="text-xl font-bold tracking-tight">Email</h3>
@@ -55,7 +55,7 @@ const ContactUs = () => {
             {/* Phone card */}
             <div className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600/20 text-red-400 ring-1 ring-red-600/30">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-a/20 text-red-400 ring-1 ring-a/30">
                   <FaPhoneAlt />
                 </div>
                 <h3 className="text-xl font-bold tracking-tight">Phone</h3>
@@ -74,7 +74,7 @@ const ContactUs = () => {
             {/* Address card */}
             <div className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600/20 text-red-400 ring-1 ring-red-600/30">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-a/20 text-red-400 ring-1 ring-a/30">
                   <FaMapMarkerAlt />
                 </div>
                 <h3 className="text-xl font-bold tracking-tight">Address</h3>
@@ -123,7 +123,7 @@ const ContactUs = () => {
           </div>
 
           {/* CTA Bar */}
-          <div className="mt-12 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 p-1">
+          <div className="mt-12 rounded-2xl bg-gradient-to-r from-a to-red-500 p-1">
             <div className="rounded-2xl bg-neutral-950/90 px-6 py-6 sm:px-8 sm:py-8">
               <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
                 <p className="text-center text-lg font-semibold sm:text-left">
