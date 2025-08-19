@@ -193,9 +193,11 @@ export default function App() {
 
   {/* Text section under image */}
   <div className="bg-white py-10 px-4 sm:px-6 lg:px-8 text-center">
-    <h1 className="text-a text-5xl sm:text-7xl font-extrabold">
-      ICN is The Home of Australia’s Natural Bodybuilding Elite
-    </h1>
+    <FadeIn y={40}>
+      <h1 className="text-a text-5xl sm:text-7xl font-extrabold">
+        ICN is The Home of Australia’s Natural Bodybuilding Elite
+      </h1>
+    </FadeIn>
   </div>
 </FullBleed>
 
