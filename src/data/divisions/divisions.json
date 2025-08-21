@@ -4,7 +4,7 @@
     "title": "Ms Bikini Model",
     "gender": "female",
     "description": "Entry-level female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
-    "image": "images/divisions/ms-bikini-model.jpg",
+    "image": "images/ms-bikini-model.jpg",
     "attire": "Two-piece stage bikini (any colour, fabric, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
     "judgingCriteria": [
       "Shape, symmetry, and toned condition (not too lean)",
@@ -20,7 +20,7 @@
     "title": "Ms Wellness",
     "gender": "female",
     "description": "A balance between Bikini and Figure divisions. More lower body development (glutes, thighs) than Bikini, but less muscular and conditioned than Figure. Emphasises an athletic, feminine, and healthy look.",
-    "image": "images/divisions/ms-wellness.jpg",
+    "image": "images/ms-wellness.jpg",
     "attire": "Two-piece stage bikini (any fabric, colour, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
     "judgingCriteria": [
       "Overall shape, balance, and symmetry with emphasis on glutes, legs, and lower body",
@@ -35,7 +35,7 @@
     "title": "Ms Sports Model",
     "gender": "female",
     "description": "Athletic, sporty look with more muscularity than Bikini, including visible abs, capped shoulders, and back/leg definition. Slightly softer than Fitness Model.",
-    "image": "images/divisions/ms-sports-model.jpg",
+    "image": "images/ms-sports-model.jpg",
     "attire": "Two-piece sports outfit (top and shorts supplied by ICN). White runners/gym shoes supplied by the athlete.",
     "judgingCriteria": [
       "Full round muscles with excellent balance and symmetry",
@@ -51,7 +51,7 @@
     "title": "Ms Figure",
     "gender": "female",
     "description": "One of the most muscular female divisions, with high conditioning while keeping femininity. Requires wide back, capped shoulders, visible six-pack, and leg muscle separation.",
-    "image": "images/divisions/ms-figure.jpg",
+    "image": "images/ms-figure.jpg",
     "attire": "Two-piece stage bikini (any colour, fabric, crystals). Clear stage heels of any height. Stage jewellery of choice.",
     "judgingCriteria": [
       "High muscularity and conditioning",
@@ -62,11 +62,11 @@
     "subdivisions": ["First Timers", "Novice", "Open", "30+", "40+", "50+"]
   },
   {
-    "slug": "ms-fitness-model",
-    "title": "Ms Fitness Model",
+    "slug": "ms-fitness",
+    "title": "Ms Fitness",
     "gender": "female",
     "description": "Balanced muscularity with visible abs, capped shoulders, and back definition. More conditioned than Sports Model, less muscular than Figure.",
-    "image": "images/divisions/ms-fitness-model.jpg",
+    "image": "images/ms-fitness.jpg",
     "attire": "Two-piece stage bikini (any colour, fabric, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
     "judgingCriteria": [
       "Conditioning and symmetry of upper and lower body",
@@ -81,7 +81,7 @@
     "title": "Ms Swimsuit",
     "gender": "female",
     "description": "Similar to Bikini but in a one-piece swimsuit. Emphasises toned condition, beauty, and stage confidence over muscularity.",
-    "image": "images/divisions/ms-swimsuit.jpg",
+    "image": "images/ms-swimsuit.jpg",
     "attire": "One-piece swimsuit (any colour or fabric). Clear stage heels of any height. Stage jewellery of choice.",
     "judgingCriteria": [
       "Shape, symmetry, and toned condition",
@@ -96,7 +96,7 @@
     "title": "Men's Bodybuilding",
     "gender": "male",
     "description": "The most muscular and conditioned men’s division. Competitors must show extreme size, symmetry, vascularity, and striations across all muscle groups.",
-    "image": "images/divisions/bodybuilding.jpg",
+    "image": "images/bodybuilding.jpg",
     "attire": "Bodybuilding trunks (supplied by athlete).",
     "judgingCriteria": [
       "Size, symmetry, condition, and vascularity",
@@ -111,7 +111,7 @@
     "title": "Men's Classic Physique",
     "gender": "male",
     "description": "Inspired by the Golden Era of bodybuilding. Emphasises symmetry, proportion, and classic lines over sheer size. Equal conditioning to Bodybuilding but less mass.",
-    "image": "images/divisions/mens-classic-physique.jpg",
+    "image": "images/mens-classic-physique.jpg",
     "attire": "Classic physique shorts/short tights (supplied by ICN).",
     "judgingCriteria": [
       "Symmetry, shape, condition, and overall aesthetics",
@@ -126,7 +126,7 @@
     "title": "Men's Fitness ",
     "gender": "male",
     "description": "Entry-level men’s category. Athletic and lean with moderate muscle, visible abs, and balance between upper and lower body. Less extreme than Physique or Bodybuilding.",
-    "image": "images/divisions/mens-fitness.jpg",
+    "image": "images/mens-fitness.jpg",
     "attire": "Athletic shorts or mid-thigh board shorts (supplied by ICN).",
     "judgingCriteria": [
       "Balance, conditioning, and six-pack abs",
@@ -141,7 +141,7 @@
     "title": "Men's Physique",
     "gender": "male",
     "description": "Upper-body focused category with broad shoulders, small waist, and strong V-taper. Highly conditioned with visible abs, but no leg development required like in Bodybuilding.",
-    "image": "images/divisions/mens-physique.jpg",
+    "image": "images/mens-physique.jpg",
     "attire": "Board shorts just above the knee (supplied by athlete).",
     "judgingCriteria": [
       "Symmetry, shape, and muscularity of upper body",

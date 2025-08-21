@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 import logo from "../images/logo.png"; // <-- update to your actual logo path
 import memberPortal from "../images/member_portal.png";
-import mensFitness from "../images/divisions/mens-fitness.jpg"
-import mensPhysique from "../images/divisions/mens-physique.jpg"
-import mensClassicPhysique from "../images/divisions/mens-classic-physique.jpg"
-import bodybuilding from "../images/divisions/bodybuilding.jpg"
-import msWellness from "../images/divisions/ms-wellness.jpg"
-import msSwimsuit from "../images/divisions/ms-swimsuit.jpg"
-import msFitness from "../images/divisions/ms-fitness.jpg"
-import msFigure from "../images/divisions/ms-figure.jpg"
-import msSportsModel from "../images/divisions/ms-sports-model.jpg"
-import msBikiniModel from "../images/divisions/ms-bikini-model.jpg"
+import mensFitness from "../data/divisions/images/mens-fitness.jpg"
+import mensPhysique from "../data/divisions/images/mens-physique.jpg"
+import mensClassicPhysique from "../data/divisions/images/mens-classic-physique.jpg"
+import bodybuilding from "../data/divisions/images/bodybuilding.jpg"
+import msWellness from "../data/divisions/images/ms-wellness.jpg"
+import msSwimsuit from "../data/divisions/images/ms-swimsuit.jpg"
+import msFitness from "../data/divisions/images/ms-fitness.jpg"
+import msFigure from "../data/divisions/images/ms-figure.jpg"
+import msSportsModel from "../data/divisions/images/ms-sports-model.jpg"
+import msBikiniModel from "../data/divisions/images/ms-bikini-model.jpg"
 
 /**
  * Responsive Navbar (Gatsby + Tailwind)
