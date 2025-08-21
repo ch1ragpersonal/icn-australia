@@ -47,13 +47,14 @@ module.exports = {
     "gatsby-transformer-sharp",
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-postcss`,
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: `blog`,
-    //     path: `${__dirname}/blog`,
-    //   }
-    // },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: `divisions`,
+        path: `${__dirname}/src/data/divisions`,
+      }
+    },
+    `gatsby-transformer-json`,
 
   ]
 };
