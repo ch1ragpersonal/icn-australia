@@ -19,6 +19,7 @@ const ContactPage = () => {
           id
           photo { file { url } }
           bio { raw }
+          priority
           contact
           name
           title
@@ -30,7 +31,15 @@ const ContactPage = () => {
   const presidents = data.allContentfulPresident.nodes.map((p) => ({
     ...p,
     photo: p.photo?.file?.url,
+    priority: !!p.priority,
   }));
+
+  const sortedPresidents = presidents
+  .map((p, idx) => ({ ...p, _idx: idx })) // capture original index
+  .sort((a, b) => {
+    if (a.priority !== b.priority) return a.priority ? -1 : 1;
+    return a._idx - b._idx; // keep original order among same priority
+  });
 
   return (
     <>
@@ -65,7 +74,7 @@ const ContactPage = () => {
             }}
             style={{ padding: "1rem 0" }}
           >
-            {presidents.map((pres) => (
+            {sortedPresidents.map((pres) => (
               <SwiperSlide key={pres.id}>
                 <div className="h-full">
                   <PresidentCard president={pres} />
