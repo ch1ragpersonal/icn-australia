@@ -17,9 +17,10 @@ import msSportsModel from "../images/divisions/ms-sports-model.jpg";
 import msBikiniModel from "../images/divisions/ms-bikini-model.jpg";
 
 
-function FullBleed({ children, className = "" }) {
+function FullBleed({ children, className = "", ...rest }) {
   return (
     <div
+      {...rest}
       className={`w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] ${className}`}
     >
       {children}
@@ -207,7 +208,7 @@ export default function App() {
 
 
       {/* Red background (a), black text (b), white CTA (c) */}
-      <FullBleed className="bg-a text-b">
+      <FullBleed id="divisions" className="bg-a text-b">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 font-sans">
           <FadeIn y={40}>
             <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6">

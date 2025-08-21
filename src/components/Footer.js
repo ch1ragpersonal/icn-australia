@@ -12,7 +12,12 @@ const Footer = () => {
           <h2 className="uppercase font-extrabold tracking-tight leading-tight text-xl md:text-2xl lg:text-3xl">
             ICN AUSTRALIA – NATURAL BODYBUILDING AT ITS BEST
           </h2>
-          <Counter target={1972} duration={1400} stagger={70} />
+          <div className="flex flex-col items-center justify-center gap-4">
+            <Counter target={1972} duration={1400} stagger={70} />
+            <h3 className="text-lg md:text-xl lg:text-xl">
+              Athletes registered to compete!
+            </h3>
+          </div>
         </div>
         {/* Box 2 */}
         <div className="bg-c p-8 md:p-12">

@@ -95,8 +95,9 @@ const Navbar = () => {
             {/* Divisions trigger (desktop hover) */}
             <div className="relative" onMouseEnter={openDivisions}>
               <Link
-                to="/divisions"
+                to="/#divisions"
                 className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
+                onClick={closeDivisions}
               >
                 <DecoratedLabel>Divisions</DecoratedLabel>
               </Link>
@@ -108,6 +109,14 @@ const Navbar = () => {
               onMouseEnter={closeDivisions}
             >
               <DecoratedLabel>Competitions</DecoratedLabel>
+            </Link>
+
+            <Link
+              to="/rules"
+              className="group relative inline-flex items-center justify-center px-3 py-2 text-white hover:text-white transition-colors focus:outline-none"
+              onMouseEnter={closeDivisions}
+            >
+              <DecoratedLabel>Rules</DecoratedLabel>
             </Link>
 
             <Link
@@ -295,6 +304,10 @@ const Navbar = () => {
               <img src={msBikiniModel} alt="Ms Bikini Model" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Bikini Model</span>
             </Link>
+            <Link to="/divisions/ms-swimsuit" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
+              <img src={msSwimsuit} alt="Ms Swimsuit" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <span className="text-white">Ms Swimsuit</span>
+            </Link>
 
             {/* If you want Ms Swimsuit instead of one of the above: */}
             {/* <Link to="/divisions/ms-swimsuit" ...>Ms Swimsuit</Link> */}
@@ -307,6 +320,13 @@ const Navbar = () => {
             onClick={() => setMobileOpen(false)}
           >
             Competitions
+          </Link>
+          <Link
+            to="/rules"
+            className="block px-3 py-2 text-white hover:text-blue-300 rounded-md transition"
+            onClick={() => setMobileOpen(false)}
+          >
+            Rules
           </Link>
           <Link
             to="/contact"

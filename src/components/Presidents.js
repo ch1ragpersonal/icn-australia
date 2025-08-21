@@ -4,6 +4,8 @@ import { createPortal } from "react-dom";                // ⬅️ NEW
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { FaEnvelope } from "react-icons/fa";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+
 
 /* ---------------------------- Modal (with portal) --------------------------- */
 const Modal = ({ open, onClose, children, title, avatar, subtitle }) => {
