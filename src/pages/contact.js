@@ -46,7 +46,7 @@ const ContactPage = () => {
           <h1
             className="
               text-3xl sm:text-4xl font-extrabold tracking-tight
-              text-black mb-4
+              text-b mb-4
             "
           >
             Meet our Presidents

@@ -29,7 +29,7 @@ const RuleItem = ({ title, children, open, onToggle }) => (
       className="w-full flex items-center gap-3 px-4 sm:px-6 py-4 text-left"
       aria-expanded={open}
     >
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-600 text-white shrink-0">
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-a/90 text-white shrink-0">
         !
       </span>
       <span className="flex-1 font-extrabold tracking-tight text-black text-base sm:text-lg">
@@ -203,7 +203,7 @@ const RulesPage = () => {
           <p>
             Refunds are rarely given and not after competing. A A$35 admin fee applies to
             any approved refund. Apply in writing to{" "}
-            <a className="underline decoration-red-600" href="mailto:admin@icompetenatural.com">
+            <a className="underline decoration-a/90" href="mailto:admin@icompetenatural.com">
               admin@icompetenatural.com
             </a>
             .
@@ -402,7 +402,7 @@ const RulesPage = () => {
               href="https://www.icompetenatural.com/report-cheating"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-red-600 px-6 py-3 font-bold text-red-600 hover:bg-red-600 hover:text-white transition"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-a/90 px-6 py-3 font-bold text-a/90 hover:bg-a/90 hover:text-white transition"
             >
               Report Cheating
             </a>
@@ -410,7 +410,7 @@ const RulesPage = () => {
               href="https://www.globaldro.com/AU/search"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-red-600 px-6 py-3 font-bold text-red-600 hover:bg-red-600 hover:text-white transition"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-a/90 px-6 py-3 font-bold text-a/90 hover:bg-a/90 hover:text-white transition"
             >
               Check your Substance
             </a>

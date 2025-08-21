@@ -102,7 +102,7 @@ const heroSrc = resolveImage(image);
                 <ul className="mt-4 space-y-2">
                   {judgingCriteria.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-red-600" />
+                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-a/90" />
                       <span className="text-neutral-800">{item}</span>
                     </li>
                   ))}
@@ -172,7 +172,7 @@ const heroSrc = resolveImage(image);
                     href={withPrefix(pdf)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border-2 border-red-600 px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white transition"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-a/90 px-4 py-2 font-bold text-a/90 hover:bg-a/90 hover:text-white transition"
                   >
                     Download Division PDF
                   </a>

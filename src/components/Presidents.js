@@ -67,7 +67,7 @@ const Modal = ({ open, onClose, children, title, avatar, subtitle }) => {
         >
           {/* Progress bar */}
           <div
-            className="h-[3px] bg-red-600 transition-[width]"
+            className="h-[3px] bg-a transition-[width]"
             style={{ width: `${progress * 100}%` }}
           />
 
@@ -91,7 +91,7 @@ const Modal = ({ open, onClose, children, title, avatar, subtitle }) => {
             <button
               onClick={onClose}
               className="ml-auto inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold
-                         bg-white text-black hover:bg-red-600 hover:text-white transition"
+                         bg-white text-black hover:bg-a/90 hover:text-white transition"
             >
               Close
             </button>
@@ -142,15 +142,15 @@ const BioRenderer = ({ raw }) => {
           <p className="mb-4 text-[17px] leading-7 tracking-tight text-white/90">{children}</p>
         ),
         [BLOCKS.QUOTE]: (_, children) => (
-          <blockquote className="my-6 border-l-4 border-red-600 pl-4 text-white/90 italic">
+          <blockquote className="my-6 border-l-4 border-a/90 pl-4 text-white/90 italic">
             {children}
           </blockquote>
         ),
         [BLOCKS.UL_LIST]: (_, children) => (
-          <ul className="mb-5 ml-5 list-disc space-y-2 marker:text-red-500">{children}</ul>
+          <ul className="mb-5 ml-5 list-disc space-y-2 marker:text-a/90">{children}</ul>
         ),
         [BLOCKS.OL_LIST]: (_, children) => (
-          <ol className="mb-5 ml-5 list-decimal space-y-2 marker:text-red-500">{children}</ol>
+          <ol className="mb-5 ml-5 list-decimal space-y-2 marker:text-a/90">{children}</ol>
         ),
         [BLOCKS.LIST_ITEM]: (_, children) => <li>{children}</li>,
         [INLINES.HYPERLINK]: (node, children) => {
@@ -160,7 +160,7 @@ const BioRenderer = ({ raw }) => {
               href={url}
               target="_blank"
               rel="noreferrer"
-              className="underline decoration-red-600 underline-offset-4 hover:text-red-400"
+              className="underline decoration-a/90 underline-offset-4 hover:text-a/90"
             >
               {children}
             </a>
