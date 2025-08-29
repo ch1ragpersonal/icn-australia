@@ -1,9 +1,11 @@
 // src/pages/contact.js
-import React from "react";
+import React, { useMemo } from "react";
 import Seo from "../components/seo";
 import ContactUs from "../components/ContactUs";
 import { graphql, useStaticQuery } from "gatsby";
-import PresidentCard from "../components/Presidents";
+
+// ⬇️ use the **named** exports from Presidents.jsx
+import { PresidentCard, sortPresidentsForDisplay, useUniformHeights } from "../components/Presidents";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
@@ -17,67 +19,69 @@ const ContactPage = () => {
       allContentfulPresident {
         nodes {
           id
-          photo { file { url } }
-          bio { raw }
-          priority
-          contact
           name
           title
+          contact
+          priority        # "Yes" | "No" | "" (keep as string)
+          vicePresident   # "Yes" | "No"
+          # stateName     # (optional; include if you have it)
+          bio { raw }
+          photo { file { url } }
         }
       }
     }
   `);
 
-  const presidents = data.allContentfulPresident.nodes.map((p) => ({
-    ...p,
-    photo: p.photo?.file?.url,
-    priority: !!p.priority,
-  }));
+  // Normalise shape for the card
+  const presidents = useMemo(
+    () =>
+      (data?.allContentfulPresident?.nodes ?? []).map((p) => ({
+        ...p,
+        photo: p.photo?.file?.url || "",
+      })),
+    [data]
+  );
 
-  const sortedPresidents = presidents
-  .map((p, idx) => ({ ...p, _idx: idx })) // capture original index
-  .sort((a, b) => {
-    if (a.priority !== b.priority) return a.priority ? -1 : 1;
-    return a._idx - b._idx; // keep original order among same priority
-  });
+  // Apply required ordering (Nick first, etc.)
+  const sortedPresidents = useMemo(
+    () => sortPresidentsForDisplay(presidents),
+    [presidents]
+  );
+
+  // Make all slides the same height (tallest wins)
+  const [refs, height] = useUniformHeights(sortedPresidents.length);
 
   return (
     <>
       <Seo title="Contact Us" description="Contact ICN Australia" />
       <ContactUs />
 
-
       <div className="px-4 sm:px-6 lg:px-8 py-6">
-        {/* Your existing contact form/section */}
-        
-
         <div className="mt-10">
-          <h1
-            className="
-              text-3xl sm:text-4xl font-extrabold tracking-tight
-              text-b mb-4
-            "
-          >
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-b mb-4">
             Meet our Presidents
           </h1>
 
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             spaceBetween={20}
-            slidesPerView={4}
             navigation
             pagination={{ clickable: true }}
             breakpoints={{
-              320: { slidesPerView: 1 },
-              640: { slidesPerView: 2 },
+              320:  { slidesPerView: 1 },
+              640:  { slidesPerView: 2 },
               1024: { slidesPerView: 4 },
             }}
             style={{ padding: "1rem 0" }}
           >
-            {sortedPresidents.map((pres) => (
-              <SwiperSlide key={pres.id}>
+            {sortedPresidents.map((pres, i) => (
+              <SwiperSlide key={pres.id} className="!h-auto">
                 <div className="h-full">
-                  <PresidentCard president={pres} />
+                  <PresidentCard
+                    ref={(el) => (refs.current[i] = el)}
+                    president={pres}
+                    style={height ? { height } : undefined}
+                  />
                 </div>
               </SwiperSlide>
             ))}

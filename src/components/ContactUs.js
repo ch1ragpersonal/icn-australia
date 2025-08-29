@@ -32,7 +32,7 @@ const ContactUs = () => {
           </div>
 
           {/* Cards */}
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Email card */}
             <div className="group rounded-2xl border border-c/10 bg-c/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-c/[0.08]">
               <div className="flex items-center gap-3">
@@ -52,24 +52,6 @@ const ContactUs = () => {
               </a>
             </div>
 
-            {/* Phone card */}
-            <div className="group rounded-2xl border border-c/10 bg-c/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-c/[0.08]">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-a/20 text-a/90 ring-1 ring-a/30">
-                  <FaPhoneAlt />
-                </div>
-                <h3 className="text-xl font-bold tracking-tight">Phone</h3>
-              </div>
-              <p className="mt-3 text-c/80">
-                Talk to the team weekdays (AEST).
-              </p>
-              <a
-                href="tel:+1234567890"
-                className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-c px-4 py-2 font-bold text-c transition hover:bg-c hover:text-b focus:outline-none focus-visible:ring-2 focus-visible:ring-a/90"
-              >
-                +1 (234) 567-890
-              </a>
-            </div>
 
             {/* Address card */}
             <div className="group rounded-2xl border border-c/10 bg-c/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-c/[0.08]">
@@ -80,16 +62,8 @@ const ContactUs = () => {
                 <h3 className="text-xl font-bold tracking-tight">Address</h3>
               </div>
               <p className="mt-3 text-c/80">
-                123 Innovation Road, Sydney, Australia
+                1/18 Norman Lindsay St, Conder ACT 2906
               </p>
-              <a
-                href="https://maps.google.com/?q=123 Innovation Road, Sydney"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-c px-4 py-2 font-bold text-c transition hover:bg-c hover:text-b focus:outline-none focus-visible:ring-2 focus-visible:ring-a/90"
-              >
-                View on Maps
-              </a>
             </div>
           </div>
 

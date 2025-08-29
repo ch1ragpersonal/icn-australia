@@ -1,38 +1,32 @@
 // src/components/DivisionTabs.js
 import React, { useId, useMemo, useState, useEffect, useRef } from "react";
 
-/**
- * DivisionTabs
- *
- * Usage:
- *  <DivisionTabs items={[
- *    {
- *      key: "trampoline",
- *      title: "TRAMPOLINE",
- *      headline: "Jumps and acrobatics for beginners and experts",
- *      body: "Trampolining is the ideal sport for letting off steam...",
- *      ctaText: "Learn More",
- *      ctaHref: "/trampoline",
- *      image: "/images/trampoline.webp",       // or import
- *      imageAlt: "Person jumping on trampoline",
- *      imageSide: "left"                        // "left" | "right"
- *    },
- *    ...
- *  ]}/>
- *
- * Notes:
- * - imageSide controls which side the hero sits on vs the text column.
- * - All styling is Tailwind classes; no external CSS.
- */
-
 // Base ring; apply color per state with text-* and after:border-*
 const ringBase =
   "relative after:content-[''] after:absolute after:inset-[-10px_-24px] after:rounded-full after:border after:transition-colors after:duration-200";
 
-const DivisionTabs = ({ items = [], initial = 0, className = "" }) => {
-  const [active, setActive] = useState(Math.min(initial, Math.max(0, items.length - 1)));
+const DivisionTabs = ({
+  items = [],
+  initial = 0,
+  className = "",
+  rowSplitIndex = 4, // first row count (Men = 4, Women = 6)
+}) => {
+  const [active, setActive] = useState(
+    Math.min(initial, Math.max(0, items.length - 1))
+  );
   const tabsId = useId();
   const btnRefs = useRef([]);
+
+  // groups
+  const firstRow = items.slice(0, rowSplitIndex);         // Men
+  const secondRow = items.slice(rowSplitIndex);           // Women
+
+  // mobile segment (men|women)
+  const initialGroup = active < rowSplitIndex ? "men" : "women";
+  const [group, setGroup] = useState(initialGroup);
+  useEffect(() => {
+    setGroup(active < rowSplitIndex ? "men" : "women");
+  }, [active, rowSplitIndex]);
 
   // Ensure refs length matches items
   useEffect(() => {
@@ -61,40 +55,136 @@ const DivisionTabs = ({ items = [], initial = 0, className = "" }) => {
 
   return (
     <section className={`w-full ${className}`}>
-      {/* Top titles / tablist */}
-      <div
-        role="tablist"
-        aria-label="Activities"
-        className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8 md:mb-12"
-      >
-        {items.map((it, i) => {
-          const selected = i === active;
-          return (
-            <button
-              key={it.key ?? i}
-              ref={(el) => (btnRefs.current[i] = el)}
-              id={`${tabsId}-tab-${i}`}
-              role="tab"
-              aria-selected={selected}
-              aria-controls={`${tabsId}-panel-${i}`}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setActive(i)}
-              onKeyDown={(e) => onKeyDown(e, i)}
-              className={[
-                "uppercase tracking-wide font-semibold text-sm md:text-base",
-                "px-6 md:px-8 py-3 transition",
-                selected
-                  ? `${ringBase} text-c after:border-c`
-                  : `${ringBase} after:border-transparent opacity-70 hover:opacity-100 focus:opacity-100 outline-none hover:text-c`,
-              ].join(" ")}
-            >
-              {it.title}
-            </button>
-          );
-        })}
+      {/* ---------- MOBILE: segmented Men/Women + swipeable pill list ---------- */}
+      <div className="md:hidden mb-8 space-y-4">
+        {/* Segment control */}
+        <div className="flex justify-center">
+          <div className="inline-flex rounded-full bg-white/10 p-1">
+            {["men", "women"].map((g) => {
+              const isOn = group === g;
+              return (
+                <button
+                  key={g}
+                  type="button"
+                  onClick={() => setGroup(g)}
+                  className={[
+                    "px-4 py-2 rounded-full text-sm font-semibold transition",
+                    isOn
+                      ? "bg-white text-black"
+                      : "text-white/80 hover:text-white"
+                  ].join(" ")}
+                  aria-pressed={isOn}
+                >
+                  {g === "men" ? "Men’s divisions" : "Women’s divisions"}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Horizontal, swipeable chips with snap */}
+        <div
+          role="tablist"
+          aria-label="Divisions"
+          className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory px-1"
+          // Optional: hide scrollbar in modern browsers; keep it accessible if you prefer
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          {(group === "men" ? firstRow : secondRow).map((it, i) => {
+            const idx = group === "men" ? i : rowSplitIndex + i;
+            const selected = idx === active;
+            return (
+              <button
+                key={it.key ?? idx}
+                ref={(el) => (btnRefs.current[idx] = el)}
+                id={`${tabsId}-tab-${idx}`}
+                role="tab"
+                aria-selected={selected}
+                aria-controls={`${tabsId}-panel-${idx}`}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActive(idx)}
+                onKeyDown={(e) => onKeyDown(e, idx)}
+                className={[
+                  "snap-start whitespace-nowrap rounded-full border px-4 py-2",
+                  "text-sm font-semibold transition",
+                  selected
+                    ? "border-white bg-white text-black"
+                    : "border-white/20 text-white/80 hover:text-white hover:border-white/40"
+                ].join(" ")}
+              >
+                {it.title}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Slide / panel */}
+      {/* ---------- DESKTOP / TABLET: your existing two-row layout ---------- */}
+      <div className="hidden md:block mb-8 md:mb-12 space-y-4">
+        {/* Row 1 (Men: 4) */}
+        <div role="tablist" aria-label="Divisions" className="space-y-4">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+            {firstRow.map((it, i) => {
+              const idx = i;
+              const selected = idx === active;
+              return (
+                <button
+                  key={it.key ?? idx}
+                  ref={(el) => (btnRefs.current[idx] = el)}
+                  id={`${tabsId}-tab-${idx}`}
+                  role="tab"
+                  aria-selected={selected}
+                  aria-controls={`${tabsId}-panel-${idx}`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActive(idx)}
+                  onKeyDown={(e) => onKeyDown(e, idx)}
+                  className={[
+                    "uppercase tracking-wide font-semibold text-sm md:text-base",
+                    "px-6 md:px-8 py-3 transition",
+                    selected
+                      ? `${ringBase} text-c after:border-c`
+                      : `${ringBase} after:border-transparent opacity-70 hover:opacity-100 focus:opacity-100 outline-none hover:text-c`,
+                  ].join(" ")}
+                >
+                  {it.title}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Row 2 (Women: force 6 across at lg) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-4 justify-items-center">
+            {secondRow.map((it, i) => {
+              const idx = rowSplitIndex + i;
+              const selected = idx === active;
+              return (
+                <button
+                  key={it.key ?? idx}
+                  ref={(el) => (btnRefs.current[idx] = el)}
+                  id={`${tabsId}-tab-${idx}`}
+                  role="tab"
+                  aria-selected={selected}
+                  aria-controls={`${tabsId}-panel-${idx}`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActive(idx)}
+                  onKeyDown={(e) => onKeyDown(e, idx)}
+                  className={[
+                    "uppercase tracking-wide font-semibold text-sm md:text-base",
+                    "px-6 md:px-8 py-3 transition max-w-full",
+                    selected
+                      ? `${ringBase} text-c after:border-c`
+                      : `${ringBase} after:border-transparent opacity-70 hover:opacity-100 focus:opacity-100 outline-none hover:text-c`,
+                  ].join(" ")}
+                >
+                  {it.title}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- Panels (unchanged) ---------- */}
       {items.map((it, i) => {
         const selected = i === active;
         const sideRight = (it.imageSide ?? "left") === "right";
@@ -108,7 +198,6 @@ const DivisionTabs = ({ items = [], initial = 0, className = "" }) => {
             hidden={!selected}
             className={[
               "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center",
-              // fade/slide transition
               "transition-opacity duration-300",
               selected ? "opacity-100" : "opacity-0",
             ].join(" ")}

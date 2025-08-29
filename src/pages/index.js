@@ -44,7 +44,7 @@ const slides = [
   },
   {
     key: "mens-physique",
-    title: "Men's Phyique",
+    title: "Men's Physique",
     headline: "Men's Physique",
     body:
      "Upper-body focused category with broad shoulders, small waist, and strong V-taper. Highly conditioned with visible abs, but no leg development required like in Bodybuilding.",
@@ -79,11 +79,35 @@ const slides = [
     imageSide: "left",
   },
   {
+    key: "ms-bikini-model",
+    title: "Ms Bikini Model",
+    headline: "Ms Bikini Model",
+    body:
+      "Entry-level female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
+    ctaText: "Learn More",
+    ctaHref: "/divisions/ms-bikini-model",
+    image: msBikiniModel,
+    imageAlt: "Game controller with lightning graphics",
+    imageSide: "left",
+  },
+  {
+    key: "ms-swimsuit",
+    title: "Ms Swimsuit",
+    headline: "Ms Swimsuit",
+    body:
+      "Similar to Bikini but in a one-piece swimsuit. Emphasises toned condition, beauty, and stage confidence over muscularity.",
+    ctaText: "Learn More",
+    ctaHref: "/divisions/ms-swimsuit",
+    image: msSwimsuit,
+    imageAlt: "Game controller with lightning graphics",
+    imageSide: "left",
+  },
+  {
       key: "ms-wellness",
       title: "Ms Wellness",
       headline: "Ms Wellness",
       body:
-        "The idea of Ms Wellness is for wellness and physique health to have a place in the competition. \"Elegance, beauty, and athleticism are the most important factors.\"",
+        "Ms Wellness is the perfect category for athletes with well developed lower bodies, showing clear disparity between upper and lower. This is the only category in ICN where the balance of the physique must favour the lower body over equal symmetry.",
       ctaText: "Learn More",
       ctaHref: "/divisions/ms-wellness",
       image: msWellness,
@@ -91,14 +115,14 @@ const slides = [
       imageSide: "left",
     },
     {
-      key: "ms-swimsuit",
-      title: "Ms Swimsuit",
-      headline: "Ms Swimsuit",
+      key: "ms-sports-model",
+      title: "Ms Sports Model",
+      headline: "Ms Sports Model",
       body:
-        "Similar to Swimsuit but in a one-piece swimsuit. Emphasises toned condition, beauty, and stage confidence over muscularity.",
+        "Athletic, sporty look with more muscularity than Bikini, including visible abs, capped shoulders, and back/leg definition. Slightly softer than Fitness Model.",
       ctaText: "Learn More",
-      ctaHref: "/divisions/ms-swimsuit",
-      image: msSwimsuit,
+      ctaHref: "/divisions/ms-sports-model",
+      image: msSportsModel,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
     },
@@ -119,37 +143,14 @@ const slides = [
       title: "Ms Figure",
       headline: "Ms Figure",
       body:
-        "Entry-level female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
+        "One of the most muscular female divisions, with high conditioning while keeping femininity. Requires wide back, capped shoulders, visible six-pack, and leg muscle separation.",
       ctaText: "Learn More",
       ctaHref: "/divisions/ms-figure",
       image: msFigure,
       imageAlt: "Game controller with lightning graphics",
       imageSide: "left",
     },
-    {
-      key: "ms-sports-model",
-      title: "Ms Sports Model",
-      headline: "Ms Sports Model",
-      body:
-        "Athletic, sporty look with more muscularity than Bikini, including visible abs, capped shoulders, and back/leg definition. Slightly softer than Fitness Model.",
-      ctaText: "Learn More",
-      ctaHref: "/divisions/ms-sports-model",
-      image: msSportsModel,
-      imageAlt: "Game controller with lightning graphics",
-      imageSide: "left",
-    },
-    {
-      key: "ms-bikini-model",
-      title: "Ms Bikini Model",
-      headline: "Ms Bikini Model",
-      body:
-        "One of the most muscular female divisions, with high conditioning while keeping femininity. Requires wide back, capped shoulders, visible six-pack, and leg muscle separation.",
-      ctaText: "Learn More",
-      ctaHref: "/divisions/ms-bikini-model",
-      image: msBikiniModel,
-      imageAlt: "Game controller with lightning graphics",
-      imageSide: "left",
-    },
+
 ];
 
   // A thin, blurred gradient seam you can pin to the top or bottom edge
