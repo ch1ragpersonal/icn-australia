@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Box 2 */}
-        <div className="bg-c p-8 md:p-12">
+        <div className="bg-a p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             EVENTS NATIONWIDE
           </h3>
@@ -29,7 +29,7 @@ const Footer = () => {
           </p>
         </div>
         {/* Box 3 */}
-        <div className="bg-a p-8 md:p-12">
+        <div className="bg-c p-8 md:p-12">
           <h3 className="uppercase font-extrabold tracking-wide text-xl md:text-2xl mb-4">
             NO QUALIFIER REQUIRED
           </h3>
