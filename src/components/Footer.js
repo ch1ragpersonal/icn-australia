@@ -1,6 +1,15 @@
 // src/components/Footer.js
 import React from "react";
 import Counter from "./Counter";
+import {
+  SiFacebook,
+  SiInstagram,
+  SiX,
+  SiYoutube,
+  SiLinkedin,
+  SiTiktok,
+} from "react-icons/si";
+
 
 const Footer = () => {
   return (
@@ -73,50 +82,71 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* === Contact and Newsletter Row === */}
-      <div className="bg-white p-8 md:p-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left Column */}
-          {/* <p className="text-base leading-relaxed">
-            Trampoline, Ninja Warrior, arcades, shuffleboard, Connect 4
-            basketball, augmented reality: come and experience the thrills and
-            activities of your trampoline park in Mulhouse, Alsace. You can
-            perform tricks in the trampoline area, try somersaults on the giant
-            airbag, or win your challenge against your opponent during an epic
-            dodge ball or Ninja Warrior course. Come test your agility and feel
-            like Lebron James for a game of Connect 4 basketball! Experience
-            augmented reality with the Hado game and discover new sensations.
-          </p> */}
-
-          {/* Right Column - Newsletter */}
+{/* === Contact & Socials Row (no newsletter) === */}
+<section className="bg-white p-8 md:p-12">
+  <div className="mx-auto max-w-7xl">
+    {/* glossy card with gradient border */}
+    <div className="relative rounded-3xl p-[1px] bg-gradient-to-r from-blue-500 via-sky-400 to-red-500">
+      <div className="rounded-[calc(1.5rem-1px)] bg-slate-900 px-6 py-8 md:px-10 md:py-10">
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          {/* Left */}
           <div>
-            <h3 className="font-bold text-lg mb-4">
-              Receive the latest ICN AUSTRALIA news
+            <h3 className="text-2xl font-bold text-white">
+              Find us on socials
             </h3>
-            <div className="flex items-center border-b border-gray-800 mb-6">
-              <input
-                type="email"
-                placeholder="E-mail address"
-                className="w-full py-2 px-1 focus:outline-none"
-              />
-              <button type="submit" className="text-2xl font-bold">
-                &gt;
-              </button>
-            </div>
-            {/* Social Icons */}
-            <div className="flex space-x-4">
-              {["F", "I", "X", "in", "YT", "S", "T"].map((icon, idx) => (
-                <div
-                  key={idx}
-                  className="w-10 h-10 rounded-full bg-c flex items-center justify-center"
-                >
-                  <span className="text-sm font-bold">{icon}</span>
-                </div>
-              ))}
-            </div>
+            <p className="mt-2 text-slate-300">
+              Follow <span className="font-semibold text-white">ICN Australia</span> for
+              competition news, athlete stories, and community updates.
+            </p>
+          </div>
+
+          {/* Right — animated icon row */}
+          <div className="flex flex-wrap items-center justify-start md:justify-end gap-3">
+            {[
+              { href: "https://www.facebook.com/icn.act/", label: "Facebook", Icon: SiFacebook },
+              { href: "https://instagram.com/icnaustralia", label: "Instagram", Icon: SiInstagram },
+              { href: "https://www.youtube.com/@icnact1477", label: "YouTube", Icon: SiYoutube },
+            ].map(({ href, label, Icon }, i) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                title={label}
+                className="
+                  group relative grid h-12 w-12 place-items-center rounded-full
+                  bg-white/5 ring-1 ring-white/10
+                  transition
+                  hover:-translate-y-0.5 hover:scale-105 hover:bg-white/10
+                  hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)]
+                "
+                style={{ transitionDelay: `${i * 30}ms` }}  // subtle stagger
+              >
+                {/* glow ring on hover */}
+                <span
+                  className="
+                    absolute -z-10 inset-0 rounded-full opacity-0 blur-sm
+                    group-hover:opacity-100
+                    bg-gradient-to-r from-blue-500 to-red-500
+                    transition-opacity
+                  "
+                />
+                <Icon className="h-5 w-5 text-slate-200 group-hover:text-white transition-colors" />
+              </a>
+            ))}
           </div>
         </div>
+
+        {/* divider & micro copy */}
+        <div className="mt-8 border-t border-white/10 pt-6 text-sm text-slate-400">
+          <p>Tag your posts with <span className="font-semibold text-white">#ICNAustralia</span> for a chance to be featured.</p>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+
 
       {/* === Sitemap Row === */}
       <div className="bg-white p-6 border-t border-gray-200">

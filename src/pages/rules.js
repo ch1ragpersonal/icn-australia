@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import Seo from "../components/seo";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import hero1 from "../images/hero1.png"
 
 // Simple chevron icon
 const Chevron = ({ open }) => (
@@ -316,9 +317,9 @@ const RulesPage = () => {
       <section className="relative overflow-hidden">
         <div className="relative h-[36vh] min-h-[260px] w-full bg-black">
           <img
-            src="/images/placeholder-hero.jpg"
+            src={hero1}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-30"
+            className="absolute inset-0 h-auto w-full object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent" />
           <div className="relative z-10 flex h-full items-end">
