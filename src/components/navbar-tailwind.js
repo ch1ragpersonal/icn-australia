@@ -1,5 +1,5 @@
 // Navbar.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import logo from "../images/logo.png"; // <-- update to your actual logo path
 import memberPortal from "../images/member_portal.png";
@@ -27,6 +27,17 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false); // mobile menu drawer
   const [mobileDivisionsOpen, setMobileDivisionsOpen] = useState(false); // mobile divisions sub-menu
 
+useEffect(() => {
+  const root = document.documentElement; // or document.body
+  if (mobileOpen) {
+    root.style.overflow = "hidden";
+  } else {
+    root.style.overflow = "";
+  }
+  return () => {
+    root.style.overflow = "";
+  };
+}, [mobileOpen]);
   
 
   // Reusable label with gradient text sweep + underline on hover
@@ -224,8 +235,8 @@ const Navbar = () => {
       {/* MOBILE: Slide-down menu */}
       <div
         id="mobile-menu"
-        className={`md:hidden bg-gray-800 shadow-inner transition-[max-height,opacity] duration-300 ease-out overflow-hidden ${
-          mobileOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden bg-gray-800 shadow-inner transition-[max-height,opacity] duration-300 ease-out overscroll-contain overflow-y-auto ${
+          mobileOpen ? "max-h-[calc(100dvh-56px)] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-4 pb-4 pt-2 space-y-1">
