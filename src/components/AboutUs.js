@@ -202,12 +202,14 @@ const AboutUs = () => {
                   </p>
                 </div>
                 <div className="flex md:justify-end">
-                  <Link
-                    to="/members"
+                  <a
+                    href="https://www.icompetenatural.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition"
                   >
                     Member’s Portal
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
