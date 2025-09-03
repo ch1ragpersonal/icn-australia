@@ -16,6 +16,7 @@ import msFigure from "../data/divisions/images/ms-figure.jpg";
 import msSportsModel from "../data/divisions/images/ms-sports-model.jpg";
 import msBikiniModel from "../data/divisions/images/ms-bikini-model.jpg";
 import hero from "../images/hero.jpg";
+import hero1 from "../images/hero1.png"
 
 
 function FullBleed({ children, className = "", ...rest }) {
@@ -186,9 +187,9 @@ export default function App() {
   <div className="relative">
     {/* Full width image */}
     <img
-      src={hero}
+      src={hero1}
       alt="ICN Australia Hero"
-      className="w-full h-auto object-cover object-top"
+      className="w-full h-auto md:h-[55vh] lg:h-[60vh] xl:h-[65vh] object-cover object-top"
       loading="eager"
       decoding="async"
     />
