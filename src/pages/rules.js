@@ -178,6 +178,40 @@ const RulesPage = () => {
         ),
       },
       {
+        title: "PRO QUALIFIER (PQ) CARD",
+        body: (
+          <>
+            <p className="mb-3">
+              ICN’s Pro Qualifier (PQ) card gives top amateurs the opportunity to step onto a PRO stage
+              in the year they receive it, while <span className="font-semibold">retaining amateur status</span> until they win a PRO division.
+              It’s designed to deepen PRO line-ups and make earning a full PRO Card more prestigious.
+            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <span className="font-semibold">Invitation to PRO Shows:</span> A PQ card is an exclusive invite to PRO shows and must be used by
+                <span className="whitespace-nowrap"> 31 December</span> of the award year.
+              </li>
+              <li>
+                <span className="font-semibold">Enter via your portal:</span> PQ status unlocks access in your iCompete portal to view and enter eligible PRO events.
+              </li>
+              <li>
+                <span className="font-semibold">Win your PRO Card:</span> Place in a PRO division (typically Top&nbsp;3 — check the Event PDF for specifics).
+              </li>
+              <li>
+                <span className="font-semibold">Dual eligibility:</span> Until you win a PRO division, you remain an amateur and may compete in all amateur divisions, including international amateur events.
+              </li>
+              <li>
+                <span className="font-semibold">Flexible by country:</span> PQ cards help promoters build local PRO divisions without relying on overseas athletes.
+              </li>
+            </ul>
+            <p className="mt-3">
+              PQ makes the path to ICN PRO status clearer and more meaningful by limiting full PRO cards while
+              enabling strong, competitive PRO fields.
+            </p>
+          </>
+        ),
+      },
+      {
         title: "JUDGING",
         body: (
           <p>

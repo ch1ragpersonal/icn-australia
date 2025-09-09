@@ -2,11 +2,146 @@
 import { Link, graphql, withPrefix } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Seo from "../../components/seo";
+import React from "react";
+import { SUBDIVISIONS } from "../../data/subdivisions";
 
 export const Head = ({ data }) => {
   const d = data?.divisionsJson;
   return <Seo title={d?.title || "Division"} description={d?.description?.slice(0, 160)} />;
 };
+
+// Reusable subdivision pill with tooltip/popover
+const SubdivisionPill = ({ item, isOpen, onToggle, className = "" }) => {
+  const id = `subdiv-${item.label.replace(/\W+/g, "-")}`;
+
+  return (
+    <div
+      className={`relative inline-flex flex-col items-center ${className}`}
+      onMouseEnter={() => onToggle("open")}    // desktop hover open
+      onMouseLeave={() => onToggle("close")}   // desktop hover close
+    >
+      <button
+        type="button"
+        onClick={() => onToggle("toggle")}      // mobile/desktop click toggle
+        aria-expanded={isOpen}
+        aria-controls={id}
+        className="rounded-full border border-black/10 bg-black/5 px-3 py-1
+                   text-sm font-semibold text-neutral-900 hover:bg-black/10
+                   focus:outline-none focus-visible:ring-2 focus-visible:ring-a/60"
+      >
+        {item.label}
+      </button>
+
+      {/* DESKTOP: floating popover BELOW the pill (unchanged) */}
+      <div
+        className={`hidden sm:block sm:absolute sm:top-full sm:left-1/2 sm:mt-2 sm:-translate-x-1/2
+                    sm:z-30 sm:max-w-[28rem] sm:w-[min(90vw,28rem)]
+                    sm:rounded-xl sm:border sm:border-black/10 sm:bg-white sm:p-4 sm:text-[15px] sm:leading-6 sm:text-neutral-800 sm:shadow-lg
+                    sm:transition-all
+                    ${isOpen ? "sm:opacity-100 sm:translate-y-0 sm:pointer-events-auto"
+                             : "sm:opacity-0 sm:-translate-y-1 sm:pointer-events-none"}`}
+        id={id}
+        aria-hidden={!isOpen}
+      >
+        <div className="flex items-start gap-3">
+          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-a/90 shrink-0" />
+          <div>
+            <div className="font-extrabold text-neutral-900">{item.label}</div>
+            <p className="mt-1">{item.long || item.short}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
+
+const MobileSubdivisionPanel = React.forwardRef(({ item }, ref) => {
+  if (!item) return null;
+  return (
+    <div ref={ref} className="sm:hidden mt-4" role="region" aria-live="polite">
+      <div className="rounded-xl border border-black/10 bg-white p-4 text-[15px] leading-6 text-neutral-800 shadow-lg">
+        <div className="flex items-start gap-3">
+          <span className="mt-1 inline-block h-2 w-2 rounded-full bg-a/90 shrink-0" />
+          <div>
+            <div className="font-extrabold text-neutral-900">{item.label}</div>
+            <p className="mt-1">{item.long || item.short}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+MobileSubdivisionPanel.displayName = "MobileSubdivisionPanel";
+
+const SubdivisionChips = ({ names = [], dict = SUBDIVISIONS }) => {
+  const items = names.map((n) => dict[n] || { label: n, short: "", long: "" });
+  const [openKey, setOpenKey] = React.useState(null);
+  const panelRef = React.useRef(null);
+
+  // desktop: close on ESC / outside click
+  React.useEffect(() => {
+    if (!openKey) return;
+    const onDown = (e) => e.key === "Escape" && setOpenKey(null);
+    const onClick = (e) => {
+      // only apply this outside-close on desktop (>= sm)
+      if (window.matchMedia("(min-width: 640px)").matches) {
+        const anyOpen = document.getElementById(`subdiv-${openKey.replace(/\W+/g, "-")}`);
+        if (anyOpen && !anyOpen.parentElement.contains(e.target)) setOpenKey(null);
+      }
+    };
+    document.addEventListener("keydown", onDown);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onDown);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [openKey]);
+
+  const handleToggleFactory = (key) => (mode) => {
+    setOpenKey((curr) => {
+      const next =
+        mode === "open"   ? key :
+        mode === "close"  ? null :
+        /* toggle */         (curr === key ? null : key);
+
+      // mobile: after opening, scroll the single panel into view
+      if (next === key && typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches) {
+        requestAnimationFrame(() => panelRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
+      }
+      return next;
+    });
+  };
+
+  const openItem = items.find((it) => it.label === openKey);
+
+  return (
+    <>
+      {/* Chip row */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {items.map((it) => {
+          const key = it.label;
+          return (
+            <SubdivisionPill
+              key={key}
+              item={it}
+              isOpen={openKey === key}
+              onToggle={handleToggleFactory(key)}
+            />
+          );
+        })}
+      </div>
+
+      {/* SINGLE mobile panel appears BELOW the chip row */}
+      <MobileSubdivisionPanel ref={panelRef} item={openItem} />
+    </>
+  );
+};
+
+
+
 
 export default function DivisionPage({ data }) {
   const d = data.divisionsJson;
@@ -96,17 +231,18 @@ export default function DivisionPage({ data }) {
 
             {/* Subdivisions */}
             {Array.isArray(d.subdivisions) && d.subdivisions.length > 0 && (
-              <section className="mb-6">
+              <section className="mb-10">
                 <h2 className="text-2xl font-extrabold tracking-tight">Subdivisions</h2>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {d.subdivisions.map((s, i) => (
-                    <span
-                      key={i}
-                      className="rounded-full border border-black/10 bg-black/5 px-3 py-1 text-sm font-semibold"
-                    >
-                      {s}
-                    </span>
-                  ))}
+                <p className="mt-2 text-neutral-600">
+                  Tap a subdivision to see eligibility and notes.
+                </p>
+                <SubdivisionChips names={d.subdivisions} dict={SUBDIVISIONS} />
+
+                <div className="mt-4 text-sm text-neutral-500">
+                  For edge cases or event-specific rules, see the event PDF and the{" "}
+                  <Link to="/rules" className="underline decoration-a/90">
+                    Rules
+                  </Link>.
                 </div>
               </section>
             )}
