@@ -8,6 +8,24 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
+// NEW: one source of truth for presidents (order preserved)
+const PRESIDENTS = [
+  { title: "Oceania President", name: "Tony Lanciano", emails: ["tonylanciano@yahoo.com"], phone: "" },
+
+  { title: "NSW President", name: "Rab Mahajer", emails: ["info@theedge.com.au"], phone: "" },
+  { title: "WA President", name: "Ryan Fredericks", emails: ["ryan@academyhealthstyle.com"], phone: "" },
+  { title: "SA President", name: "Kim Tanska", emails: ["kimtanska62@gmail.com"], phone: "" },
+  { title: "ACT President", name: "Vivek Bhattacharjee", emails: ["vivek@vivkb.com"], phone: "" },
+  { title: "NT President", name: "Vanessa O'grady", emails: ["info@wickednrg.com.au"], phone: "" },
+  {
+    title: "VIC Presidents",
+    name: "Bowen McDonald & Orlando Lanciano",
+    emails: ["bowen.mcdonald@icompetenatural.com", "orlandolanciano@gmail.com"],
+    phone: "",
+  },
+  { title: "QLD President", name: "Jason Woodforth", emails: ["jason@bodizone.com.au"], phone: "" },
+];
+
 const ContactUs = () => {
   return (
     <section className="relative overflow-hidden">
@@ -31,7 +49,7 @@ const ContactUs = () => {
             </p>
           </div>
 
-          {/* Cards */}
+          {/* Primary cards */}
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Email card */}
             <div className="group rounded-2xl border border-c/10 bg-c/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-c/[0.08]">
@@ -52,7 +70,6 @@ const ContactUs = () => {
               </a>
             </div>
 
-
             {/* Address card */}
             <div className="group rounded-2xl border border-c/10 bg-c/5 p-6 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-c/[0.08]">
               <div className="flex items-center gap-3">
@@ -64,6 +81,65 @@ const ContactUs = () => {
               <p className="mt-3 text-c/80">
                 1/18 Norman Lindsay St, Conder ACT 2906
               </p>
+            </div>
+          </div>
+
+          {/* NEW: State & Territory Presidents */}
+          <div className="mt-10">
+            <h2 className="text-2xl font-extrabold tracking-tight">State &amp; Territory Presidents</h2>
+            <p className="mt-2 text-c/70 text-[15px]">
+              Contact your local president directly.
+            </p>
+
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {PRESIDENTS.map((p) => (
+                <div
+                  key={p.title}
+                  className="rounded-2xl border border-c/10 bg-c/5 p-5 backdrop-blur-sm"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-2.5 py-1 text-xs font-semibold text-c/80 ring-1 ring-white/10">
+                        <span className="inline-block h-2 w-2 rounded-full bg-a/90" />
+                        {p.title}
+                      </div>
+                      <h3 className="mt-2 text-lg font-bold">{p.name}</h3>
+                    </div>
+
+                    {/* Optional phone */}
+                    {!!p.phone && (
+                      <a
+                        href={`tel:${p.phone.replace(/\s+/g, "")}`}
+                        className="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-full border border-c/20 text-c transition hover:bg-c hover:text-b"
+                        aria-label={`Call ${p.name}`}
+                      >
+                        <FaPhoneAlt />
+                      </a>
+                    )}
+                  </div>
+
+                  {/* Emails */}
+                  <div className="mt-3 flex flex-col gap-2">
+                    {p.emails.map((e) => (
+                      <a
+                        key={e}
+                        href={`mailto:${e}`}
+                        className="inline-flex items-center gap-2 rounded-full border-2 border-c px-3 py-1.5 text-sm font-semibold text-c transition hover:bg-c hover:text-b"
+                      >
+                        <FaEnvelope className="opacity-80" />
+                        <span className="truncate">{e}</span>
+                      </a>
+                    ))}
+                  </div>
+
+                  {/* Phone line (text) until numbers are added */}
+                  {!p.phone && (
+                    <div className="mt-3 text-xs text-c/60">
+                      Phone: <span className="opacity-70">to be added</span>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
