@@ -1,4 +1,4 @@
-// src/pages/results.js
+// src/pages/results.js 
 import React, { useMemo, useState } from "react";
 import { Link } from "gatsby";
 import Seo from "../components/seo";
