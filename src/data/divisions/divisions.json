@@ -13,7 +13,7 @@
       "Not judged on muscularity"
     ],
     "stageWalkPosing": "Perform 4 quarter turns (front, side, back, opposite side). May include comparison rounds. Half-turn walk to coloured lines. Presentation in a relaxed, confident style.",
-    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "30+", "40+", "Momma's"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
   },
   {
     "slug": "ms-wellness",
@@ -28,7 +28,7 @@
       "Stage presence, confidence, and feminine presentation"
     ],
     "stageWalkPosing": "Perform 4 quarter turns (front, side, back, opposite side). May include comparison rounds. Relaxed, feminine, confident stage walk.",
-    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "30+", "40+"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+"]
   },
   {
     "slug": "ms-sports-model",
@@ -44,7 +44,7 @@
       "Overall sporty and fit appearance"
     ],
     "stageWalkPosing": "Perform 4 quarter turns. May include comparison rounds. Present on stage in a relaxed position with model-like walk and confidence.",
-    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "30+", "40+", "Momma's"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
   },
   {
     "slug": "ms-figure",
@@ -59,7 +59,7 @@
       "Polished posing and presentation"
     ],
     "stageWalkPosing": "Two rounds: Symmetry (quarter turns) and Muscularity (mandatory poses: front double biceps, side chest, side triceps, back double biceps, abs and thighs).",
-    "subdivisions": ["First Timers", "Novice", "Open", "30+", "40+", "50+"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "30+", "40+", "50+"]
   },
   {
     "slug": "ms-fitness",
@@ -74,7 +74,7 @@
       "Overall 'fitness model' look"
     ],
     "stageWalkPosing": "Perform 4 quarter turns. Comparison round may follow. Relaxed but confident presentation on stage.",
-    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "30+", "40+", "Momma's"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
   },
   {
     "slug": "ms-swimsuit",
@@ -89,7 +89,7 @@
       "Not judged on muscularity"
     ],
     "stageWalkPosing": "Perform 4 quarter turns. May include comparison rounds. Relaxed, confident presentation.",
-    "subdivisions": ["Entry level, no formal subdivisions noted in PDF"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
   },
   {
     "slug": "bodybuilding",
@@ -104,7 +104,7 @@
       "Polished posing, smooth transitions, and confidence"
     ],
     "stageWalkPosing": "Quarter turns for symmetry. Mandatory poses: front double biceps, front lat spread, side chest, abs & thighs, side triceps, rear lat spread, most muscular, rear double biceps.",
-    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "23 & Under", "30+", "40+", "50+", "60+"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "21 & Under", "30+", "40+", "50+", "60+"]
   },
   {
     "slug": "mens-classic-physique",
@@ -119,7 +119,7 @@
       "Stage presence and confidence without arrogance"
     ],
     "stageWalkPosing": "Quarter turns for symmetry. Mandatory classic poses: front double biceps, side chest, side triceps, rear biceps, vacuum/abs, favourite classic pose. Smooth, artful transitions.",
-    "subdivisions": ["First Timers", "Novice", "Open", "23 & Under", "30+", "40+", "50+"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "21 & Under", "30+", "40+", "50+"]
   },
   {
     "slug": "mens-fitness",
@@ -134,7 +134,7 @@
       "Stage presence, confidence, and grooming"
     ],
     "stageWalkPosing": "Perform 4 quarter turns. May include comparison rounds. Relaxed, confident, athletic presentation on stage.",
-    "subdivisions": ["First Timers", "Novice", "Open", "30+", "40+", "50+"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "30+", "40+", "50+"]
   },
   {
     "slug": "mens-physique",
@@ -149,6 +149,6 @@
       "Stage presence, polished posing, and confidence"
     ],
     "stageWalkPosing": "Two rounds: Symmetry (quarter turns) and Muscularity (front double biceps, side chest, side triceps, back double biceps, abs).",
-    "subdivisions": ["First Timers", "Novice", "Open", "21 & Under", "23 & Under", "30+", "40+", "50+"]
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "21 & Under", "30+", "40+", "50+"]
   }
 ]

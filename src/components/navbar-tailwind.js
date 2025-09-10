@@ -54,24 +54,37 @@ useEffect(() => {
     </span>
   );
 
-    // Uniform tile used in the mega menu
-    const MenuTile = ({ to, label, img, alt }) => (
-      <Link
-        to={to}
-        className="group w-[9.5rem] flex flex-col items-center text-center"  // fixed width + centered column
-      >
-        <img
-          src={img}
-          alt={alt || label}
-          className="block mx-auto w-24 h-24 rounded-full object-cover mb-3
-                     ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition"
-        />
-        <span className="block w-full text-white text-sm sm:text-base leading-tight
-                         group-hover:text-blue-300 transition-colors">
-          {label}
-        </span>
-      </Link>
-    );
+
+
+  // 1) Add a tiny reusable avatar that supports object-position + hover ring
+  const Avatar = ({ src, alt, pos = "50% 20%" }) => (
+    <div className="w-28 h-28 rounded-full overflow-hidden ring-0 group-hover:ring-2 group-hover:ring-blue-300 transition">
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover"
+        style={{ objectPosition: pos }} // <- bias the crop up (20% from top)
+      />
+    </div>
+  );
+
+    // a smaller mobile avatar
+  const MobileAvatar = ({ src, alt, pos = "50% 18%" }) => (
+    <div className="w-20 h-20 rounded-full overflow-hidden">
+      <img src={src} alt={alt} className="w-full h-full object-cover" style={{ objectPosition: pos }} />
+    </div>
+  );
+
+  // 2) Use Avatar inside MenuTile, pass per-image 'pos' if needed
+  const MenuTile = ({ to, label, img, alt, pos }) => (
+    <Link to={to} className="group w-[9.5rem] flex flex-col items-center text-center">
+      <Avatar src={img} alt={alt || label} pos={pos} />
+      <span className="mt-3 block w-full text-white text-sm sm:text-base leading-tight group-hover:text-blue-300 transition-colors">
+        {label}
+      </span>
+    </Link>
+  );
+
     
 
 
@@ -278,45 +291,45 @@ useEffect(() => {
           >
             {/* Row 1 (4) */}
             <Link to="/divisions/mens-fitness" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={mensFitness} alt="Men's Fitness" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={mensFitness} alt="Men's Fitness" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Men's Fitness</span>
             </Link>
             <Link to="/divisions/mens-physique" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={mensPhysique} alt="Men's Physique" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={mensPhysique} alt="Men's Physique" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Men's Physique</span>
             </Link>
             <Link to="/divisions/mens-classic-physique" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={mensClassicPhysique} alt="Men's Classic Physique" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={mensClassicPhysique} alt="Men's Classic Physique" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Men's Classic Physique</span>
             </Link>
             <Link to="/divisions/bodybuilding" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={bodybuilding} alt="Bodybuilding" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={bodybuilding} alt="Bodybuilding" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Bodybuilding</span>
             </Link>
 
             {/* Row 2 (5) */}
             <Link to="/divisions/ms-wellness" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={msWellness} alt="Ms Wellness" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={msWellness} alt="Ms Wellness" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Wellness</span>
             </Link>
             <Link to="/divisions/ms-fitness" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={msFitness} alt="Ms Fitness" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={msFitness} alt="Ms Fitness" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Fitness</span>
             </Link>
             <Link to="/divisions/ms-figure" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={msFigure} alt="Ms Figure" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={msFigure} alt="Ms Figure" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Figure</span>
             </Link>
             <Link to="/divisions/ms-sports-model" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={msSportsModel} alt="Ms Sports Model" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={msSportsModel} alt="Ms Sports Model" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Sports Model</span>
             </Link>
             <Link to="/divisions/ms-bikini-model" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={msBikiniModel} alt="Ms Bikini Model" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={msBikiniModel} alt="Ms Bikini Model" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Bikini Model</span>
             </Link>
             <Link to="/divisions/ms-swimsuit" className="flex flex-col items-center text-center" onClick={() => setMobileOpen(false)}>
-              <img src={msSwimsuit} alt="Ms Swimsuit" className="w-20 h-20 rounded-full object-cover mb-2" />
+              <MobileAvatar src={msSwimsuit} alt="Ms Swimsuit" className="w-20 h-20 rounded-full object-cover mb-2" />
               <span className="text-white">Ms Swimsuit</span>
             </Link>
 
