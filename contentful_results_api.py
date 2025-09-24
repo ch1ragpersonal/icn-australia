@@ -19,12 +19,15 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 from rapidfuzz import fuzz
-import dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # ========= CONFIG =========
-SPACE_ID = dotenv.get("CONTENTFUL_SPACE_ID")
-ENVIRONMENT_ID = "icn-australia"
-CMA_TOKEN = dotenv.get("CONTENTFUL_CMA_TOKEN")
+SPACE_ID = os.getenv("CONTENTFUL_SPACE_ID")
+ENVIRONMENT_ID = "master"
+CMA_TOKEN = os.getenv("CONTENTFUL_CMA_TOKEN")
 
 CONTENT_TYPE_ID = "competition"          # Competition content type id
 LOCALE = "en-US"
@@ -42,7 +45,7 @@ STATE_FIELD_IS_ARRAY = False             # set True if your State field is an ar
 # Matching behaviour (be conservative)
 FUZZY_MIN_SCORE = 88                     # token_set_ratio threshold (0-100)
 PREFER_SAME_YEAR = True                  # only accept cross-year matches if 100% exact
-DRY_RUN = False                          # True prints actions without writing
+DRY_RUN = True                          # True prints actions without writing
 
 # Optional: small delay to respect API rate limits if needed
 WRITE_DELAY_SEC = 0.2
@@ -79,10 +82,14 @@ def _put(url: str, json_body: Dict[str, Any] = None, headers_extra: Dict[str, st
 
 # ========= Utilities =========
 def jan1_iso(year: int) -> str:
-    return f"{year:04d}-01-01T00:00:00Z"
+    # Accept int or numeric string and normalise
+    y = int(year)
+    return f"{y:04d}-01-01T00:00:00Z"
 
 def end_of_year_iso(year: int) -> str:
-    return f"{year:04d}-12-31T23:59:59Z"
+    # Accept int or numeric string and normalise
+    y = int(year)
+    return f"{y:04d}-12-31T23:59:59Z"
 
 def extract_year_from_title(title: str) -> Optional[int]:
     m = re.search(r"(20\d{2})", title)
@@ -303,7 +310,7 @@ def load_input(filename: str) -> List[Dict[str, Any]]:
     raise ValueError("Input JSON must be a list of competitions or {'competitions': [...]}")
 
 if __name__ == "__main__":
-    INPUT_JSON = "results.json"  # change to your file path
+    INPUT_JSON = "events.json"  # change to your file path
     items = load_input(INPUT_JSON)
     print(f"Found {len(items)} competitions in input.")
     for obj in items:
