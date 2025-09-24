@@ -45,7 +45,7 @@ STATE_FIELD_IS_ARRAY = False             # set True if your State field is an ar
 # Matching behaviour (be conservative)
 FUZZY_MIN_SCORE = 88                     # token_set_ratio threshold (0-100)
 PREFER_SAME_YEAR = True                  # only accept cross-year matches if 100% exact
-DRY_RUN = True                          # True prints actions without writing
+DRY_RUN = False                          # True prints actions without writing
 
 # Optional: small delay to respect API rate limits if needed
 WRITE_DELAY_SEC = 0.2

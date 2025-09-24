@@ -1,91 +1,15 @@
-// src/pages/results.js 
+// src/pages/results.js
 import React, { useMemo, useState } from "react";
-import { Link } from "gatsby";
+import { Link, graphql, useStaticQuery } from "gatsby";
 import Seo from "../components/seo";
 import hero1 from "../images/hero1.png";
 
-// --- Mock data ---------------------------------------------------------------
-const MOCK_RESULTS = [
-  {
-    id: "evt-NSW-Autumn-24",
-    title: "ICN NSW Autumn Classic",
-    date: "2024-04-21",
-    season: "A",
-    state: "NSW",
-    venue: "Sydney Olympic Park",
-    divisions: [
-      {
-        name: "Men's Physique",
-        results: [
-          { place: 1, athlete: "Liam Carter", team: "Team Apex", number: 34 },
-          { place: 2, athlete: "Ethan Wu", team: "", number: 17 },
-          { place: 3, athlete: "Noah Singh", team: "Iron DNA", number: 52 },
-          { place: 4, athlete: "Oliver Grant", team: "", number: 28 },
-        ],
-      },
-      {
-        name: "Ms Bikini Model",
-        results: [
-          { place: 1, athlete: "Sofia Nguyen", team: "GlowFit", number: 12 },
-          { place: 2, athlete: "Ava Thompson", team: "", number: 19 },
-          { place: 3, athlete: "Mia Robinson", team: "Peak Physique", number: 23 },
-        ],
-      },
-    ],
-  },
-  {
-    id: "evt-VIC-Autumn-24",
-    title: "ICN Victoria State Championships",
-    date: "2024-05-04",
-    season: "A",
-    state: "VIC",
-    venue: "Melbourne Convention Centre",
-    divisions: [
-      {
-        name: "Bodybuilding",
-        results: [
-          { place: 1, athlete: "James Russo", team: "MuscleLab", number: 88 },
-          { place: 2, athlete: "Harrison Cole", team: "", number: 63 },
-          { place: 3, athlete: "Daniel Chen", team: "Apex", number: 71 },
-        ],
-      },
-      {
-        name: "Ms Figure",
-        results: [
-          { place: 1, athlete: "Aria Patel", team: "", number: 11 },
-          { place: 2, athlete: "Isla Brooks", team: "Iron DNA", number: 27 },
-          { place: 3, athlete: "Zara Lewis", team: "Peak Physique", number: 39 },
-        ],
-      },
-    ],
-  },
-  {
-    id: "evt-QLD-Spring-23",
-    title: "ICN QLD Spring Show",
-    date: "2023-09-10",
-    season: "B",
-    state: "QLD",
-    venue: "Brisbane City Hall",
-    divisions: [
-      {
-        name: "Ms Sports Model",
-        results: [
-          { place: 1, athlete: "Layla Ward", team: "GlowFit", number: 6 },
-          { place: 2, athlete: "Chloe Adams", team: "", number: 15 },
-          { place: 3, athlete: "Emily King", team: "", number: 21 },
-        ],
-      },
-    ],
-  },
-];
-
-// --- Tiny helpers ------------------------------------------------------------
+// --- medal chip etc. (unchanged) -------------------------------------------
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("en-AU", { day: "2-digit", month: "short", year: "numeric" });
 
-const states = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "ACT", "NT"];
+const states = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "ACT", "NT", "Australia"];
 
-// medal for place
 const Medal = ({ place }) => (
   <span
     className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold
@@ -97,7 +21,6 @@ const Medal = ({ place }) => (
   </span>
 );
 
-// --- Reusable UI bits --------------------------------------------------------
 const Chevron = ({ open }) => (
   <svg className={`h-5 w-5 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 20 20" fill="currentColor">
     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
@@ -114,27 +37,154 @@ const Chip = ({ active, children, onClick }) => (
   </button>
 );
 
-// --- Results page ------------------------------------------------------------
+// --- NEW: Contentful query + transformer ------------------------------------
+/**
+ * We query competitions with a JSON "results" field present.
+ * Adjust field API IDs here if your model differs.
+ *
+ * Tried fields:
+ *  - competitionName OR title (string)
+ *  - date (DateTime)
+ *  - state { code name } (Entry link) OR stateText (string) fallback
+ *  - results (JSON scalar)
+ */
+const useCompetitions = () => {
+  const data = useStaticQuery(graphql`
+    query ResultsFromContentful {
+      allContentfulCompetition(
+    filter: {
+      results: {
+        elemMatch: {
+          childContentfulCompetitionResultsJsonNodeJson: {
+            division_name: { nin: ["", null] }
+          }
+        }
+      }
+    }
+    sort: { date: DESC }
+  ) {
+        nodes {
+          id
+          competitionName
+          date
+          state {
+            name
+            symbol
+          }
+          # results is an array; each item wraps the real JSON under the child node
+          results {
+            childContentfulCompetitionResultsJsonNodeJson {
+              division_name
+              participant {
+                name
+                place
+                team
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const nodes = data?.allContentfulCompetition?.nodes ?? [];
+
+  const events = nodes.map((n) => {
+    const title = n.competitionName || n.title || "Untitled Competition";
+    const date = n.date || "2022-01-01";
+    const stateLinked = n.state?.symbol || n.state?.name;
+    const state = (stateLinked && String(stateLinked).toUpperCase()) || "Australia";
+
+    // Flatten results[].childContentfulCompetitionResultsJsonNodeJson
+    const divisionsRaw =
+      Array.isArray(n.results)
+        ? n.results
+            .map((r) => r?.childContentfulCompetitionResultsJsonNodeJson)
+            .filter(Boolean)
+        : [];
+
+    return {
+      id: n.id,
+      title,
+      date,
+      season: deriveSeasonFromDate(date),
+      state,
+      divisions: divisionsRaw.map((d) => ({
+        name: d.division_name || "Division",
+        results: Array.isArray(d.participant)
+          ? d.participant
+              .map((p, idx) => ({
+                place: Number(p.place ?? idx + 1),
+                athlete: p.name || "",
+                team: p.team || "",
+              }))
+              .sort((a, b) => {
+                const aP = Number.isFinite(a.place) ? a.place : Number.POSITIVE_INFINITY;
+                const bP = Number.isFinite(b.place) ? b.place : Number.POSITIVE_INFINITY;
+                return aP - bP;
+              })
+          : [],
+      })),
+    };
+  });
+
+  return events;
+};
+
+
+function safeJSON(s) {
+  try {
+    return JSON.parse(s);
+  } catch {
+    return {};
+  }
+}
+
+function deriveSeasonFromDate(iso) {
+  const d = new Date(iso);
+  // If date parsing fails, fall back to showing a season based on current month logic
+  if (Number.isNaN(d.getTime())) return null;
+
+  // If the date is exactly Jan 1 (UTC) of any year, omit season in UI
+  if (d.getUTCMonth() === 0 && d.getUTCDate() === 1) return null;
+
+  const m = d.getUTCMonth() + 1;
+  // Adjust if you have exact ICN season rules; this just preserves the chip
+  return m <= 6 ? "A" : "B";
+}
+
+function isJanuaryFirst(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return false;
+  return d.getUTCMonth() === 0 && d.getUTCDate() === 1;
+}
+
+// --- Results page (mostly unchanged; data source swapped) --------------------
 export default function ResultsPage() {
+  // REPLACED MOCK_RESULTS with Contentful data
+  const CONTENTFUL_RESULTS = useCompetitions();
+
   const [year, setYear] = useState("All");
   const [stateSel, setStateSel] = useState("All");
   const [divisionSel, setDivisionSel] = useState("All");
   const [q, setQ] = useState("");
 
-  // derive filter options
+  // derive filter options from Contentful data
   const allYears = useMemo(() => {
-    const ys = Array.from(new Set(MOCK_RESULTS.map((e) => new Date(e.date).getFullYear()))).sort((a, b) => b - a);
+    const ys = Array.from(
+      new Set(CONTENTFUL_RESULTS.map((e) => new Date(e.date).getFullYear()))
+    ).sort((a, b) => b - a);
     return ["All", ...ys];
-  }, []);
+  }, [CONTENTFUL_RESULTS]);
 
   const allDivisions = useMemo(() => {
     const set = new Set();
-    MOCK_RESULTS.forEach((e) => e.divisions.forEach((d) => set.add(d.name)));
+    CONTENTFUL_RESULTS.forEach((e) => e.divisions.forEach((d) => set.add(d.name)));
     return ["All", ...Array.from(set).sort()];
-  }, []);
+  }, [CONTENTFUL_RESULTS]);
 
   const filtered = useMemo(() => {
-    return MOCK_RESULTS.filter((evt) => {
+    return CONTENTFUL_RESULTS.filter((evt) => {
       const yOk = year === "All" || new Date(evt.date).getFullYear().toString() === year.toString();
       const sOk = stateSel === "All" || evt.state === stateSel;
       const dOk =
@@ -147,24 +197,25 @@ export default function ResultsPage() {
         );
       return yOk && sOk && dOk && qOk;
     }).sort((a, b) => new Date(b.date) - new Date(a.date));
-  }, [year, stateSel, divisionSel, q]);
+  }, [CONTENTFUL_RESULTS, year, stateSel, divisionSel, q]);
 
-  // group by year then state
+  // group by year then state (add "Australia" bucket for missing states)
   const grouped = useMemo(() => {
     const byYear = {};
     filtered.forEach((evt) => {
       const y = new Date(evt.date).getFullYear();
       byYear[y] ??= {};
-      byYear[y][evt.state] ??= [];
-      byYear[y][evt.state].push(evt);
+      const stateKey = evt.state && states.includes(evt.state) ? evt.state : "Australia";
+      byYear[y][stateKey] ??= [];
+      byYear[y][stateKey].push(evt);
     });
-    return byYear; // {2024:{NSW:[..],VIC:[..]}, 2023:{QLD:[..]}}
+    return byYear;
   }, [filtered]);
 
   return (
     <>
       <Seo title="Results" description="Official ICN Australia competition results by year, state and division." />
-      {/* HERO */}
+      {/* HERO (unchanged) */}
       <section className="relative overflow-hidden">
         <div className="relative h-[34vh] min-h-[260px] w-full bg-black">
           <img src={hero1} alt="" className="absolute inset-0 h-auto w-full object-cover opacity-30" />
@@ -183,7 +234,7 @@ export default function ResultsPage() {
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-b from-transparent to-white" />
       </section>
 
-      {/* BODY */}
+      {/* BODY (unchanged UI) */}
       <main className="max-w-6xl mx-auto px-6 py-8">
         {/* Filter bar */}
         <div className="sticky top-[64px] z-40 bg-white/90 backdrop-blur rounded-2xl border border-black/10 shadow-sm p-4 mb-8">
@@ -291,7 +342,7 @@ export default function ResultsPage() {
   );
 }
 
-// --- Event + Division Accordions --------------------------------------------
+// --- Event + Division Accordions (unchanged) ---------------------------------
 const EventCard = ({ evt, highlightDivision }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -303,10 +354,11 @@ const EventCard = ({ evt, highlightDivision }) => {
       >
         <div className="flex min-w-0 flex-col sm:flex-row sm:items-center sm:gap-3">
           <span className="inline-flex items-center rounded-full bg-white/60 border border-black/10 px-2 py-0.5 text-xs font-semibold text-neutral-700">
-            {evt.state} • Season {evt.season}
+            {evt.state}
+            {evt.season ? ` • Season ${evt.season}` : ""}
           </span>
           <h3 className="mt-1 sm:mt-0 font-extrabold tracking-tight text-black truncate">{evt.title}</h3>
-          <div className="text-sm text-neutral-500 truncate">{formatDate(evt.date)} • {evt.venue}</div>
+          <div className="text-sm text-neutral-500 truncate">{isJanuaryFirst(evt.date) ? "" : formatDate(evt.date)}</div>
         </div>
         <Chevron open={open} />
       </button>
@@ -352,24 +404,20 @@ const DivisionCard = ({ division, defaultOpen = false }) => {
                   <th className="py-2 pr-2 text-left">Place</th>
                   <th className="py-2 pr-2 text-left">Athlete</th>
                   <th className="py-2 pr-2 text-left">Team</th>
-                  <th className="py-2 text-left">#</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/5">
-                {division.results.map((r) => (
-                  <tr key={`${division.name}-${r.number}-${r.athlete}`}>
+                {division.results.map((r, idx) => (
+                  <tr key={`${division.name}-${idx}-${r.athlete}`}>
                     <td className="py-2 pr-2"><Medal place={r.place} /></td>
                     <td className="py-2 pr-2 font-semibold">{r.athlete}</td>
                     <td className="py-2 pr-2 text-neutral-700">{r.team || "-"}</td>
-                    <td className="py-2">{r.number ?? "-"}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
-            {/* Optional: link row for PDFs/photos */}
             <div className="mt-3 flex flex-wrap gap-2">
-              <Link to="/photos" className="underline decoration-a/90 text-sm">Event Photos</Link>
               <Link to="/rules" className="underline decoration-a/90 text-sm">Rules</Link>
             </div>
           </div>
