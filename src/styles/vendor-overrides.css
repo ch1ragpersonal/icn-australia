@@ -1,0 +1,46 @@
+/* Swiper overrides */
+.swiper-wrapper .swiper-slide {
+  height: auto !important;
+}
+
+.swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.swiper-slide {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.swiper-button-next {
+  right: -2.5px !important;
+}
+
+.swiper-button-prev {
+  left: -2.5px !important;
+}
+
+/* Toast notification overrides */
+.toast-success {
+  background-color: #10b981; /* green-500 equivalent */
+  color: white;
+}
+
+.toast-error {
+  background-color: #ef4444; /* red-500 equivalent */
+  color: white;
+}
+
+.toast-info {
+  background-color: #3b82f6; /* blue-500 equivalent */
+  color: white;
+}
+
+/* Active link styles */
+.active-link {
+  text-decoration: none !important;
+}
+
+.active-link:after {
+  width: 100% !important;
+}

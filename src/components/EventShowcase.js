@@ -1,12 +1,10 @@
-/** @jsxImportSource theme-ui */
+// src/components/EventShowcase.js (Tailwind version)
 import React from "react";
 import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
-import { Box, Image, Button, Heading, Card, Text, Link } from "theme-ui";
-import SecondaryButton from "./SecondaryButton";
 
 const EventShowcase = () => {
   const data = useStaticQuery(graphql`
-    query {
+    query EventsForShowcaseTailwind {
       allContentfulCompetition {
         nodes {
           id
@@ -20,161 +18,146 @@ const EventShowcase = () => {
             }
           }
           state {
-            id
-            website
+            id        # we’ll use this as the label if that’s what Contentful exposes
+            website   # external event/site link if present
           }
         }
       }
     }
   `);
 
+  // Helpers
   const today = new Date();
+  today.setHours(0, 0, 0, 0); // comparison is date-only
 
-  // Process competitions: only include those with a poster and convert date strings to Date objects.
-  let competitions = data.allContentfulCompetition.nodes
-    .filter((event) => event.poster?.file?.url)
-    .map((event) => ({
-      ...event,
-      date: new Date(event.date),
-    }));
+  const competitions = data.allContentfulCompetition.nodes
+    .filter((e) => e.poster?.file?.url)
+    .map((e) => ({ ...e, date: new Date(e.date) }));
 
-  // Filter for future events and sort by date (ascending), then take the first 4.
   const displayEvents = competitions
-    .filter((event) => event.date >= today)
+    .filter((e) => e.date >= today)
     .sort((a, b) => a.date - b.date)
     .slice(0, 4);
 
-  return (
-    <Box sx={{ textAlign: "center", my: 4 }}>
-      <Heading as="h2" sx={{color:"black", fontSize: 4, textAlign: "center", mb: 2 }}>
-        Upcoming Competitions
-      </Heading>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: ["1fr", "repeat(2, 1fr)"],
-          gap: "40px",
-          justifyItems: "center",
-          width: "100%",
-          px: [2, 4],
-        }}
-      >
-        {displayEvents.map((event) => {
-          const cardContent = (
-            <Card
-            sx={{
-              padding: "30px",
-              boxShadow: "0px 6px 15px rgba(0,0,0,0.25)",
-              borderRadius: "15px",
-              backgroundColor: "cardback",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "25px",
-              width: ["95%", "100%"],
-              maxWidth: ["95%", "500px"],
-              minHeight: "auto",
-              mx: "auto",
-              transition: "transform 0.2s ease-in-out",
-              "&:hover": {
-                transform: "translateY(-6px)",
-                boxShadow: "0px 8px 20px rgba(0,0,0,0.3)",
-              },
-            }}
-            >
-              {event.poster?.file?.url && (
-                <Image
-                  src={event.poster.file.url}
-                  alt={event.competitionName}
-                  sx={{
-                    width: "100%",
-                    maxWidth: "450px",
-                    height: "auto",
-                    borderRadius: "12px",
-                    objectFit: "contain",
-                    boxShadow: "0px 4px 12px rgba(0,0,0,0.15)",
-                  }}
-                />
-              )}
-              <Box sx={{ textAlign: "center", width: "100%", mt: 2 }}>
-                <Heading as="h3" sx={{ fontSize: "26px", marginBottom: "25px", color: "cardtext", lineHeight: 1.3 }}>
-                  {event.competitionName}
-                </Heading>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "15px",
-                    marginBottom: "15px",
-                    padding: "10px",
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <Text sx={{ fontSize: "22px" }}>📅</Text>
-                  <Text sx={{ fontSize: "19px", color: "primary", fontWeight: "bold" }}>
-                    {event.date.toDateString()}
-                  </Text>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "15px",
-                    padding: "10px",
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <Text sx={{ fontSize: "22px" }}>📍</Text>
-                  <Text sx={{ fontSize: "19px", color: "primary", fontWeight: "bold" }}>
-                    {event.location}
-                  </Text>
-                </Box>
-              </Box>
-            </Card>
-          );
+  const formatDate = (d) =>
+    d.toLocaleDateString(undefined, {
+      weekday: "short",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
 
-          return event.state && event.state.website ? (
-            <Link
-              key={event.id}
-              href={event.state.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ textDecoration: "none", color: "inherit" }}
-            >
-              {cardContent}
-            </Link>
-          ) : (
-            <Box key={event.id}>{cardContent}</Box>
+  const CardWrapper = ({ event, children }) => {
+    // If there's an external state website, use <a>; otherwise just a div.
+    if (event?.state?.website) {
+      return (
+        <a
+          href={event.state.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${event.competitionName} – ${event?.state?.id || ""}`}
+          className="block group"
+        >
+          {children}
+        </a>
+      );
+    }
+    return <div className="group">{children}</div>;
+  };
+
+  return (
+    <section className="my-10 text-center">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-2 md:px-6 max-w-6xl mx-auto">
+        {displayEvents.map((event) => {
+          const poster = event.poster.file.url;
+
+          return (
+            <CardWrapper key={event.id} event={event}>
+              <article
+                className="
+                  relative overflow-hidden rounded-2xl shadow-lg
+                  ring-1 ring-black/5
+                  transition-transform duration-300 ease-out
+                  hover:-translate-y-1 hover:shadow-xl
+                "
+              >
+                {/* Poster image */}
+                <img
+                  src={poster}
+                  alt={event.competitionName}
+                  className="
+                    w-full h-full object-cover
+                    aspect-[3/4] md:aspect-[4/5]  /* keep nice poster aspect */
+                    transition-transform duration-500 ease-out
+                    group-hover:scale-105
+                  "
+                />
+
+                {/* Translucent overlay with white text (hidden on hover) */}
+                <div
+                  className="
+                    pointer-events-none absolute inset-0
+                    bg-black/60 backdrop-blur-[1px]
+                    flex flex-col items-center justify-end
+                    p-6 sm:p-8
+                    transition-opacity duration-300 ease-out
+                    group-hover:opacity-0
+                  "
+                >
+                  <h3 className="text-white text-2xl sm:text-3xl font-extrabold text-center drop-shadow">
+                    {event.competitionName}
+                  </h3>
+
+                  {/* State + Date row */}
+                  <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-white/90">
+                    <time
+                      dateTime={event.date.toISOString()}
+                      className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-sm font-semibold"
+                    >
+                      {formatDate(event.date)}
+                    </time>
+                  </div>
+
+                  {/* Optional location chip */}
+                  {event.location && (
+                    <div className="mt-3">
+                      <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs sm:text-sm font-medium text-white/90">
+                        {event.location}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </article>
+            </CardWrapper>
           );
         })}
-      </Box>
-      {/* <GatsbyLink to="/competitions">
-        <Button
-          sx={{
-            mt: 3,
-            background: "buttonback",
-            color: "buttontext",
-            fontSize: "16px",
-            borderRadius: "8px",
-            px: 4,
-            py: 2,
-            cursor: "pointer",
-            fontWeight: "bold",
-            transition: "background-color 0.3s ease-in-out",
-              "&:hover": {
-                backgroundColor: "#999",
-            },
-          }}
+      </div>
+
+      {/* See More button */}
+      <div className="mt-8">
+        <GatsbyLink
+          to="/competitions"
+          className="
+            inline-flex items-center gap-2 rounded-full border-2
+            border-black px-6 py-3 font-bold
+            text-black hover:bg-black hover:text-white
+            transition-colors
+          "
         >
           See More Events
-        </Button>
-      </GatsbyLink> */}
-      <SecondaryButton to='/competitions' text={'See More Events'}/>
-    </Box>
+          <svg
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </GatsbyLink>
+      </div>
+    </section>
   );
 };
 

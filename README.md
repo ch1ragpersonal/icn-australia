@@ -1,6 +1,6 @@
 **Scripts**
 
-`netlify dev`
+`netlify dev 
 
   
   - Starts your Gatsby dev server at http://localhost:8888

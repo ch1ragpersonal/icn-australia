@@ -3,6 +3,7 @@
 !.env.example
 public/
 node_modules/
+.venv/
  
 # Local Netlify folder
 .netlify

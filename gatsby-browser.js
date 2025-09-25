@@ -4,6 +4,7 @@ import favicon from './src/images/favicon.ico';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import './src/styles/global.css'
 
 const link = document.createElement('link');
 link.rel = 'icon';

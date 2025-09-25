@@ -2,12 +2,13 @@
 import { Box, Container, Flex } from 'theme-ui';
 import { Helmet } from 'react-helmet'; // Import Helmet for adding fonts
 import Login from '../components/Login';
-import Navbar from './navbar';
+import Navbar from './navbar-tailwind';
 import Seo from './seo';
 import SiteMap from './SiteMap';
+import Footer from './Footer';
 
 const Layout = ({ children, title, description }) => (
-  <Box>
+  <div>
     {/* Helmet to Include Google Fonts */}
     <Helmet>
       <link
@@ -21,29 +22,12 @@ const Layout = ({ children, title, description }) => (
       description={description || "ICN Australia - Australia's Leading Natural Bodybuilding Competition"}
     />
     
-    <header
-      sx={{
-        backgroundColor: 'primary',
-        overflow: 'hidden',
-        boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        width: '100%',
-      }}
-    >
-      <Box>
-        <Navbar/>
-      </Box>
-    </header>
+    <Navbar/>
 
     <main>{children}</main>
 
-    <footer sx={{ bg: 'muted', padding: '1rem', textAlign: 'center', backgroundColor: 'buttonback', color:'buttontext' }}>
-      <SiteMap/>
-      © 2024 ICN Australia
-    </footer>
-  </Box>
+    <Footer/>
+  </div>
 );
 
 export default Layout;

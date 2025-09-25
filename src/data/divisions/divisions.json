@@ -1,0 +1,154 @@
+[
+  {
+    "slug": "ms-bikini-model",
+    "title": "Ms Bikini Model",
+    "gender": "female",
+    "description": "Entry-level female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
+    "image": "images/ms-bikini-model.jpg",
+    "attire": "Two-piece stage bikini (any colour, fabric, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
+    "judgingCriteria": [
+      "Shape, symmetry, and toned condition (not too lean)",
+      "Stage presence, confidence, and energy",
+      "Overall beauty and immaculate grooming",
+      "Not judged on muscularity"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns (front, side, back, opposite side). May include comparison rounds. Half-turn walk to coloured lines. Presentation in a relaxed, confident style.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
+  },
+  {
+    "slug": "ms-wellness",
+    "title": "Ms Wellness",
+    "gender": "female",
+    "description": "A balance between Bikini and Figure divisions. More lower body development (glutes, thighs) than Bikini, but less muscular and conditioned than Figure. Emphasises an athletic, feminine, and healthy look.",
+    "image": "images/ms-wellness.jpg",
+    "attire": "Two-piece stage bikini (any fabric, colour, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
+    "judgingCriteria": [
+      "Overall shape, balance, and symmetry with emphasis on glutes, legs, and lower body",
+      "Toned but not overly lean condition",
+      "Stage presence, confidence, and feminine presentation"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns (front, side, back, opposite side). May include comparison rounds. Relaxed, feminine, confident stage walk.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+"]
+  },
+  {
+    "slug": "ms-sports-model",
+    "title": "Ms Sports Model",
+    "gender": "female",
+    "description": "Athletic, sporty look with more muscularity than Bikini, including visible abs, capped shoulders, and back/leg definition. Slightly softer than Fitness Model.",
+    "image": "images/ms-sports-model.jpg",
+    "attire": "Two-piece sports outfit (top and shorts supplied by ICN). White runners/gym shoes supplied by the athlete.",
+    "judgingCriteria": [
+      "Full round muscles with excellent balance and symmetry",
+      "Visible abs and toned condition",
+      "Stage presence, beauty, and confident model-like presentation",
+      "Overall sporty and fit appearance"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns. May include comparison rounds. Present on stage in a relaxed position with model-like walk and confidence.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
+  },
+  {
+    "slug": "ms-figure",
+    "title": "Ms Figure",
+    "gender": "female",
+    "description": "One of the most muscular female divisions, with high conditioning while keeping femininity. Requires wide back, capped shoulders, visible six-pack, and leg muscle separation.",
+    "image": "images/ms-figure.jpg",
+    "attire": "Two-piece stage bikini (any colour, fabric, crystals). Clear stage heels of any height. Stage jewellery of choice.",
+    "judgingCriteria": [
+      "High muscularity and conditioning",
+      "Muscle size, symmetry, and hourglass shape",
+      "Polished posing and presentation"
+    ],
+    "stageWalkPosing": "Two rounds: Symmetry (quarter turns) and Muscularity (mandatory poses: front double biceps, side chest, side triceps, back double biceps, abs and thighs).",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "30+", "40+", "50+"]
+  },
+  {
+    "slug": "ms-fitness",
+    "title": "Ms Fitness",
+    "gender": "female",
+    "description": "Balanced muscularity with visible abs, capped shoulders, and back definition. More conditioned than Sports Model, less muscular than Figure.",
+    "image": "images/ms-fitness.jpg",
+    "attire": "Two-piece stage bikini (any colour, fabric, connectors, crystals). Clear stage heels of any height. Stage jewellery of choice.",
+    "judgingCriteria": [
+      "Conditioning and symmetry of upper and lower body",
+      "Stage presence, confidence, and polished walk",
+      "Overall 'fitness model' look"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns. Comparison round may follow. Relaxed but confident presentation on stage.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
+  },
+  {
+    "slug": "ms-swimsuit",
+    "title": "Ms Swimsuit",
+    "gender": "female",
+    "description": "Similar to Bikini but in a one-piece swimsuit. Emphasises toned condition, beauty, and stage confidence over muscularity.",
+    "image": "images/ms-swimsuit.jpg",
+    "attire": "One-piece swimsuit (any colour or fabric). Clear stage heels of any height. Stage jewellery of choice.",
+    "judgingCriteria": [
+      "Shape, symmetry, and toned condition",
+      "Stage presence, confidence, and grooming",
+      "Not judged on muscularity"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns. May include comparison rounds. Relaxed, confident presentation.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "23 & Under", "30+", "40+", "50+", "Momma's"]
+  },
+  {
+    "slug": "bodybuilding",
+    "title": "Men's Bodybuilding",
+    "gender": "male",
+    "description": "The most muscular and conditioned men’s division. Competitors must show extreme size, symmetry, vascularity, and striations across all muscle groups.",
+    "image": "images/bodybuilding.jpg",
+    "attire": "Bodybuilding trunks (supplied by athlete).",
+    "judgingCriteria": [
+      "Size, symmetry, condition, and vascularity",
+      "Definition and separation of all muscle groups",
+      "Polished posing, smooth transitions, and confidence"
+    ],
+    "stageWalkPosing": "Quarter turns for symmetry. Mandatory poses: front double biceps, front lat spread, side chest, abs & thighs, side triceps, rear lat spread, most muscular, rear double biceps.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "21 & Under", "30+", "40+", "50+", "60+"]
+  },
+  {
+    "slug": "mens-classic-physique",
+    "title": "Men's Classic Physique",
+    "gender": "male",
+    "description": "Inspired by the Golden Era of bodybuilding. Emphasises symmetry, proportion, and classic lines over sheer size. Equal conditioning to Bodybuilding but less mass.",
+    "image": "images/mens-classic-physique.jpg",
+    "attire": "Classic physique shorts/short tights (supplied by ICN).",
+    "judgingCriteria": [
+      "Symmetry, shape, condition, and overall aesthetics",
+      "Polished, graceful posing (only classic poses allowed)",
+      "Stage presence and confidence without arrogance"
+    ],
+    "stageWalkPosing": "Quarter turns for symmetry. Mandatory classic poses: front double biceps, side chest, side triceps, rear biceps, vacuum/abs, favourite classic pose. Smooth, artful transitions.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "21 & Under", "30+", "40+", "50+"]
+  },
+  {
+    "slug": "mens-fitness",
+    "title": "Men's Fitness ",
+    "gender": "male",
+    "description": "Entry-level men’s category. Athletic and lean with moderate muscle, visible abs, and balance between upper and lower body. Less extreme than Physique or Bodybuilding.",
+    "image": "images/mens-fitness.jpg",
+    "attire": "Athletic shorts or mid-thigh board shorts (supplied by ICN).",
+    "judgingCriteria": [
+      "Balance, conditioning, and six-pack abs",
+      "Athletic appearance and symmetry",
+      "Stage presence, confidence, and grooming"
+    ],
+    "stageWalkPosing": "Perform 4 quarter turns. May include comparison rounds. Relaxed, confident, athletic presentation on stage.",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "30+", "40+", "50+"]
+  },
+  {
+    "slug": "mens-physique",
+    "title": "Men's Physique",
+    "gender": "male",
+    "description": "Upper-body focused category with broad shoulders, small waist, and strong V-taper. Highly conditioned with visible abs, but no leg development required like in Bodybuilding.",
+    "image": "images/mens-physique.jpg",
+    "attire": "Board shorts just above the knee (supplied by athlete).",
+    "judgingCriteria": [
+      "Symmetry, shape, and muscularity of upper body",
+      "Well-developed six-pack and conditioning",
+      "Stage presence, polished posing, and confidence"
+    ],
+    "stageWalkPosing": "Two rounds: Symmetry (quarter turns) and Muscularity (front double biceps, side chest, side triceps, back double biceps, abs).",
+    "subdivisions": ["First Timers", "Novice", "Rookie", "Open", "21 & Under", "30+", "40+", "50+"]
+  }
+]
