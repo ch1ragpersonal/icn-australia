@@ -1,5 +1,5 @@
 // src/pages/results.js
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import Seo from "../components/seo";
 import hero1 from "../images/hero1.png";
@@ -9,6 +9,7 @@ const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("en-AU", { day: "2-digit", month: "short", year: "numeric" });
 
 const states = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "ACT", "NT", "Australia"];
+const INITIAL_BATCH_SIZE = 12;
 
 const Medal = ({ place }) => (
   <span
@@ -131,7 +132,6 @@ const useCompetitions = () => {
   return events;
 };
 
-
 function safeJSON(s) {
   try {
     return JSON.parse(s);
@@ -168,6 +168,7 @@ export default function ResultsPage() {
   const [stateSel, setStateSel] = useState("All");
   const [divisionSel, setDivisionSel] = useState("All");
   const [q, setQ] = useState("");
+  const [visibleCount, setVisibleCount] = useState(INITIAL_BATCH_SIZE);
 
   // derive filter options from Contentful data
   const allYears = useMemo(() => {
@@ -199,10 +200,16 @@ export default function ResultsPage() {
     }).sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [CONTENTFUL_RESULTS, year, stateSel, divisionSel, q]);
 
+  useEffect(() => {
+    setVisibleCount(INITIAL_BATCH_SIZE);
+  }, [year, stateSel, divisionSel, q, filtered.length]);
+
+  const visibleEvents = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+
   // group by year then state (add "Australia" bucket for missing states)
   const grouped = useMemo(() => {
     const byYear = {};
-    filtered.forEach((evt) => {
+    visibleEvents.forEach((evt) => {
       const y = new Date(evt.date).getFullYear();
       byYear[y] ??= {};
       const stateKey = evt.state && states.includes(evt.state) ? evt.state : "Australia";
@@ -210,7 +217,7 @@ export default function ResultsPage() {
       byYear[y][stateKey].push(evt);
     });
     return byYear;
-  }, [filtered]);
+  }, [visibleEvents]);
 
   return (
     <>
@@ -237,7 +244,7 @@ export default function ResultsPage() {
       {/* BODY (unchanged UI) */}
       <main className="max-w-6xl mx-auto px-6 py-8">
         {/* Filter bar */}
-        <div className="sticky top-[64px] z-40 bg-white/90 backdrop-blur rounded-2xl border border-black/10 shadow-sm p-4 mb-8">
+        <div className="top-[64px] z-40 bg-white/90 backdrop-blur rounded-2xl border border-black/10 shadow-sm p-4 mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             {/* Year */}
             <div>
@@ -337,6 +344,28 @@ export default function ResultsPage() {
             ))}
           </section>
         ))}
+
+        {filtered.length > visibleEvents.length && (
+          <div className="mt-10 flex flex-col items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((prev) => Math.min(prev + INITIAL_BATCH_SIZE, filtered.length))}
+              className="inline-flex items-center justify-center rounded-full border-2 border-black px-5 py-2 text-sm font-semibold text-black transition hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Load more results
+              {filtered.length - visibleEvents.length > 0 ? ` (${filtered.length - visibleEvents.length} remaining)` : ""}
+            </button>
+            <p className="text-xs text-neutral-500">
+              Showing {visibleEvents.length} of {filtered.length} competitions
+            </p>
+          </div>
+        )}
+
+        {filtered.length > 0 && filtered.length === visibleEvents.length && (
+          <p className="mt-6 text-center text-xs text-neutral-500">
+            Showing all {filtered.length} competitions
+          </p>
+        )}
       </main>
     </>
   );
