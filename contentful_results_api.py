@@ -310,7 +310,7 @@ def load_input(filename: str) -> List[Dict[str, Any]]:
     raise ValueError("Input JSON must be a list of competitions or {'competitions': [...]}")
 
 if __name__ == "__main__":
-    INPUT_JSON = "events.json"  # change to your file path
+    INPUT_JSON = "events3.json"  # change to your file path
     items = load_input(INPUT_JSON)
     print(f"Found {len(items)} competitions in input.")
     for obj in items:
