@@ -23,7 +23,7 @@ const PRESIDENTS = [
     emails: ["bowen.mcdonald@icompetenatural.com", "orlandolanciano@gmail.com"],
     phone: "",
   },
-  { title: "QLD President", name: "Jason Woodforth", emails: ["jason@bodizone.com.au"], phone: "" },
+  { title: "QLD President", name: "Jay Acharya", emails: ["jayacharyaofficial@gmail.com"], phone: "" },
 ];
 
 const ContactUs = () => {
