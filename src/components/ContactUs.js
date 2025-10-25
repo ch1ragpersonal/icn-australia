@@ -10,7 +10,7 @@ import {
 
 // NEW: one source of truth for presidents (order preserved)
 const PRESIDENTS = [
-  { title: "Oceania President", name: "Tony Lanciano", emails: ["tonylanciano@yahoo.com"], phone: "" },
+  { title: "Oceania President", name: "Tony Lanciano", emails: ["tony.lanciano@icompetenatural.com"], phone: "" },
 
   { title: "NSW President", name: "Rab Mahajer", emails: ["info@theedge.com.au"], phone: "" },
   { title: "WA President", name: "Ryan Fredericks", emails: ["ryan@academyhealthstyle.com"], phone: "" },
@@ -131,13 +131,6 @@ const ContactUs = () => {
                       </a>
                     ))}
                   </div>
-
-                  {/* Phone line (text) until numbers are added */}
-                  {!p.phone && (
-                    <div className="mt-3 text-xs text-c/60">
-                      Phone: <span className="opacity-70">to be added</span>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>

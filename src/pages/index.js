@@ -84,7 +84,7 @@ const slides = [
     title: "Ms Bikini Model",
     headline: "Ms Bikini Model",
     body:
-      "Entry-level female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
+      "Female division emphasising beauty, balance, and a shapely, toned physique. Competitors should be lean but not overly muscular, with no visible six-pack abs but a flat midsection.",
     ctaText: "Learn More",
     ctaHref: "/divisions/ms-bikini-model",
     image: msBikiniModel,
